@@ -9,7 +9,7 @@
 Welcome to the repository of SQL Database Project for HBO Inholland. In this project, our group aims to collaboratively design and implement a robust SQL database to address specific requirements.
 
 ### Project Description
- In this project, our group aims to collectively design, implement, and demonstrate proficiency in various aspects of database management, including Entity-Relationship Diagram (ERD) modeling, SQL querying, and integration with C# using Microsoft SQL Server and Management Studio.
+ In this project, our group aims to collectively design, implement, and demonstrate proficiency in various aspects of database management, including Entity-Relationship Diagram (ERD) modeling, SQL querying, and integration with C# using Microsoft SQL Server and Management Studio. The database is hosted on Azure for enhanced accessibility and scalability.
 
 ### Group Members
 - Asiel Elaouare (GitHub: AsielElaouare)
