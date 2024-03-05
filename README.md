@@ -3,6 +3,7 @@
 [![SQL](https://img.shields.io/badge/Database-SQL-orange?style=for-the-badge&logo=sql&logoColor=white)](https://en.wikipedia.org/wiki/SQL)
 [![Management Studio](https://img.shields.io/badge/Microsoft%20Management%20Studio-SSMS-green?style=for-the-badge&logo=microsoft&logoColor=white)](https://docs.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms)
 [![Visual Studio](https://img.shields.io/badge/IDE-Visual%20Studio-purple?style=for-the-badge&logo=visual-studio&logoColor=white)](https://visualstudio.microsoft.com/)
+[![Azure](https://img.shields.io/badge/Microsoft%20Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com/)
 
 
 Welcome to the repository of SQL Database Project for HBO Inholland. In this project, our group aims to collaboratively design and implement a robust SQL database to address specific requirements.
