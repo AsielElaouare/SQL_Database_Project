@@ -14,8 +14,9 @@ namespace SomerenDAL
     {
         public List<Activity> GetAllActivities()
         {
-            string query = "SELECT * FROM Activiteit";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = "SELECT * FROM Activiteit WHERE id = @ID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter() { ParameterName = "@ID", Value = 2 };
             return ReadActivities(ExecuteSelectQuery(query, sqlParameters));
         }
 
