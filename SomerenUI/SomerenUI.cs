@@ -62,6 +62,45 @@ namespace SomerenUI
             }
         }
 
+        private void ShowActivitiesPanel()
+        {
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+
+/*            pnlActivities.Show();
+*/
+            try
+            {
+                List<Activity> activities = GetActivities();
+                DisplayActivities(activities);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong while loading the activities: " + ex.Message);
+            }
+        }
+
+        private List<Activity> GetActivities()
+        {
+            ActivityService activityService = new ActivityService();
+            List<Activity> activities = activityService.GetActivities();
+            return activities;
+        }
+        private void DisplayActivities(List<Activity> activities)
+        {
+/*            listViewActivities.Clear();
+*/
+            foreach (Activity activity in activities)
+            {
+                ListViewItem li = new ListViewItem(activity.Name);
+                li.SubItems.Add(activity.Date);
+                li.SubItems.Add(activity.StartTime);
+                li.SubItems.Add(activity.EndTime);
+                li.Tag = activity;
+/*                listViewActivities.Items.Add(li);
+*/            }
+        }
+
         private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
         {
             ShowDashboardPanel();
@@ -75,6 +114,11 @@ namespace SomerenUI
         private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowStudentsPanel();
+        }
+
+        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowActivitiesPanel();
         }
     }
 }
