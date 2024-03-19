@@ -62,11 +62,10 @@ namespace SomerenUI
 
 		private void ShowActivitiesPanel()
 		{
-			pnlDashboard.Hide();
-			pnlStudents.Hide();
+			HideAllPanel();
 
-			/*            pnlActivities.Show();
-			*/
+			pnlActivities.Show();
+
 			try
 			{
 				List<Activity> activities = GetActivities();
@@ -108,8 +107,8 @@ namespace SomerenUI
 
 		private void DisplayActivities(List<Activity> activities)
 		{
-			/*            listViewActivities.Clear();
-			*/
+			listViewActivities.Items.Clear();
+
 			foreach (Activity activity in activities)
 			{
 				ListViewItem li = new ListViewItem(activity.Name);
@@ -117,8 +116,8 @@ namespace SomerenUI
 				li.SubItems.Add(activity.StartTime);
 				li.SubItems.Add(activity.EndTime);
 				li.Tag = activity;
-				/*                listViewActivities.Items.Add(li);
-				*/
+				listViewActivities.Items.Add(li);
+
 			}
 		}
 
