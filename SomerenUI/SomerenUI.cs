@@ -90,11 +90,12 @@ namespace SomerenUI
 		private void DisplayStudents(List<Student> students)
 		{
 			// clear the listview before filling it
-			listViewStudents.Clear();
+			listViewStudents.Items.Clear();
 
 			foreach (Student student in students)
 			{
-				ListViewItem li = new ListViewItem(student.studentnumber.ToString());
+				ListViewItem li = new ListViewItem(student.studentId.ToString());
+				li.SubItems.Add(student.studentNumber.ToString());
 				li.SubItems.Add(student.firstName);
 				li.SubItems.Add(student.lastName);
 				li.SubItems.Add(student.studentClass);
