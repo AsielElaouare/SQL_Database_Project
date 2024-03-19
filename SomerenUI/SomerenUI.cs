@@ -3,11 +3,16 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SomerenUI
 {
     public partial class SomerenUI : Form
     {
+        private List<Drink> selectedDrinksList;
+        private Drink selectedDrink;
+        private Student selectedStudent;
+        private int selectedQuantityDrinks;
         public SomerenUI()
         {
             InitializeComponent();
@@ -21,6 +26,7 @@ namespace SomerenUI
             pnlActivities.Hide();
             pnlRooms.Hide();
             pnlOrderADrink.Hide();
+            pnlQuantityDrinks.Hide();
         }
 
         private void ShowDashboardPanel()
@@ -119,7 +125,9 @@ namespace SomerenUI
             {
                 // get and display all students
                 List<Student> students = GetStudents();
+                List<Drink> drinks = GetDrinks();
                 DisplayStudentsForOrders(students);
+                DisplayDrinksForOrders(drinks);
             }
             catch (Exception ex)
             {
@@ -145,6 +153,28 @@ namespace SomerenUI
                 listViewStudentOrder.Items.Add(li);
             }
         }
+
+
+        private void DisplayDrinksForOrders(List<Drink> drinks)
+        {
+            // clear the listview before filling it
+            listViewDrinkOrder.Items.Clear();
+
+            foreach (Drink drink in drinks)
+            {
+                ListViewItem li = new ListViewItem(drink.Id.ToString());
+                li.SubItems.Add(drink.Name);
+                li.SubItems.Add(drink.Price.ToString());
+                li.SubItems.Add(drink.Vat.ToString());
+                li.SubItems.Add(drink.isAlcoholic.ToString());
+                li.SubItems.Add(drink.Stock.ToString());
+                //li.SubItems.Add(student.roomId.ToString());
+                li.Tag = drink;   // link student object to listview item
+                listViewDrinkOrder.Items.Add(li);
+            }
+        }
+
+
 
         private void DisplayStudents(List<Student> students)
         {
@@ -181,7 +211,7 @@ namespace SomerenUI
                 listViewLecturers.Items.Add(li);
             }
 
-		}
+        }
 
         private void DisplayActivities(List<Activity> activities)
         {
@@ -223,12 +253,19 @@ namespace SomerenUI
             return students;
         }
 
-		private List<Teacher> GetTeachers()
-		{
-			TeacherService teacherService = new TeacherService();
-			List<Teacher> teachers = teacherService.GetTeachers();
-			return teachers;
-		}
+        private List<Drink> GetDrinks()
+        {
+            DrinksService drinkService = new DrinksService();
+            List<Drink> drinks = drinkService.GetDrink();
+            return drinks;
+        }
+
+        private List<Teacher> GetTeachers()
+        {
+            TeacherService teacherService = new TeacherService();
+            List<Teacher> teachers = teacherService.GetTeachers();
+            return teachers;
+        }
 
         private List<Activity> GetActivities()
         {
@@ -284,6 +321,74 @@ namespace SomerenUI
         {
             ShowOrderADrinkPanel();
 
+        }
+
+
+        // ORDER VIEW FOR THE ORDER PANEL
+
+
+        private void UpdateOrderLabel(List<Drink> orderedDrinks)
+        {
+            foreach (Drink drink in orderedDrinks)
+            {
+                orderViewItems.Text += $"Drink: {drink.Name}; Price: {drink.Price}; Quantity: {drink.SelectedQuantity}";
+            }
+
+        }
+
+        private void listViewDrinkOrder_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+            if (listViewDrinkOrder.SelectedItems.Count == 1)
+            {
+                selectedDrinksList = new List<Drink>();
+                ListViewItem selectedItem = listViewDrinkOrder.SelectedItems[0];
+                selectedDrink = (Drink)selectedItem.Tag;
+
+                pnlQuantityDrinks.Show();
+            }
+
+        }
+
+        //submit quantity 
+        private void submitQuantityButton_Click(object sender, EventArgs e)
+        {
+            selectedQuantityDrinks = int.Parse(textBoxQuantityDrinks.Text);
+            selectedDrink.SelectedQuantity = selectedQuantityDrinks;
+            selectedDrinksList.Add(selectedDrink);
+            pnlQuantityDrinks.Hide();
+            UpdateOrderLabel(selectedDrinksList);
+        }
+        //cancel quantity 
+        private void cancelQuantityButton_Click(object sender, EventArgs e)
+        {
+            pnlQuantityDrinks.Hide();
+        }
+
+
+        /// submit order button 
+        private void submitOrderButtton_Click(object sender, EventArgs e)
+        {
+
+            if (selectedStudent != null)
+            {
+
+            }
+            else 
+            {
+                MessageBox.Show("An error occurred: Please Select a Student ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void listViewStudentOrder_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewStudentOrder.SelectedItems.Count == 1)
+            {
+                ListViewItem selectedStudentListView = listViewStudentOrder.SelectedItems[0];
+                selectedStudent = (Student)selectedStudentListView.Tag;
+
+            }
         }
     }
 }

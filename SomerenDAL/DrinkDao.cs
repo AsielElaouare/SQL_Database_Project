@@ -17,7 +17,7 @@ namespace SomerenDAL
     {
         public List<Drink> GetAllDrinks()
         {
-            string query = "SELECT drinkId, [name],[alcoholic], vat, price, Stock, CASE WHEN stock < 10 THEN 'Stock nearly depleted' ELSE 'Stock sufficitent' END AS Stock_status FROM Drinks WHERE Name NOT IN ('Water', 'Orange lemonade') AND stock > 1 AND price > 1 ORDER BY stock DESC, price DESC;";
+            string query = "SELECT * FROM Drink;";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
