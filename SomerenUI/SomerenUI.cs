@@ -59,17 +59,17 @@ namespace SomerenUI
 			// show lecturers
 			pnlLecturers.Show();
 
-            try
-            {
-                // get and display all students
-                List<Teacher> teachers = GetTeachers();
-                DisplayTeachers(teachers);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
-            }
-        }
+			try
+			{
+				// get and display all students
+				List<Teacher> teachers = GetTeachers();
+				DisplayTeachers(teachers);
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("Something went wrong while loading the lecturers: " + e.Message);
+			}
+		}
 
 		private void ShowActivitiesPanel()
 		{
@@ -95,6 +95,16 @@ namespace SomerenUI
 
 			// show rooms
 			pnlRooms.Show();
+
+			try
+			{
+				List<Room> rooms = GetRooms();
+				DisplayRooms(rooms);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Something went wrong while loading the rooms: " + ex.Message);
+			}
 		}
 
 		private void DisplayStudents(List<Student> students)
@@ -122,17 +132,17 @@ namespace SomerenUI
 
 			foreach (Teacher teacher in teachers)
 			{
-                ListViewItem li = new ListViewItem(teacher.TeacherId.ToString());
+				ListViewItem li = new ListViewItem(teacher.TeacherId.ToString());
 				li.SubItems.Add(teacher.FirstName);
 				li.SubItems.Add(teacher.LastName);
 				li.SubItems.Add(teacher.Age.ToString());
 				li.SubItems.Add(teacher.PhoneNumber);
-                li.Tag = teacher;
-				
-                listViewLecturers.Items.Add(li);
-            }
+				li.Tag = teacher;
 
-        }
+				listViewLecturers.Items.Add(li);
+			}
+
+		}
 
 		private void DisplayActivities(List<Activity> activities)
 		{
@@ -151,6 +161,22 @@ namespace SomerenUI
 			}
 		}
 
+		private void DisplayRooms(List<Room> rooms)
+		{
+			listViewRooms.Items.Clear();
+
+			foreach (Room room in rooms)
+			{
+				ListViewItem li = new ListViewItem(room.roomId.ToString());
+				li.SubItems.Add(room.roomName);
+				li.SubItems.Add(room.roomType);
+				li.SubItems.Add(room.size.ToString());
+				li.Tag = room;
+				listViewRooms.Items.Add(li);
+
+			}
+		}
+
 		private List<Student> GetStudents()
 		{
 			StudentService studentService = new StudentService();
@@ -158,18 +184,25 @@ namespace SomerenUI
 			return students;
 		}
 
-        private List<Teacher> GetTeachers()
-        {
-            TeacherService teacherService = new TeacherService();
-            List<Teacher> teachers = teacherService.GetTeachers();
-            return teachers;
-        }
+		private List<Teacher> GetTeachers()
+		{
+			TeacherService teacherService = new TeacherService();
+			List<Teacher> teachers = teacherService.GetTeachers();
+			return teachers;
+		}
 
-        private List<Activity> GetActivities()
+		private List<Activity> GetActivities()
 		{
 			ActivityService activityService = new ActivityService();
 			List<Activity> activities = activityService.GetActivities();
 			return activities;
+		}
+
+		private List<Room> GetRooms()
+		{
+			RoomService roomService = new RoomService();
+			List<Room> rooms = roomService.GetRooms();
+			return rooms;
 		}
 
 		private void SomerenUI_Load(object sender, EventArgs e)
