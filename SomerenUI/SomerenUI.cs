@@ -94,9 +94,14 @@ namespace SomerenUI
 
 			foreach (Student student in students)
 			{
-				//ListViewItem li = new ListViewItem(student.Name);
-				//li.Tag = student;   // link student object to listview item
-				//listViewStudents.Items.Add(li);
+				ListViewItem li = new ListViewItem(student.studentnumber.ToString());
+				li.SubItems.Add(student.firstName);
+				li.SubItems.Add(student.lastName);
+				li.SubItems.Add(student.studentClass);
+				li.SubItems.Add(student.phoneNumber.ToString());
+				//li.SubItems.Add(student.roomId.ToString());
+				li.Tag = student;   // link student object to listview item
+				listViewStudents.Items.Add(li);
 			}
 		}
 
