@@ -7,7 +7,7 @@ namespace SomerenModel
         public int studentId { get; set; }     // database id
         public string firstName { get; set; }
         public string lastName { get; set; } // StudentNumber, e.g. 474791
-        public int studentnumber { get; set; }
+        public int studentNumber { get; set; }
 
         public string phoneNumber {  get; set; }
 
