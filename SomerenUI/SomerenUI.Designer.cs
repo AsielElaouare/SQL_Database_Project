@@ -76,6 +76,7 @@
             ActivityEndTime = new System.Windows.Forms.ColumnHeader();
             label3 = new System.Windows.Forms.Label();
             pnlOrderADrink = new System.Windows.Forms.Panel();
+            totalPriceLabel = new System.Windows.Forms.Label();
             submitOrderButtton = new System.Windows.Forms.Button();
             pnlQuantityDrinks = new System.Windows.Forms.Panel();
             cancelQuantityButton = new System.Windows.Forms.Button();
@@ -450,6 +451,7 @@
             // 
             // pnlOrderADrink
             // 
+            pnlOrderADrink.Controls.Add(totalPriceLabel);
             pnlOrderADrink.Controls.Add(submitOrderButtton);
             pnlOrderADrink.Controls.Add(pnlQuantityDrinks);
             pnlOrderADrink.Controls.Add(orderViewItems);
@@ -463,6 +465,16 @@
             pnlOrderADrink.Name = "pnlOrderADrink";
             pnlOrderADrink.Size = new System.Drawing.Size(938, 466);
             pnlOrderADrink.TabIndex = 6;
+            // 
+            // totalPriceLabel
+            // 
+            totalPriceLabel.AutoSize = true;
+            totalPriceLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            totalPriceLabel.Location = new System.Drawing.Point(805, 335);
+            totalPriceLabel.Name = "totalPriceLabel";
+            totalPriceLabel.Size = new System.Drawing.Size(77, 32);
+            totalPriceLabel.TabIndex = 11;
+            totalPriceLabel.Text = "Total: ";
             // 
             // submitOrderButtton
             // 
@@ -521,6 +533,7 @@
             textBoxQuantityDrinks.Name = "textBoxQuantityDrinks";
             textBoxQuantityDrinks.Size = new System.Drawing.Size(147, 23);
             textBoxQuantityDrinks.TabIndex = 8;
+            textBoxQuantityDrinks.Text = "1";
             // 
             // orderViewItems
             // 
@@ -746,5 +759,6 @@
         private System.Windows.Forms.Button submitQuantityButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button submitOrderButtton;
+        private System.Windows.Forms.Label totalPriceLabel;
     }
 }

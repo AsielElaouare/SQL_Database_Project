@@ -24,5 +24,9 @@ namespace SomerenService
             return orders;
         }
 
+        public void AddOrder(Order order)
+        {
+            orderdb.AddOrder(order);
+        }
     }
 }

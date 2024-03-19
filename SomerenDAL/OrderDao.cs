@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -39,5 +40,24 @@ namespace SomerenDAL
             }
             return orders;
         }
+
+
+        public void AddOrder(Order order)
+        {
+            // Construct the SQL query to insert an order into the database
+            string query = "INSERT INTO [order] (quantity, drinkId, StudentId) VALUES ( @quantity, @drinkId, @StudentId)";
+
+            // Define the SQL parameters
+            SqlParameter[] sqlParameters =
+            {
+            
+            new SqlParameter("@StudentId", order.StudentId),
+            new SqlParameter("@drinkId", order.DrinkId),
+            new SqlParameter("@quantity", order.Quantity)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+    
     }
 }

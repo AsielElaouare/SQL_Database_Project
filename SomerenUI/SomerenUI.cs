@@ -13,6 +13,7 @@ namespace SomerenUI
         private Drink selectedDrink;
         private Student selectedStudent;
         private int selectedQuantityDrinks;
+        private decimal price;
         public SomerenUI()
         {
             InitializeComponent();
@@ -336,6 +337,18 @@ namespace SomerenUI
 
         }
 
+        private void UpdateTotalPrice(List<Drink> orderedDrinks)
+        {
+            
+            foreach (Drink drink in orderedDrinks)
+            {
+                price = price + drink.Price * drink.SelectedQuantity;
+                totalPriceLabel.Text = $"Total: {price}";
+            }  
+
+        }
+
+
         private void listViewDrinkOrder_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -346,9 +359,23 @@ namespace SomerenUI
                 ListViewItem selectedItem = listViewDrinkOrder.SelectedItems[0];
                 selectedDrink = (Drink)selectedItem.Tag;
 
-                pnlQuantityDrinks.Show();
+                ShowPnlQuantityDrinks();
             }
+            
 
+        }
+
+
+        private void ShowPnlQuantityDrinks()
+        {
+            listViewDrinkOrder.Enabled = false;
+            pnlQuantityDrinks.Show();
+        }
+
+        private void HidePnlQuantityDrinks()
+        {
+            listViewDrinkOrder.Enabled = true;
+            pnlQuantityDrinks.Hide();
         }
 
         //submit quantity 
@@ -358,12 +385,15 @@ namespace SomerenUI
             selectedDrink.SelectedQuantity = selectedQuantityDrinks;
             selectedDrinksList.Add(selectedDrink);
             pnlQuantityDrinks.Hide();
+            
             UpdateOrderLabel(selectedDrinksList);
+            UpdateTotalPrice(selectedDrinksList);
         }
         //cancel quantity 
         private void cancelQuantityButton_Click(object sender, EventArgs e)
         {
-            pnlQuantityDrinks.Hide();
+            HidePnlQuantityDrinks();
+
         }
 
 
@@ -373,6 +403,14 @@ namespace SomerenUI
 
             if (selectedStudent != null)
             {
+                OrderService orderService = new OrderService();
+                Order order = new Order();
+                order.StudentId = selectedStudent.studentId;
+                order.DrinkId = selectedDrink.Id;
+                order.Quantity = selectedQuantityDrinks;
+                orderService.AddOrder(order);
+                ResetPanelOptions();
+                MessageBox.Show("Order Submitted Succesfully");
 
             }
             else 
@@ -389,6 +427,16 @@ namespace SomerenUI
                 selectedStudent = (Student)selectedStudentListView.Tag;
 
             }
+        }
+
+
+        // reset changes after order is submitted
+
+        private void ResetPanelOptions()
+        {
+            listViewDrinkOrder.Enabled = true;
+            totalPriceLabel.Text = "Total: ";
+            orderViewItems.Text = "";
         }
     }
 }
