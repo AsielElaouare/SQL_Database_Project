@@ -113,9 +113,9 @@ namespace SomerenUI
 			{
 				ListViewItem li = new ListViewItem(activity.Id.ToString());
 				li.SubItems.Add(activity.Name);
-				li.SubItems.Add(activity.Date);
-				li.SubItems.Add(activity.StartTime);
-				li.SubItems.Add(activity.EndTime);
+				li.SubItems.Add(activity.Day);
+				li.SubItems.Add(activity.StartTime.ToString());
+				li.SubItems.Add(activity.EndTime.ToString());
 				li.Tag = activity;
 				listViewActivities.Items.Add(li);
 

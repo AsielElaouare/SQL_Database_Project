@@ -31,9 +31,8 @@ namespace SomerenDAL
 
                     Id = (int)dr["activityId"],
                     Name = dr["name"].ToString(),
-                    Date = dr["day"].ToString(),
-                    StartTime = dr["beginTime"].ToString(),
-                    EndTime = dr["endTime"].ToString()
+                    StartTime = (DateTime)dr["beginTime"],
+                    EndTime = (DateTime)dr["endTime"]
                 };
 
                 activities.Add(activity);
