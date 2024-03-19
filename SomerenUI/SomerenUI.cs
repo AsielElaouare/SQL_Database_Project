@@ -111,7 +111,8 @@ namespace SomerenUI
 
 			foreach (Activity activity in activities)
 			{
-				ListViewItem li = new ListViewItem(activity.Name);
+				ListViewItem li = new ListViewItem(activity.Id.ToString());
+				li.SubItems.Add(activity.Name);
 				li.SubItems.Add(activity.Date);
 				li.SubItems.Add(activity.StartTime);
 				li.SubItems.Add(activity.EndTime);
