@@ -58,7 +58,18 @@ namespace SomerenUI
 
 			// show lecturers
 			pnlLecturers.Show();
-		}
+
+            try
+            {
+                // get and display all students
+                List<Teacher> teachers = GetTeachers();
+                DisplayTeachers(teachers);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
+            }
+        }
 
 		private void ShowActivitiesPanel()
 		{
@@ -105,6 +116,24 @@ namespace SomerenUI
 			}
 		}
 
+		private void DisplayTeachers(List<Teacher> teachers)
+		{
+			listViewLecturers.Items.Clear();
+
+			foreach (Teacher teacher in teachers)
+			{
+                ListViewItem li = new ListViewItem(teacher.TeacherId.ToString());
+				li.SubItems.Add(teacher.FirstName);
+				li.SubItems.Add(teacher.LastName);
+				li.SubItems.Add(teacher.Age.ToString());
+				li.SubItems.Add(teacher.PhoneNumber);
+                li.Tag = teacher;
+				
+                listViewLecturers.Items.Add(li);
+            }
+
+        }
+
 		private void DisplayActivities(List<Activity> activities)
 		{
 			listViewActivities.Items.Clear();
@@ -129,7 +158,14 @@ namespace SomerenUI
 			return students;
 		}
 
-		private List<Activity> GetActivities()
+        private List<Teacher> GetTeachers()
+        {
+            TeacherService teacherService = new TeacherService();
+            List<Teacher> teachers = teacherService.GetTeachers();
+            return teachers;
+        }
+
+        private List<Activity> GetActivities()
 		{
 			ActivityService activityService = new ActivityService();
 			List<Activity> activities = activityService.GetActivities();
