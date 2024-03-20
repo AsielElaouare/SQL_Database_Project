@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using SomerenDAL;
 
 namespace SomerenUI
 {
@@ -328,23 +329,19 @@ namespace SomerenUI
         // ORDER VIEW FOR THE ORDER PANEL
 
 
-        private void UpdateOrderLabel(List<Drink> orderedDrinks)
+        private void UpdateOrderLabel(Drink drink)
         {
-            foreach (Drink drink in orderedDrinks)
-            {
-                orderViewItems.Text += $"Drink: {drink.Name}; Price: {drink.Price}; Quantity: {drink.SelectedQuantity}";
-            }
+           
+          orderViewItems.Text += $"Drink: {drink.Name}; Price: \u20AC{drink.Price}; Quantity: {drink.SelectedQuantity}";
+            
 
         }
 
-        private void UpdateTotalPrice(List<Drink> orderedDrinks)
+        private void UpdateTotalPrice(Drink drink)
         {
-            
-            foreach (Drink drink in orderedDrinks)
-            {
+
                 price = price + drink.Price * drink.SelectedQuantity;
-                totalPriceLabel.Text = $"Total: {price}";
-            }  
+                totalPriceLabel.Text = $"Total: \u20AC{price}";
 
         }
 
@@ -352,9 +349,9 @@ namespace SomerenUI
         private void listViewDrinkOrder_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-
             if (listViewDrinkOrder.SelectedItems.Count == 1)
             {
+                
                 selectedDrinksList = new List<Drink>();
                 ListViewItem selectedItem = listViewDrinkOrder.SelectedItems[0];
                 selectedDrink = (Drink)selectedItem.Tag;
@@ -368,8 +365,15 @@ namespace SomerenUI
 
         private void ShowPnlQuantityDrinks()
         {
-            listViewDrinkOrder.Enabled = false;
-            pnlQuantityDrinks.Show();
+            if (selectedDrink.Stock > 0)
+            {
+                listViewDrinkOrder.Enabled = false;
+                pnlQuantityDrinks.Show();
+            }
+            else
+            {
+                MessageBox.Show("This Drink is Out of Stock", "Out Of Stock!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void HidePnlQuantityDrinks()
@@ -383,11 +387,18 @@ namespace SomerenUI
         {
             selectedQuantityDrinks = int.Parse(textBoxQuantityDrinks.Text);
             selectedDrink.SelectedQuantity = selectedQuantityDrinks;
-            selectedDrinksList.Add(selectedDrink);
-            pnlQuantityDrinks.Hide();
+            if (selectedQuantityDrinks <= selectedDrink.Stock)
+            {
+                pnlQuantityDrinks.Hide();
+
+                UpdateOrderLabel(selectedDrink);
+                UpdateTotalPrice(selectedDrink);
+            }
+            else
+            {
+                MessageBox.Show("Selected quantity is higher than drink's stock", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             
-            UpdateOrderLabel(selectedDrinksList);
-            UpdateTotalPrice(selectedDrinksList);
         }
         //cancel quantity 
         private void cancelQuantityButton_Click(object sender, EventArgs e)
@@ -401,21 +412,28 @@ namespace SomerenUI
         private void submitOrderButtton_Click(object sender, EventArgs e)
         {
 
-            if (selectedStudent != null)
+            if (selectedStudent != null && selectedDrink != null)
             {
-                OrderService orderService = new OrderService();
-                Order order = new Order();
-                order.StudentId = selectedStudent.studentId;
-                order.DrinkId = selectedDrink.Id;
-                order.Quantity = selectedQuantityDrinks;
-                orderService.AddOrder(order);
-                ResetPanelOptions();
-                MessageBox.Show("Order Submitted Succesfully");
+                    DrinkDao drinkDao = new DrinkDao();
+                    Drink drink = new Drink();
+                    drink = selectedDrink;
+                    drink.Stock = drink.Stock - selectedQuantityDrinks;
+                    OrderService orderService = new OrderService();
+                    Order order = new Order();
+                    order.StudentId = selectedStudent.studentId;
+                    order.DrinkId = selectedDrink.Id;
+                    order.Quantity = selectedQuantityDrinks;
+                    drinkDao.UpdateDrink(drink);
+                    orderService.AddOrder(order);
+                    ResetPanelOptions();
+                    MessageBox.Show("Order Submitted Succesfully");
 
+                    //refreshing with updated data after submitting order
+                    ShowOrderADrinkPanel();
             }
             else 
             {
-                MessageBox.Show("An error occurred: Please Select a Student ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("An error occurred: You need To select a Student AND a Drink", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
