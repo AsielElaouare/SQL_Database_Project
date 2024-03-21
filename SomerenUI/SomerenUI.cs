@@ -418,6 +418,7 @@ namespace SomerenUI
                     Drink drink = new Drink();
                     drink = selectedDrink;
                     drink.Stock = drink.Stock - selectedQuantityDrinks;
+                    drink.Sold += drink.SelectedQuantity;
                     OrderService orderService = new OrderService();
                     Order order = new Order();
                     order.StudentId = selectedStudent.studentId;

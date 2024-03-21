@@ -61,11 +61,12 @@ namespace SomerenDAL
             try
             {
                 dbConnection.Open();
-                SqlCommand command = new SqlCommand("UPDATE Drink SET Name=@name, Stock=@stock, Price=@price Where drinkId=@drinkId", dbConnection);
+                SqlCommand command = new SqlCommand("UPDATE Drink SET Name=@name, Stock=@stock, Sold=@Sold, Price=@price Where drinkId=@drinkId", dbConnection);
                 command.Parameters.AddWithValue("@drinkId", drink.Id);
                 command.Parameters.AddWithValue("@name", drink.Name);
                 command.Parameters.AddWithValue("@stock", drink.Stock);
                 command.Parameters.AddWithValue("@price", drink.Price);
+                command.Parameters.AddWithValue("@sold", drink.Sold);
 
                 command.ExecuteNonQuery();
             }
