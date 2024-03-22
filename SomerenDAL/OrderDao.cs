@@ -45,7 +45,7 @@ namespace SomerenDAL
         public void AddOrder(Order order)
         {
             // Construct the SQL query to insert an order into the database
-            string query = "INSERT INTO [order] (quantity, drinkId, StudentId) VALUES ( @quantity, @drinkId, @StudentId)";
+            string query = "INSERT INTO [order] (quantity, drinkId, StudentId, OrderDate) VALUES ( @quantity, @drinkId, @StudentId, @OrderDate)";
 
             // Define the SQL parameters
             SqlParameter[] sqlParameters =
@@ -53,7 +53,8 @@ namespace SomerenDAL
             
             new SqlParameter("@StudentId", order.StudentId),
             new SqlParameter("@drinkId", order.DrinkId),
-            new SqlParameter("@quantity", order.Quantity)
+            new SqlParameter("@quantity", order.Quantity),
+            new SqlParameter("@OrderDate", order.OrderDate)
             };
 
             ExecuteEditQuery(query, sqlParameters);
