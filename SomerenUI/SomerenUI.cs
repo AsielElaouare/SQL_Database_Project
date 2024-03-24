@@ -437,26 +437,38 @@ namespace SomerenUI
             if (selectedStudent != null && selectedDrink != null)
             {
                 DrinkDao drinkDao = new DrinkDao();
-                Drink drink = new Drink();
-                drink = selectedDrink;
+                Drink drink = selectedDrink;
                 drink.Stock = drink.Stock - selectedQuantityDrinks;
-                OrderService orderService = new OrderService();
-                Order order = new Order();
-                order.StudentId = selectedStudent.studentId;
-                order.DrinkId = selectedDrink.Id;
-                order.Quantity = selectedQuantityDrinks;
+                    
+                
+                //update database
+                CreateOrder();
                 drinkDao.UpdateDrink(drink);
-                orderService.AddOrder(order);
-                ResetPanelOptions();
+
                 MessageBox.Show("Order Submitted Succesfully");
 
                 //refreshing with updated data after submitting order
                 ShowOrderADrinkPanel();
-            }
-            else
+                ResetPanelOptions();
+            }       
+            else 
             {
                 MessageBox.Show("An error occurred: You need To select a Student AND a Drink", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void CreateOrder()
+        {
+            Order order = new Order();
+            DrinkDao drinkDao = new DrinkDao();
+            OrderService orderService = new OrderService();
+            DateTime dateNow = DateTime.Now;
+            order.StudentId = selectedStudent.studentId;
+            order.DrinkId = selectedDrink.Id;
+            order.Quantity = selectedQuantityDrinks;
+            order.OrderDate = dateNow;
+            orderService.AddOrder(order);
+          
         }
 
         private void listViewStudentOrder_SelectedIndexChanged(object sender, EventArgs e)
