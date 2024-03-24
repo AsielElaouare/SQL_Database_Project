@@ -15,6 +15,7 @@ namespace SomerenUI
         private Student selectedStudent;
         private int selectedQuantityDrinks;
         private decimal price;
+
         public SomerenUI()
         {
             InitializeComponent();
@@ -29,6 +30,7 @@ namespace SomerenUI
             pnlRooms.Hide();
             pnlOrderADrink.Hide();
             pnlQuantityDrinks.Hide();
+            pnlRevenue.Hide();
         }
 
         private void ShowDashboardPanel()
@@ -135,6 +137,26 @@ namespace SomerenUI
             {
                 MessageBox.Show("Something went wrong while loading the rooms: " + ex.Message);
             }
+        }
+        private void ShowRevenuePanel()
+        {
+            HideAllPanel();
+
+            // show revenue panel
+            pnlRevenue.Show();
+
+            DateTime endDate = DateTime.Today;
+            DateTime startDate = endDate.AddDays(-7);
+
+            startdatePicker.MaxDate = endDate;
+            enddatePicker.MaxDate = endDate;
+
+            startdatePicker.Value = startDate;
+            enddatePicker.Value = endDate;
+        }
+        private void enddatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            startdatePicker.MaxDate = enddatePicker.Value;
         }
 
         private void DisplayStudentsForOrders(List<Student> students)
@@ -331,17 +353,17 @@ namespace SomerenUI
 
         private void UpdateOrderLabel(Drink drink)
         {
-           
-          orderViewItems.Text += $"Drink: {drink.Name}; Price: \u20AC{drink.Price}; Quantity: {drink.SelectedQuantity}";
-            
+
+            orderViewItems.Text += $"Drink: {drink.Name}; Price: \u20AC{drink.Price}; Quantity: {drink.SelectedQuantity}";
+
 
         }
 
         private void UpdateTotalPrice(Drink drink)
         {
 
-                price = price + drink.Price * drink.SelectedQuantity;
-                totalPriceLabel.Text = $"Total: \u20AC{price}";
+            price = price + drink.Price * drink.SelectedQuantity;
+            totalPriceLabel.Text = $"Total: \u20AC{price}";
 
         }
 
@@ -351,14 +373,14 @@ namespace SomerenUI
 
             if (listViewDrinkOrder.SelectedItems.Count == 1)
             {
-                
+
                 selectedDrinksList = new List<Drink>();
                 ListViewItem selectedItem = listViewDrinkOrder.SelectedItems[0];
                 selectedDrink = (Drink)selectedItem.Tag;
 
                 ShowPnlQuantityDrinks();
             }
-            
+
 
         }
 
@@ -398,7 +420,7 @@ namespace SomerenUI
             {
                 MessageBox.Show("Selected quantity is higher than drink's stock", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
         //cancel quantity 
         private void cancelQuantityButton_Click(object sender, EventArgs e)
@@ -467,6 +489,31 @@ namespace SomerenUI
             listViewDrinkOrder.Enabled = true;
             totalPriceLabel.Text = "Total: ";
             orderViewItems.Text = "";
+        }
+
+        private void reportGeneratorBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Optionally, you can display the revenue data for the default date range
+                RevenueService revenueService = new RevenueService();
+                RevenueDao dao = new RevenueDao();
+                Revenue revenue = revenueService.GetRevenue(startdatePicker.Value, enddatePicker.Value);
+
+                // Display revenue data
+                outputSales.Text = $"{revenue.Sales} ";
+                outputTurnover.Text = $"{revenue.Turnover} ";
+                outputNoC.Text = $"{revenue.NumberOfCustomers} ";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong while loading the revenue: " + ex.Message);
+            }
+        }
+
+        private void revenueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowRevenuePanel();
         }
     }
 }
