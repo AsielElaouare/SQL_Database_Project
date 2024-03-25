@@ -15,7 +15,6 @@ namespace SomerenModel
         public  bool isAlcoholic { get; set; }
         public int Stock { get; set; }
 
-        public int SelectedQuantity { get; set; }
 
 
 

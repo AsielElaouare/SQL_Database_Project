@@ -33,7 +33,6 @@ namespace SomerenDAL
                     Id = (int)dr["drinkId"],
                     Name = dr["name"].ToString(),
                     Price = (decimal)dr["price"],
-                    Vat = (int)dr["vat"],
                     isAlcoholic = (bool)dr["alcoholic"],
                     Stock = (int)dr["stock"]
                 };
