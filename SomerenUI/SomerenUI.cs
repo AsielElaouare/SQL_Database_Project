@@ -12,11 +12,6 @@ namespace SomerenUI
 	public partial class SomerenUI : Form
 	{
 		CultureInfo ci = new CultureInfo("nl-NL");
-		private List<Drink> selectedDrinksList;
-		private Drink selectedDrink;
-		private Student selectedStudent;
-		private int selectedQuantityDrinks;
-		private decimal price;
 
 		public SomerenUI()
 		{
@@ -31,7 +26,6 @@ namespace SomerenUI
 			pnlActivities.Hide();
 			pnlRooms.Hide();
 			pnlOrderADrink.Hide();
-			pnlQuantityDrinks.Hide();
 			pnlRevenue.Hide();
 			pnlVatReport.Hide();
 		}
@@ -218,7 +212,6 @@ namespace SomerenUI
 				ListViewItem li = new ListViewItem(drink.Id.ToString());
 				li.SubItems.Add(drink.Name);
 				li.SubItems.Add(drink.Price.ToString());
-				li.SubItems.Add(drink.Vat.ToString());
 				li.SubItems.Add(drink.isAlcoholic.ToString());
 				li.SubItems.Add(drink.Stock.ToString());
 				//li.SubItems.Add(student.roomId.ToString());
@@ -226,8 +219,6 @@ namespace SomerenUI
 				listViewDrinkOrder.Items.Add(li);
 			}
 		}
-
-
 
 		private void DisplayStudents(List<Student> students)
 		{
@@ -381,148 +372,78 @@ namespace SomerenUI
 			ShowVatReportPanel();
 		}
 
+		private void submitOrderButtton_Click(object sender, EventArgs e)
+		{
+			if (listViewDrinkOrder.SelectedItems.Count == 0 || listViewStudentOrder.SelectedItems.Count == 0) return;
 
-		// ORDER VIEW FOR THE ORDER PANEL
+			Drink selectedDrink = new Drink();
+			Student selectedStudent = new Student();
 
+			ListViewItem selectedDrinkItem = listViewDrinkOrder.SelectedItems[0];
+			selectedDrink = (Drink)selectedDrinkItem.Tag;
+
+			ListViewItem selectedStudentItem = listViewStudentOrder.SelectedItems[0];
+			selectedStudent = (Student)selectedStudentItem.Tag;
+
+			int quantity = (int)textBoxQuantityDrinks.Value;
+
+			if (quantity > 0)
+			{
+				ResetLabels();
+				MessageBox.Show("Order Submitted Succesfully", "Submitted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				CreateOrder(selectedDrink, selectedStudent, quantity);
+				List<Drink> drinks = GetDrinks();
+				DisplayDrinksForOrders(drinks);
+			}
+			else
+			{
+				MessageBox.Show("Drink is out of Stock", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+		}
 
 		private void UpdateOrderLabel(Drink drink)
 		{
-
-			orderViewItems.Text += $"Drink: {drink.Name}; Price: \u20AC{drink.Price}; Quantity: {drink.SelectedQuantity}";
-
-
+			orderViewItems.Text = $"Drink: {drink.Name} Price: {drink.Price} Alcohol: {drink.isAlcoholic}, Quantity: {textBoxQuantityDrinks.Value}";
 		}
 
-		private void UpdateTotalPrice(Drink drink)
+		private void CreateOrder(Drink selectedDrink, Student selectedStudent, int quantity)
 		{
-
-			price = price + drink.Price * drink.SelectedQuantity;
-			totalPriceLabel.Text = $"Total: \u20AC{price}";
-
-		}
-
-
-		private void listViewDrinkOrder_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-			if (listViewDrinkOrder.SelectedItems.Count == 1)
-			{
-
-				selectedDrinksList = new List<Drink>();
-				ListViewItem selectedItem = listViewDrinkOrder.SelectedItems[0];
-				selectedDrink = (Drink)selectedItem.Tag;
-
-				ShowPnlQuantityDrinks();
-			}
-
-
-		}
-
-
-		private void ShowPnlQuantityDrinks()
-		{
-			if (selectedDrink.Stock > 0)
-			{
-				listViewDrinkOrder.Enabled = false;
-				pnlQuantityDrinks.Show();
-			}
-			else
-			{
-				MessageBox.Show("This Drink is Out of Stock", "Out Of Stock!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			}
-		}
-
-		private void HidePnlQuantityDrinks()
-		{
-			listViewDrinkOrder.Enabled = true;
-			pnlQuantityDrinks.Hide();
-		}
-
-		//submit quantity 
-		private void submitQuantityButton_Click(object sender, EventArgs e)
-		{
-			selectedQuantityDrinks = int.Parse(textBoxQuantityDrinks.Text);
-			selectedDrink.SelectedQuantity = selectedQuantityDrinks;
-			if (selectedQuantityDrinks <= selectedDrink.Stock)
-			{
-				pnlQuantityDrinks.Hide();
-
-				UpdateOrderLabel(selectedDrink);
-				UpdateTotalPrice(selectedDrink);
-			}
-			else
-			{
-				MessageBox.Show("Selected quantity is higher than drink's stock", "System Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-
-		}
-		//cancel quantity 
-		private void cancelQuantityButton_Click(object sender, EventArgs e)
-		{
-			HidePnlQuantityDrinks();
-
-		}
-
-
-		/// submit order button 
-		private void submitOrderButtton_Click(object sender, EventArgs e)
-		{
-
-			if (selectedStudent != null && selectedDrink != null)
-			{
-				DrinkDao drinkDao = new DrinkDao();
-				Drink drink = selectedDrink;
-				drink.Stock = drink.Stock - selectedQuantityDrinks;
-
-
-				//update database
-				CreateOrder();
-				drinkDao.UpdateDrink(drink);
-
-				MessageBox.Show("Order Submitted Succesfully");
-
-				//refreshing with updated data after submitting order
-				ShowOrderADrinkPanel();
-				ResetPanelOptions();
-			}
-			else
-			{
-				MessageBox.Show("An error occurred: You need To select a Student AND a Drink", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-
-		private void CreateOrder()
-		{
+			OrderService orderService = new OrderService();
 			Order order = new Order();
 			DrinkDao drinkDao = new DrinkDao();
-			OrderService orderService = new OrderService();
+			Drink drink = selectedDrink;
+			drink.Stock = drink.Stock - quantity;
+			drinkDao.UpdateDrink(drink);
 			DateTime dateNow = DateTime.Now;
 			order.StudentId = selectedStudent.studentId;
 			order.DrinkId = selectedDrink.Id;
-			order.Quantity = selectedQuantityDrinks;
+			order.Quantity = quantity;
 			order.OrderDate = dateNow;
 			orderService.AddOrder(order);
-
 		}
 
-		private void listViewStudentOrder_SelectedIndexChanged(object sender, EventArgs e)
+		private void textBoxQuantityDrinks_ValueChanged(object sender, EventArgs e)
 		{
-			if (listViewStudentOrder.SelectedItems.Count == 1)
-			{
-				ListViewItem selectedStudentListView = listViewStudentOrder.SelectedItems[0];
-				selectedStudent = (Student)selectedStudentListView.Tag;
-
-			}
+			Drink drink = (Drink)listViewDrinkOrder.SelectedItems[0].Tag;
+			totalPriceLabel.Text = $"Total: \u20AC{drink.Price * textBoxQuantityDrinks.Value}";
+			UpdateOrderLabel(drink);
 		}
 
-
-		// reset changes after order is submitted
-
-		private void ResetPanelOptions()
+		private void ResetLabels()
 		{
-			listViewDrinkOrder.Enabled = true;
-			totalPriceLabel.Text = "Total: ";
 			orderViewItems.Text = "";
+			totalPriceLabel.Text = "Total: ";
+		}
+
+		private void listViewDrinkOrder_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (listViewDrinkOrder.SelectedItems.Count != 0)
+			{
+				Drink drink = (Drink)listViewDrinkOrder.SelectedItems[0].Tag;
+				textBoxQuantityDrinks.Minimum = 1;
+				textBoxQuantityDrinks.Maximum = drink.Stock;
+				UpdateOrderLabel(drink);
+			}
 		}
 
 		private void reportGeneratorBtn_Click(object sender, EventArgs e)
