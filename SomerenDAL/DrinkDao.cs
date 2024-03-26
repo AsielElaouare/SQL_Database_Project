@@ -17,7 +17,7 @@ namespace SomerenDAL
 	{
 		public List<Drink> GetAllDrinks()
 		{
-			string query = "SELECT * FROM Drink;";
+			string query = "SELECT Drink.drinkId, Drink.[name], Drink.price, Drink.alcoholic, Drink.stock, SUM([Order].quantity) AS Sold FROM Drink LEFT JOIN [Order] ON [Order].drinkId = Drink.drinkId GROUP BY Drink.drinkId, Drink.[name], Drink.price, Drink.alcoholic, Drink.stock ORDER BY [name]";
 			SqlParameter[] sqlParameters = new SqlParameter[0];
 			return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
 		}
@@ -60,11 +60,12 @@ namespace SomerenDAL
 			try
 			{
 				dbConnection.Open();
-				SqlCommand command = new SqlCommand("UPDATE Drink SET Name=@name, Stock=@stock, Price=@price Where drinkId=@drinkId", dbConnection);
+				SqlCommand command = new SqlCommand("UPDATE Drink SET Name=@name, Stock=@stock, Price=@price, Alcoholic=@alcoholic Where drinkId=@drinkId", dbConnection);
 				command.Parameters.AddWithValue("@drinkId", drink.Id);
 				command.Parameters.AddWithValue("@name", drink.Name);
 				command.Parameters.AddWithValue("@stock", drink.Stock);
 				command.Parameters.AddWithValue("@price", drink.Price);
+				command.Parameters.AddWithValue("@alcoholic", drink.isAlcoholic);
 
 				command.ExecuteNonQuery();
 			}
@@ -85,19 +86,18 @@ namespace SomerenDAL
 			{
 				dbConnection.Open();
 				SqlCommand command = new SqlCommand(
-				"INSERT INTO Drink (drinkId, name, alcoholic, price, stock)" +
-				"VALUES (@drinkId, @name, @alcoholic, @price, @stock);" +
-				"SELECT SCOPE_IDENTITY();", dbConnection);
-				command.Parameters.AddWithValue("@DrinksId", drink.Id);
-				command.Parameters.AddWithValue("@Name", drink.Name);
-				command.Parameters.AddWithValue("@Type", drink.isAlcoholic);
-				command.Parameters.AddWithValue("@Price", drink.Price);
-				command.Parameters.AddWithValue("@Stock", drink.Stock);
+					"INSERT INTO Drink (name, alcoholic, price, stock) " +
+					"VALUES (@name, @alcoholic, @price, @stock);", dbConnection);
+				command.Parameters.AddWithValue("@drinkId", drink.Id);
+				command.Parameters.AddWithValue("@name", drink.Name);
+				command.Parameters.AddWithValue("@alcoholic", drink.isAlcoholic);
+				command.Parameters.AddWithValue("@price", drink.Price);
+				command.Parameters.AddWithValue("@stock", drink.Stock);
 				command.ExecuteNonQuery();
 			}
-			catch
+			catch (Exception ex)
 			{
-				throw new Exception("Can not connect to the database");
+				throw new Exception("Can not connect to the database: " + ex.Message);
 			}
 			finally
 			{
