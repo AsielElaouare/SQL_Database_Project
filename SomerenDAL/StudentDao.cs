@@ -36,83 +36,50 @@ namespace SomerenDAL
 			}
 			return students;
 		}
-        private SqlConnection dbConnection;
 
+        
         public void UpdateStudent(Student student)
         {
-            try
-            {
-                dbConnection.Open();
-                SqlCommand command = new SqlCommand("UPDATE Student SET firstname=@firstname, lastname=@lastname, studentNumber=@studentNumber, phoneNumber=@phoneNumber," +
-                    "studentClass=@studentClass, roomId=@roomId Where studentId=@studentId", dbConnection);
-                command.Parameters.AddWithValue("@studentId", student.studentId);
-                command.Parameters.AddWithValue("@firstName", student.firstName);
-                command.Parameters.AddWithValue("@lastName", student.lastName);
-                command.Parameters.AddWithValue("@studentNumber", student.studentNumber);
-                command.Parameters.AddWithValue("@phoneNumber", student.phoneNumber);
-                command.Parameters.AddWithValue("@studentClass", student.studentClass);
-                command.Parameters.AddWithValue("@roomId", student.roomId);
-
-
-                command.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw new Exception("Can not connect to the database");
-            }
-            finally
-            {
-                dbConnection.Close();
-            }
+                string command = "UPDATE Student SET firstname=@firstname, lastname=@lastname, studentNumber=@studentNumber, phoneNumber=@phoneNumber," +
+                    "studentClass=@studentClass, roomId=@roomId Where studentId=@studentId";
+            SqlParameter[] sqlParameters = new SqlParameter[7];
+            sqlParameters[0] = new SqlParameter("@studentId", student.studentId);
+            sqlParameters[1] = new SqlParameter("@firstName", student.firstName);
+            sqlParameters[2] = new SqlParameter("@lastName", student.lastName);
+            sqlParameters[3] = new SqlParameter("@studentNumber", student.studentNumber);
+            sqlParameters[4] = new SqlParameter("@phoneNumber", student.phoneNumber);
+            sqlParameters[5] = new SqlParameter("@studentClass", student.studentClass);
+            sqlParameters[6] = new SqlParameter("@roomId", student.roomId);
+            ExecuteEditQuery(command, sqlParameters);
         }
 
 
         public void AddStudent(Student student)
         {
-            try
-            {
-                dbConnection.Open();
-                SqlCommand command = new SqlCommand(
-                    "INSERT INTO Student (firstName, lastName, studentNumber, phoneNumber, studentClass, roomId) " +
-                    "VALUES (@firstName, @Lastname, @studentNumber, @phoneNumber, @studentClass, @roomId);", dbConnection);
-                command.Parameters.AddWithValue("@studentId", student.studentId);
-                command.Parameters.AddWithValue("@firstName", student.firstName);
-                command.Parameters.AddWithValue("@lastName", student.lastName);
-                command.Parameters.AddWithValue("@studentNumber", student.studentNumber);
-                command.Parameters.AddWithValue("@phoneNumber", student.phoneNumber);
-                command.Parameters.AddWithValue("@studentClass", student.studentClass);
-                command.Parameters.AddWithValue("@roomId", student.roomId);
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Can not connect to the database: " + ex.Message);
-            }
-            finally
-            {
-                dbConnection.Close();
-            }
+            string command = "INSERT INTO Student (firstName, lastName, studentNumber, phoneNumber, studentClass, roomId) " +
+                    "VALUES (@firstName, @Lastname, @studentNumber, @phoneNumber, @studentClass, @roomId);";
+            SqlParameter[] sqlParameters = new SqlParameter[7];
+            sqlParameters[0] = new SqlParameter("@studentId", student.studentId);
+            sqlParameters[1] = new SqlParameter("@firstName", student.firstName);
+            sqlParameters[2] = new SqlParameter("@lastName", student.lastName);
+            sqlParameters[3] = new SqlParameter("@studentNumber", student.studentNumber);
+            sqlParameters[4] = new SqlParameter("@phoneNumber", student.phoneNumber);
+            sqlParameters[5] = new SqlParameter("@studentClass", student.studentClass);
+            sqlParameters[6] = new SqlParameter("@roomId", student.roomId);
+            ExecuteEditQuery(command, sqlParameters);
+          
+
+            
         }
 
         public void DeleteStudent(Student student)
         {
-            try
-            {
-                dbConnection.Open();
-                SqlCommand command = new SqlCommand("DELETE From Student WHERE studentId = @studentId", dbConnection);
-                command.Parameters.AddWithValue("@studentId", student.studentId);
-                command.ExecuteNonQuery();
-            }
 
-
-            catch
-            {
-                throw new Exception("Can not connect to the database");
-            }
-            finally
-            {
-                dbConnection.Close();
-            }
+            string command = "DELETE From Student WHERE studentId = @studentId";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@studentId", student.studentId);
+            ExecuteEditQuery(command, sqlParameters);
+            
         }
     }
 }

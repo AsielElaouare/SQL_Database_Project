@@ -135,6 +135,8 @@
             pictureBox5 = new System.Windows.Forms.PictureBox();
             label5 = new System.Windows.Forms.Label();
             pnlDrinks = new System.Windows.Forms.Panel();
+            AlcoholischNoRadio = new System.Windows.Forms.RadioButton();
+            AlcoholischYesRadio = new System.Windows.Forms.RadioButton();
             PriceOfDrink = new System.Windows.Forms.Label();
             StockOfDrink = new System.Windows.Forms.Label();
             BoolOfDrink = new System.Windows.Forms.Label();
@@ -142,7 +144,6 @@
             TitleOfDrink = new System.Windows.Forms.Label();
             deletebtn = new System.Windows.Forms.Button();
             updatebtn = new System.Windows.Forms.Button();
-            drinkAlcoholischTextBox = new System.Windows.Forms.TextBox();
             AddDrinkButton = new System.Windows.Forms.Button();
             drinkPriceTextBox = new System.Windows.Forms.TextBox();
             drinkStockTextBox = new System.Windows.Forms.TextBox();
@@ -1062,6 +1063,8 @@
             // 
             // pnlDrinks
             // 
+            pnlDrinks.Controls.Add(AlcoholischNoRadio);
+            pnlDrinks.Controls.Add(AlcoholischYesRadio);
             pnlDrinks.Controls.Add(PriceOfDrink);
             pnlDrinks.Controls.Add(StockOfDrink);
             pnlDrinks.Controls.Add(BoolOfDrink);
@@ -1069,7 +1072,6 @@
             pnlDrinks.Controls.Add(TitleOfDrink);
             pnlDrinks.Controls.Add(deletebtn);
             pnlDrinks.Controls.Add(updatebtn);
-            pnlDrinks.Controls.Add(drinkAlcoholischTextBox);
             pnlDrinks.Controls.Add(AddDrinkButton);
             pnlDrinks.Controls.Add(drinkPriceTextBox);
             pnlDrinks.Controls.Add(drinkStockTextBox);
@@ -1079,6 +1081,26 @@
             pnlDrinks.Name = "pnlDrinks";
             pnlDrinks.Size = new System.Drawing.Size(1072, 621);
             pnlDrinks.TabIndex = 17;
+            // 
+            // AlcoholischNoRadio
+            // 
+            AlcoholischNoRadio.AutoSize = true;
+            AlcoholischNoRadio.Location = new System.Drawing.Point(765, 208);
+            AlcoholischNoRadio.Name = "AlcoholischNoRadio";
+            AlcoholischNoRadio.Size = new System.Drawing.Size(50, 24);
+            AlcoholischNoRadio.TabIndex = 20;
+            AlcoholischNoRadio.Text = "No";
+            AlcoholischNoRadio.UseVisualStyleBackColor = true;
+            // 
+            // AlcoholischYesRadio
+            // 
+            AlcoholischYesRadio.AutoSize = true;
+            AlcoholischYesRadio.Location = new System.Drawing.Point(690, 208);
+            AlcoholischYesRadio.Name = "AlcoholischYesRadio";
+            AlcoholischYesRadio.Size = new System.Drawing.Size(51, 24);
+            AlcoholischYesRadio.TabIndex = 19;
+            AlcoholischYesRadio.Text = "Yes";
+            AlcoholischYesRadio.UseVisualStyleBackColor = true;
             // 
             // PriceOfDrink
             // 
@@ -1145,13 +1167,6 @@
             updatebtn.Text = "Update!";
             updatebtn.UseVisualStyleBackColor = true;
             updatebtn.Click += updatebtn_Click;
-            // 
-            // drinkAlcoholischTextBox
-            // 
-            drinkAlcoholischTextBox.Location = new System.Drawing.Point(692, 162);
-            drinkAlcoholischTextBox.Name = "drinkAlcoholischTextBox";
-            drinkAlcoholischTextBox.Size = new System.Drawing.Size(125, 27);
-            drinkAlcoholischTextBox.TabIndex = 10;
             // 
             // AddDrinkButton
             // 
@@ -1391,7 +1406,6 @@
         private System.Windows.Forms.Label TitleOfDrink;
         private System.Windows.Forms.Button deletebtn;
         private System.Windows.Forms.Button updatebtn;
-        private System.Windows.Forms.TextBox drinkAlcoholischTextBox;
         private System.Windows.Forms.Button AddDrinkButton;
         private System.Windows.Forms.TextBox drinkPriceTextBox;
         private System.Windows.Forms.TextBox drinkStockTextBox;
@@ -1403,5 +1417,7 @@
         private System.Windows.Forms.ColumnHeader drinkStock;
         private System.Windows.Forms.ColumnHeader stockstatus;
         private System.Windows.Forms.ToolStripMenuItem drinksToolStripMenuItem;
+        private System.Windows.Forms.RadioButton AlcoholischNoRadio;
+        private System.Windows.Forms.RadioButton AlcoholischYesRadio;
     }
 }

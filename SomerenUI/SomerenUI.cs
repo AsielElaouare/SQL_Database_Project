@@ -583,12 +583,10 @@ namespace SomerenUI
                 Drink drinks = new Drink();
                 DrinksService drinksService = new DrinksService();
                 drinks.Name = drinkNameTextBox.Text;
-                if (!bool.TryParse(drinkAlcoholischTextBox.Text, out bool isAlcoholic))
-                {
-                    MessageBox.Show("Invalid input for alcoholic. Please enter 'true' or 'false'.");
-                    return;
-                }
-                drinks.isAlcoholic = isAlcoholic;
+
+                if (AlcoholischYesRadio.Checked) { drinks.isAlcoholic = true; }
+                else if (AlcoholischNoRadio.Checked) { drinks.isAlcoholic = false; }
+                else throw new Exception("Please select an option");
                 drinks.Price = decimal.Parse(drinkPriceTextBox.Text);
                 drinks.Stock = int.Parse(drinkStockTextBox.Text);
                 drinksService.AddDrink(drinks);
@@ -642,13 +640,9 @@ namespace SomerenUI
 
                 Drink selectedDrink = (Drink)selectedItem.Tag;
 
-                selectedDrink.Name = drinkNameTextBox.Text;
-                if (!bool.TryParse(drinkAlcoholischTextBox.Text, out bool isAlcoholic))
-                {
-                    MessageBox.Show("Invalid input for alcoholic. Please enter 'true' or 'false'.");
-                    return;
-                }
-                selectedDrink.isAlcoholic = isAlcoholic;
+                if (AlcoholischYesRadio.Checked) { selectedDrink.isAlcoholic = true; }
+                else if (AlcoholischNoRadio.Checked) { selectedDrink.isAlcoholic = false; }
+                else throw new Exception("Please select an option");
                 selectedDrink.Price = decimal.Parse(drinkPriceTextBox.Text);
                 selectedDrink.Stock = int.Parse(drinkStockTextBox.Text);
 
@@ -687,7 +681,14 @@ namespace SomerenUI
                 Drink selectedDrink = (Drink)selectedItem.Tag;
 
                 drinkNameTextBox.Text = selectedDrink.Name;
-                drinkAlcoholischTextBox.Text = selectedDrink.isAlcoholic.ToString();
+                if (selectedDrink.isAlcoholic == true)
+                {
+                    AlcoholischYesRadio.Checked = true;
+                }
+                else if (selectedDrink.isAlcoholic == false)
+                {
+                    AlcoholischNoRadio.Checked = true;
+                }
                 drinkPriceTextBox.Text = selectedDrink.Price.ToString();
                 drinkStockTextBox.Text = selectedDrink.Stock.ToString();
             }
