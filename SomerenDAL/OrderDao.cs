@@ -12,7 +12,6 @@ namespace SomerenDAL
 {
 	public class OrderDao : BaseDao
 	{
-
 		public List<Order> GetAllOrders()
 		{
 			string query = "SELECT * FROM [Order]";
@@ -38,7 +37,6 @@ namespace SomerenDAL
 			return orders;
 		}
 
-
 		public void AddOrder(Order order)
 		{
 			// Construct the SQL query to insert an order into the database
@@ -47,15 +45,13 @@ namespace SomerenDAL
 			// Define the SQL parameters
 			SqlParameter[] sqlParameters =
 			{
-
-			new SqlParameter("@StudentId", order.StudentId),
-			new SqlParameter("@drinkId", order.DrinkId),
-			new SqlParameter("@quantity", order.Quantity),
-			new SqlParameter("@OrderDate", order.OrderDate)
+				new SqlParameter("@StudentId", order.StudentId),
+				new SqlParameter("@drinkId", order.DrinkId),
+				new SqlParameter("@quantity", order.Quantity),
+				new SqlParameter("@OrderDate", order.OrderDate)
 			};
 
 			ExecuteEditQuery(query, sqlParameters);
 		}
-
 	}
 }

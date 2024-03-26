@@ -25,6 +25,7 @@ namespace SomerenUI
 			pnlLecturers.Hide();
 			pnlActivities.Hide();
 			pnlRooms.Hide();
+			pnlDrinks.Hide();
 			pnlOrderADrink.Hide();
 			pnlRevenue.Hide();
 			pnlVatReport.Hide();
@@ -525,6 +526,172 @@ namespace SomerenUI
 				StartQuarterDate = startQuarterDate,
 				EndQuarterDate = endQuarterDate
 			};
+		}
+
+		private void ShowDrinksPanel()
+		{
+			HideAllPanel();
+			pnlDrinks.Show();
+			LoadDrinks();
+		}
+
+		private void drinksToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ShowDrinksPanel();
+		}
+
+		private void LoadDrinks()
+		{
+			try
+			{
+				listViewDrinks.Items.Clear();
+
+				DrinksService drinksService = new DrinksService();
+				List<Drink> drinks = drinksService.GetAllDrinks();
+
+				foreach (Drink drink in drinks)
+				{
+					ListViewItem item = new ListViewItem(drink.Id.ToString());
+					item.SubItems.Add(drink.Name.ToString());
+					item.SubItems.Add(drink.isAlcoholic.ToString());
+					item.SubItems.Add(drink.Price.ToString());
+					item.SubItems.Add(drink.Stock.ToString());
+
+					if (drink.Stock < 10)
+					{
+						item.SubItems.Add("Stock nearly depleted");
+					}
+					else
+					{
+						item.SubItems.Add("Stock sufficient");
+					}
+
+					item.Tag = drink;
+
+					listViewDrinks.Items.Add(item);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Error loading drinks: {ex.Message}");
+			}
+		}
+
+		private void AddDrinks()
+		{
+			try
+			{
+				Drink drinks = new Drink();
+				DrinksService drinksService = new DrinksService();
+				drinks.Name = drinkNameTextBox.Text;
+				if (!bool.TryParse(drinkAlcoholischTextBox.Text, out bool isAlcoholic))
+				{
+					MessageBox.Show("Invalid input for alcoholic. Please enter 'true' or 'false'.");
+					return;
+				}
+				drinks.isAlcoholic = isAlcoholic;
+				drinks.Price = decimal.Parse(drinkPriceTextBox.Text);
+				drinks.Stock = int.Parse(drinkStockTextBox.Text);
+				drinksService.AddDrink(drinks);
+				MessageBox.Show($"Succesfully added: {drinks.Name}");
+				LoadDrinks();
+
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Cannot add this drink{ex.Message}");
+			}
+		}
+
+		private void AddDrinkButton_Click(object sender, EventArgs e)
+		{
+			AddDrinks();
+		}
+
+		private void deletebtn_Click(object sender, EventArgs e)
+		{
+			if (listViewDrinks.SelectedItems.Count > 0)
+			{
+				ListViewItem selectedItem = listViewDrinks.SelectedItems[0];
+
+				Drink selectedDrink = (Drink)selectedItem.Tag;
+
+				try
+				{
+					DrinksService drinksService = new DrinksService();
+
+					drinksService.DeleteDrink(selectedDrink);
+					LoadDrinks();
+
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show($"Error deleting drink: {ex.Message}");
+				}
+			}
+			else
+			{
+				MessageBox.Show("Please select a drink to delete.");
+			}
+		}
+
+		private void updatebtn_Click(object sender, EventArgs e)
+		{
+			if (listViewDrinks.SelectedItems.Count > 0)
+			{
+				ListViewItem selectedItem = listViewDrinks.SelectedItems[0];
+
+				Drink selectedDrink = (Drink)selectedItem.Tag;
+
+				selectedDrink.Name = drinkNameTextBox.Text;
+				if (!bool.TryParse(drinkAlcoholischTextBox.Text, out bool isAlcoholic))
+				{
+					MessageBox.Show("Invalid input for alcoholic. Please enter 'true' or 'false'.");
+					return;
+				}
+				selectedDrink.isAlcoholic = isAlcoholic;
+				selectedDrink.Price = decimal.Parse(drinkPriceTextBox.Text);
+				selectedDrink.Stock = int.Parse(drinkStockTextBox.Text);
+
+				try
+				{
+
+					DrinksService drinksService = new DrinksService();
+
+
+					drinksService.UpdateDrink(selectedDrink);
+
+
+					LoadDrinks();
+
+					MessageBox.Show("Drink details updated successfully.");
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show($"Error updating drink details: {ex.Message}");
+				}
+			}
+			else
+			{
+				MessageBox.Show("Please select a drink to modify.");
+			}
+		}
+
+		private void listViewDrinks_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (listViewDrinks.SelectedItems.Count > 0)
+			{
+
+				ListViewItem selectedItem = listViewDrinks.SelectedItems[0];
+
+
+				Drink selectedDrink = (Drink)selectedItem.Tag;
+
+				drinkNameTextBox.Text = selectedDrink.Name;
+				drinkAlcoholischTextBox.Text = selectedDrink.isAlcoholic.ToString();
+				drinkPriceTextBox.Text = selectedDrink.Price.ToString();
+				drinkStockTextBox.Text = selectedDrink.Stock.ToString();
+			}
 		}
 	}
 }
