@@ -18,5 +18,20 @@ namespace SomerenService
             List<Student> students = studentdb.GetAllStudents();
             return students;
         }
+
+        public void UpdateStudent(Student student)
+        {
+            studentdb.UpdateStudent(student);
+        }
+
+        public void DeleteStudent(Student student)
+        {
+            studentdb.DeleteStudent(student);
+        }
+
+        public void AddStudent(Student student)
+        {
+            studentdb.AddStudent(student);
+        }
     }
 }
