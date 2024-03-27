@@ -14,7 +14,7 @@ namespace SomerenDAL
 	{
 		public List<Order> GetAllOrders()
 		{
-			string query = "SELECT * FROM [Order]";
+			string query = "SELECT orderId, quantity, drinkId, studentId FROM [Order] ORDER BY orderDate";
 			SqlParameter[] sqlParameters = new SqlParameter[0];
 			return ReadTables(ExecuteSelectQuery(query, sqlParameters));
 		}

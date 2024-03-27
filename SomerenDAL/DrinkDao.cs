@@ -17,7 +17,7 @@ namespace SomerenDAL
 	{
 		public List<Drink> GetAllDrinks()
 		{
-			string query = "SELECT Drink.drinkId, Drink.[name], Drink.price, Drink.alcoholic, Drink.stock, SUM([Order].quantity) AS Sold FROM Drink LEFT JOIN [Order] ON [Order].drinkId = Drink.drinkId GROUP BY Drink.drinkId, Drink.[name], Drink.price, Drink.alcoholic, Drink.stock ORDER BY [name]";
+			string query = "SELECT Drink.drinkId, Drink.[name], Drink.price, Drink.alcoholic, Drink.stock, SUM([Order].quantity) AS Sold FROM Drink LEFT JOIN [Order] ON [Order].drinkId = Drink.drinkId GROUP BY Drink.drinkId, Drink.[name], Drink.price, Drink.alcoholic, Drink.stock ORDER BY stock, [name]";
 			SqlParameter[] sqlParameters = new SqlParameter[0];
 			return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
 		}
