@@ -70,6 +70,7 @@
 			lecturerPhoneNumber = new System.Windows.Forms.ColumnHeader();
 			label2 = new System.Windows.Forms.Label();
 			pnlActivities = new System.Windows.Forms.Panel();
+			btnManageParticipants = new System.Windows.Forms.Button();
 			pictureBox3 = new System.Windows.Forms.PictureBox();
 			listViewActivities = new System.Windows.Forms.ListView();
 			ActivityId = new System.Windows.Forms.ColumnHeader();
@@ -479,6 +480,7 @@
 			// 
 			// pnlActivities
 			// 
+			pnlActivities.Controls.Add(btnManageParticipants);
 			pnlActivities.Controls.Add(pictureBox3);
 			pnlActivities.Controls.Add(listViewActivities);
 			pnlActivities.Controls.Add(label3);
@@ -487,6 +489,16 @@
 			pnlActivities.Name = "pnlActivities";
 			pnlActivities.Size = new System.Drawing.Size(1072, 621);
 			pnlActivities.TabIndex = 4;
+			// 
+			// btnManageParticipants
+			// 
+			btnManageParticipants.Enabled = false;
+			btnManageParticipants.Location = new System.Drawing.Point(692, 471);
+			btnManageParticipants.Name = "btnManageParticipants";
+			btnManageParticipants.Size = new System.Drawing.Size(201, 29);
+			btnManageParticipants.TabIndex = 3;
+			btnManageParticipants.Text = "Manage participants";
+			btnManageParticipants.UseVisualStyleBackColor = true;
 			// 
 			// pictureBox3
 			// 
@@ -1235,6 +1247,7 @@
 			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			ClientSize = new System.Drawing.Size(1099, 663);
 			Controls.Add(menuStrip1);
+			Controls.Add(pnlActivities);
 			Controls.Add(pnlDrinks);
 			Controls.Add(pnlOrderADrink);
 			Controls.Add(pnlVatReport);
@@ -1242,7 +1255,6 @@
 			Controls.Add(pnlDashboard);
 			Controls.Add(pnlStudents);
 			Controls.Add(pnlLecturers);
-			Controls.Add(pnlActivities);
 			Controls.Add(pnlRooms);
 			MainMenuStrip = menuStrip1;
 			Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -1410,5 +1422,6 @@
 		private System.Windows.Forms.ColumnHeader drinkStock;
 		private System.Windows.Forms.ColumnHeader stockstatus;
 		private System.Windows.Forms.ToolStripMenuItem drinksToolStripMenuItem;
+		private System.Windows.Forms.Button btnManageParticipants;
 	}
 }
