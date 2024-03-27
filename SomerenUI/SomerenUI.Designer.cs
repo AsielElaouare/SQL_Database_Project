@@ -70,6 +70,7 @@
 			lecturerPhoneNumber = new System.Windows.Forms.ColumnHeader();
 			label2 = new System.Windows.Forms.Label();
 			pnlActivities = new System.Windows.Forms.Panel();
+			btnManageParticipants = new System.Windows.Forms.Button();
 			pictureBox3 = new System.Windows.Forms.PictureBox();
 			listViewActivities = new System.Windows.Forms.ListView();
 			ActivityId = new System.Windows.Forms.ColumnHeader();
@@ -154,7 +155,6 @@
 			drinksPrice = new System.Windows.Forms.ColumnHeader();
 			drinkStock = new System.Windows.Forms.ColumnHeader();
 			stockstatus = new System.Windows.Forms.ColumnHeader();
-			button1 = new System.Windows.Forms.Button();
 			menuStrip1.SuspendLayout();
 			pnlDashboard.SuspendLayout();
 			pnlStudents.SuspendLayout();
@@ -480,7 +480,7 @@
 			// 
 			// pnlActivities
 			// 
-			pnlActivities.Controls.Add(button1);
+			pnlActivities.Controls.Add(btnManageParticipants);
 			pnlActivities.Controls.Add(pictureBox3);
 			pnlActivities.Controls.Add(listViewActivities);
 			pnlActivities.Controls.Add(label3);
@@ -489,6 +489,16 @@
 			pnlActivities.Name = "pnlActivities";
 			pnlActivities.Size = new System.Drawing.Size(1072, 621);
 			pnlActivities.TabIndex = 4;
+			// 
+			// btnManageParticipants
+			// 
+			btnManageParticipants.Enabled = false;
+			btnManageParticipants.Location = new System.Drawing.Point(692, 471);
+			btnManageParticipants.Name = "btnManageParticipants";
+			btnManageParticipants.Size = new System.Drawing.Size(201, 29);
+			btnManageParticipants.TabIndex = 3;
+			btnManageParticipants.Text = "Manage participants";
+			btnManageParticipants.UseVisualStyleBackColor = true;
 			// 
 			// pictureBox3
 			// 
@@ -1231,16 +1241,6 @@
 			stockstatus.Text = "Stock Status";
 			stockstatus.Width = 160;
 			// 
-			// button1
-			// 
-			button1.Enabled = false;
-			button1.Location = new System.Drawing.Point(692, 471);
-			button1.Name = "button1";
-			button1.Size = new System.Drawing.Size(201, 29);
-			button1.TabIndex = 3;
-			button1.Text = "Manage participants";
-			button1.UseVisualStyleBackColor = true;
-			// 
 			// SomerenUI
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -1422,6 +1422,6 @@
 		private System.Windows.Forms.ColumnHeader drinkStock;
 		private System.Windows.Forms.ColumnHeader stockstatus;
 		private System.Windows.Forms.ToolStripMenuItem drinksToolStripMenuItem;
-		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.Button btnManageParticipants;
 	}
 }
