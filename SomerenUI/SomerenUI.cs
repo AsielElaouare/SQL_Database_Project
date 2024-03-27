@@ -207,12 +207,11 @@ namespace SomerenUI
 
             foreach (Student student in students)
             {
-                ListViewItem li = new ListViewItem(student.studentId.ToString());
-                li.SubItems.Add(student.studentNumber.ToString());
+                ListViewItem li = new ListViewItem(student.studentNumber.ToString());
                 li.SubItems.Add(student.firstName);
                 li.SubItems.Add(student.lastName);
-                li.SubItems.Add(student.studentClass);
                 li.SubItems.Add(student.phoneNumber.ToString());
+                li.SubItems.Add(student.studentClass);
                 //li.SubItems.Add(student.roomId.ToString());
                 li.Tag = student;   // link student object to listview item
                 listViewStudents.Items.Add(li);
@@ -439,8 +438,8 @@ namespace SomerenUI
                 DrinkDao drinkDao = new DrinkDao();
                 Drink drink = selectedDrink;
                 drink.Stock = drink.Stock - selectedQuantityDrinks;
-                    
-                
+
+
                 //update database
                 CreateOrder();
                 drinkDao.UpdateDrink(drink);
@@ -450,8 +449,8 @@ namespace SomerenUI
                 //refreshing with updated data after submitting order
                 ShowOrderADrinkPanel();
                 ResetPanelOptions();
-            }       
-            else 
+            }
+            else
             {
                 MessageBox.Show("An error occurred: You need To select a Student AND a Drink", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -468,7 +467,7 @@ namespace SomerenUI
             order.Quantity = selectedQuantityDrinks;
             order.OrderDate = dateNow;
             orderService.AddOrder(order);
-          
+
         }
 
         private void listViewStudentOrder_SelectedIndexChanged(object sender, EventArgs e)

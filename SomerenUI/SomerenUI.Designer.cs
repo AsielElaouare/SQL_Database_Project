@@ -44,11 +44,11 @@
             pnlStudents = new System.Windows.Forms.Panel();
             pictureBox1 = new System.Windows.Forms.PictureBox();
             listViewStudents = new System.Windows.Forms.ListView();
-            studentNumber = new System.Windows.Forms.ColumnHeader();
+            studentStudentNumber = new System.Windows.Forms.ColumnHeader();
             studentFirstName = new System.Windows.Forms.ColumnHeader();
             studentLastName = new System.Windows.Forms.ColumnHeader();
-            studentClass = new System.Windows.Forms.ColumnHeader();
             studentPhoneNumber = new System.Windows.Forms.ColumnHeader();
+            studentStudenClass = new System.Windows.Forms.ColumnHeader();
             label1 = new System.Windows.Forms.Label();
             pnlRooms = new System.Windows.Forms.Panel();
             pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -251,7 +251,7 @@
             // 
             // listViewStudents
             // 
-            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { studentNumber, studentFirstName, studentLastName, studentClass, studentPhoneNumber });
+            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { studentStudentNumber, studentFirstName, studentLastName, studentPhoneNumber, studentStudenClass });
             listViewStudents.Location = new System.Drawing.Point(23, 70);
             listViewStudents.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             listViewStudents.Name = "listViewStudents";
@@ -260,29 +260,29 @@
             listViewStudents.UseCompatibleStateImageBehavior = false;
             listViewStudents.View = System.Windows.Forms.View.Details;
             // 
-            // studentNumber
+            // studentStudentNumber
             // 
-            studentNumber.Text = "Student Number";
+            studentStudentNumber.Text = "Studentnumber";
+            studentStudentNumber.Width = 150;
             // 
             // studentFirstName
             // 
-            studentFirstName.Text = "First Name";
+            studentFirstName.Text = "Firstname";
             studentFirstName.Width = 150;
             // 
             // studentLastName
             // 
-            studentLastName.Text = "Last Name";
+            studentLastName.Text = "Lastname";
             studentLastName.Width = 150;
-            // 
-            // studentClass
-            // 
-            studentClass.Text = "Class";
-            studentClass.Width = 150;
             // 
             // studentPhoneNumber
             // 
-            studentPhoneNumber.Text = "Phone Number";
+            studentPhoneNumber.Text = "Phonenumber";
             studentPhoneNumber.Width = 150;
+            // 
+            // studentStudenClass
+            // 
+            studentStudenClass.Text = "Class";
             // 
             // label1
             // 
@@ -865,10 +865,10 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1374, 828);
             Controls.Add(menuStrip1);
+            Controls.Add(pnlStudents);
             Controls.Add(pnlRevenue);
             Controls.Add(pnlOrderADrink);
             Controls.Add(pnlDashboard);
-            Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlActivities);
             Controls.Add(pnlRooms);
@@ -933,11 +933,11 @@
 		private System.Windows.Forms.PictureBox pictureBox3;
 		private System.Windows.Forms.ListView listViewActivities;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.ColumnHeader studentFirstName;
 		private System.Windows.Forms.ColumnHeader studentLastName;
-		private System.Windows.Forms.ColumnHeader studentNumber;
-		private System.Windows.Forms.ColumnHeader studentClass;
 		private System.Windows.Forms.ColumnHeader studentPhoneNumber;
+		private System.Windows.Forms.ColumnHeader studentFirstName;
+		private System.Windows.Forms.ColumnHeader studentStudentNumber;
+		private System.Windows.Forms.ColumnHeader studentStudenClass;
 		private System.Windows.Forms.ColumnHeader lecturerId;
 		private System.Windows.Forms.ColumnHeader lecturerFirstName;
 		private System.Windows.Forms.ColumnHeader lecturerLastName;
