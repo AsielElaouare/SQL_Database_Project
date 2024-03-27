@@ -223,12 +223,11 @@ namespace SomerenUI
 
             foreach (Student student in students)
             {
-                ListViewItem li = new ListViewItem(student.studentId.ToString());
-                li.SubItems.Add(student.studentNumber.ToString());
+                ListViewItem li = new ListViewItem(student.studentNumber.ToString());
                 li.SubItems.Add(student.firstName);
                 li.SubItems.Add(student.lastName);
-                li.SubItems.Add(student.studentClass);
                 li.SubItems.Add(student.phoneNumber.ToString());
+                li.SubItems.Add(student.studentClass);
                 //li.SubItems.Add(student.roomId.ToString());
                 li.Tag = student;   // link student object to listview item
                 listViewStudents.Items.Add(li);
