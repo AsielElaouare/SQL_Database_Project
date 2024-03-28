@@ -36,14 +36,16 @@
 			lvNotParticipating = new System.Windows.Forms.ListView();
 			lvNotParticipatingStudentNumber = new System.Windows.Forms.ColumnHeader();
 			lvNotParticipatingStudentName = new System.Windows.Forms.ColumnHeader();
+			label1 = new System.Windows.Forms.Label();
+			label2 = new System.Windows.Forms.Label();
 			SuspendLayout();
 			// 
 			// lvParticipating
 			// 
 			lvParticipating.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvParticipatingStudentNumber, lvParticipatingStudentName });
-			lvParticipating.Location = new System.Drawing.Point(12, 12);
+			lvParticipating.Location = new System.Drawing.Point(12, 32);
 			lvParticipating.Name = "lvParticipating";
-			lvParticipating.Size = new System.Drawing.Size(335, 426);
+			lvParticipating.Size = new System.Drawing.Size(335, 406);
 			lvParticipating.TabIndex = 0;
 			lvParticipating.UseCompatibleStateImageBehavior = false;
 			lvParticipating.View = System.Windows.Forms.View.Details;
@@ -79,9 +81,9 @@
 			// lvNotParticipating
 			// 
 			lvNotParticipating.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvNotParticipatingStudentNumber, lvNotParticipatingStudentName });
-			lvNotParticipating.Location = new System.Drawing.Point(453, 12);
+			lvNotParticipating.Location = new System.Drawing.Point(453, 32);
 			lvNotParticipating.Name = "lvNotParticipating";
-			lvNotParticipating.Size = new System.Drawing.Size(335, 426);
+			lvNotParticipating.Size = new System.Drawing.Size(335, 406);
 			lvNotParticipating.TabIndex = 4;
 			lvNotParticipating.UseCompatibleStateImageBehavior = false;
 			lvNotParticipating.View = System.Windows.Forms.View.Details;
@@ -96,11 +98,31 @@
 			lvNotParticipatingStudentName.Text = "Student Name";
 			lvNotParticipatingStudentName.Width = 110;
 			// 
+			// label1
+			// 
+			label1.AutoSize = true;
+			label1.Location = new System.Drawing.Point(12, 9);
+			label1.Name = "label1";
+			label1.Size = new System.Drawing.Size(153, 20);
+			label1.TabIndex = 5;
+			label1.Text = "Participating Students";
+			// 
+			// label2
+			// 
+			label2.AutoSize = true;
+			label2.Location = new System.Drawing.Point(453, 9);
+			label2.Name = "label2";
+			label2.Size = new System.Drawing.Size(182, 20);
+			label2.TabIndex = 5;
+			label2.Text = "Not Participating Students";
+			// 
 			// ManageParticipants
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			ClientSize = new System.Drawing.Size(800, 450);
+			Controls.Add(label2);
+			Controls.Add(label1);
 			Controls.Add(lvNotParticipating);
 			Controls.Add(btnAddParticipant);
 			Controls.Add(btnRmvParticipant);
@@ -108,6 +130,7 @@
 			Name = "ManageParticipants";
 			Text = "Manage Participants";
 			ResumeLayout(false);
+			PerformLayout();
 		}
 
 		#endregion
@@ -120,5 +143,7 @@
 		private System.Windows.Forms.ListView lvNotParticipating;
 		private System.Windows.Forms.ColumnHeader lvNotParticipatingStudentNumber;
 		private System.Windows.Forms.ColumnHeader lvNotParticipatingStudentName;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Label label2;
 	}
 }
