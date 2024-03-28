@@ -129,6 +129,7 @@
 			Controls.Add(lvParticipating);
 			Name = "ManageParticipants";
 			Text = "Manage Participants";
+			Load += ManageParticipants_Load;
 			ResumeLayout(false);
 			PerformLayout();
 		}
