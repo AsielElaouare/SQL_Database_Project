@@ -26,9 +26,6 @@ namespace SomerenDAL
 
         private Revenue ReadTables(DataTable dataTable)
         {
-            if (dataTable.Rows.Count == 0) 
-                return new Revenue();
-            
             DataRow dr = dataTable.Rows[0];
 
             return new Revenue()
