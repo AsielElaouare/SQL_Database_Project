@@ -19,7 +19,14 @@ namespace SomerenService
 
         public Revenue GetRevenue(DateTime startDate, DateTime endDate)
         {
-            return revenuedb.GetRevenueByDate(startDate, endDate);
+            Revenue revenue = revenuedb.GetRevenueByDate(startDate, endDate);
+
+            if (revenue == null)
+            {
+                return new Revenue();
+            }
+
+            return revenue;
         }  
     }
 }
