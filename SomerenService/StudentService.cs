@@ -30,5 +30,15 @@ namespace SomerenService
 			List<Student> students = studentdb.GetNotParticipatingStudents(activityId);
 			return students;
 		}
+
+		public void AddParticipant(int activityId, int studentId)
+		{
+			studentdb.AddParticipant(activityId, studentId);
+		}
+
+		public void RemoveParticipant(int activityId, int studentId)
+		{
+			studentdb.RemoveParticipant(activityId, studentId);
+		}
 	}
 }

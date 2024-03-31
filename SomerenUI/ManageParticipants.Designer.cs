@@ -43,9 +43,10 @@
 			// lvParticipating
 			// 
 			lvParticipating.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvParticipatingStudentNumber, lvParticipatingStudentName });
-			lvParticipating.Location = new System.Drawing.Point(12, 32);
+			lvParticipating.FullRowSelect = true;
+			lvParticipating.Location = new System.Drawing.Point(11, 32);
 			lvParticipating.Name = "lvParticipating";
-			lvParticipating.Size = new System.Drawing.Size(335, 406);
+			lvParticipating.Size = new System.Drawing.Size(335, 407);
 			lvParticipating.TabIndex = 0;
 			lvParticipating.UseCompatibleStateImageBehavior = false;
 			lvParticipating.View = System.Windows.Forms.View.Details;
@@ -62,12 +63,13 @@
 			// 
 			// btnAddParticipant
 			// 
-			btnAddParticipant.Location = new System.Drawing.Point(353, 374);
+			btnAddParticipant.Location = new System.Drawing.Point(353, 373);
 			btnAddParticipant.Name = "btnAddParticipant";
 			btnAddParticipant.Size = new System.Drawing.Size(94, 29);
 			btnAddParticipant.TabIndex = 2;
 			btnAddParticipant.Text = "< ADD";
 			btnAddParticipant.UseVisualStyleBackColor = true;
+			btnAddParticipant.Click += btnAddParticipant_Click;
 			// 
 			// btnRmvParticipant
 			// 
@@ -77,13 +79,15 @@
 			btnRmvParticipant.TabIndex = 3;
 			btnRmvParticipant.Text = "REMOVE >";
 			btnRmvParticipant.UseVisualStyleBackColor = true;
+			btnRmvParticipant.Click += btnRmvParticipant_Click;
 			// 
 			// lvNotParticipating
 			// 
 			lvNotParticipating.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvNotParticipatingStudentNumber, lvNotParticipatingStudentName });
+			lvNotParticipating.FullRowSelect = true;
 			lvNotParticipating.Location = new System.Drawing.Point(453, 32);
 			lvNotParticipating.Name = "lvNotParticipating";
-			lvNotParticipating.Size = new System.Drawing.Size(335, 406);
+			lvNotParticipating.Size = new System.Drawing.Size(335, 407);
 			lvNotParticipating.TabIndex = 4;
 			lvNotParticipating.UseCompatibleStateImageBehavior = false;
 			lvNotParticipating.View = System.Windows.Forms.View.Details;
@@ -101,7 +105,7 @@
 			// label1
 			// 
 			label1.AutoSize = true;
-			label1.Location = new System.Drawing.Point(12, 9);
+			label1.Location = new System.Drawing.Point(11, 9);
 			label1.Name = "label1";
 			label1.Size = new System.Drawing.Size(153, 20);
 			label1.TabIndex = 5;
@@ -120,7 +124,7 @@
 			// 
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			ClientSize = new System.Drawing.Size(800, 450);
+			ClientSize = new System.Drawing.Size(800, 451);
 			Controls.Add(label2);
 			Controls.Add(label1);
 			Controls.Add(lvNotParticipating);
