@@ -28,19 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             lvParticipatingSupervisors = new System.Windows.Forms.ListView();
             lvParticipatingSupervisorName = new System.Windows.Forms.ColumnHeader();
+            lvParticipatingSupervisorLastName = new System.Windows.Forms.ColumnHeader();
             btnAddSupervisor = new System.Windows.Forms.Button();
             btnRmvSupervisor = new System.Windows.Forms.Button();
             lvNotParticipatingSupervisors = new System.Windows.Forms.ListView();
             lvNotParticipatingSupervisorName = new System.Windows.Forms.ColumnHeader();
+            lvNotParticipatingSupervisorLastName = new System.Windows.Forms.ColumnHeader();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // lvParticipatingSupervisors
             // 
-            lvParticipatingSupervisors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvParticipatingSupervisorName });
+            lvParticipatingSupervisors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvParticipatingSupervisorName, lvParticipatingSupervisorLastName });
+            lvParticipatingSupervisors.FullRowSelect = true;
             lvParticipatingSupervisors.Location = new System.Drawing.Point(12, 25);
             lvParticipatingSupervisors.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             lvParticipatingSupervisors.Name = "lvParticipatingSupervisors";
@@ -51,8 +55,13 @@
             // 
             // lvParticipatingSupervisorName
             // 
-            lvParticipatingSupervisorName.Text = "Supervisor Name";
+            lvParticipatingSupervisorName.Text = "Name";
             lvParticipatingSupervisorName.Width = 125;
+            // 
+            // lvParticipatingSupervisorLastName
+            // 
+            lvParticipatingSupervisorLastName.Text = "Last Name";
+            lvParticipatingSupervisorLastName.Width = 120;
             // 
             // btnAddSupervisor
             // 
@@ -78,7 +87,9 @@
             // 
             // lvNotParticipatingSupervisors
             // 
-            lvNotParticipatingSupervisors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvNotParticipatingSupervisorName });
+            lvNotParticipatingSupervisors.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lvNotParticipatingSupervisorName, lvNotParticipatingSupervisorLastName });
+            lvNotParticipatingSupervisors.FullRowSelect = true;
+            lvNotParticipatingSupervisors.Items.AddRange(new System.Windows.Forms.ListViewItem[] { listViewItem1 });
             lvNotParticipatingSupervisors.Location = new System.Drawing.Point(400, 26);
             lvNotParticipatingSupervisors.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             lvNotParticipatingSupervisors.Name = "lvNotParticipatingSupervisors";
@@ -89,8 +100,13 @@
             // 
             // lvNotParticipatingSupervisorName
             // 
-            lvNotParticipatingSupervisorName.Text = "Supervisor Name";
+            lvNotParticipatingSupervisorName.Text = "Name";
             lvNotParticipatingSupervisorName.Width = 125;
+            // 
+            // lvNotParticipatingSupervisorLastName
+            // 
+            lvNotParticipatingSupervisorLastName.Text = "Last Name";
+            lvNotParticipatingSupervisorLastName.Width = 120;
             // 
             // label1
             // 
@@ -138,5 +154,7 @@
         private System.Windows.Forms.ColumnHeader lvNotParticipatingSupervisorName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader lvParticipatingSupervisorLastName;
+        private System.Windows.Forms.ColumnHeader lvNotParticipatingSupervisorLastName;
     }
 }
