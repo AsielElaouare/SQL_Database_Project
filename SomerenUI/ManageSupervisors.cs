@@ -105,15 +105,18 @@ namespace SomerenUI
 
         private void btnRmvSupervisor_Click(object sender, EventArgs e)
         {
-            Teacher teacher = new Teacher();
-            TeacherService teacherService = new TeacherService();
-
             ListViewItem selectedTeacherItem = lvParticipatingSupervisors.SelectedItems[0];
-            teacher = (Teacher)selectedTeacherItem.Tag;
+            Teacher teacher = (Teacher)selectedTeacherItem.Tag;
 
-            teacherService.UpdateTeacher(1, teacher.TeacherId);
-            RemoveSupervisorToActivity(teacher.TeacherId);
-            PopulatingLvs();
+            DialogResult result = MessageBox.Show($"Are you sure you want to remove '{teacher.FirstName} {teacher.LastName}' from this Activity?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            
+            if (result == DialogResult.OK)
+            {
+                TeacherService teacherService = new TeacherService();
+                teacherService.UpdateTeacher(1, teacher.TeacherId);
+                RemoveSupervisorToActivity(teacher.TeacherId);
+                PopulatingLvs();
+            }
         }
     }
 }
