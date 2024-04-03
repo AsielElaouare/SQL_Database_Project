@@ -11,23 +11,49 @@ namespace SomerenDAL
 {
     public  class SupervisorDao : BaseDao
     {
-        public List<Supervisor> GetAllSupervisors()
+        public List<Teacher> GetAllSupervisors()
         {
-            string query = "SELECT lecturertId, activityId FROM [lecturerparticipant]";
+            string query = "SELECT  lecturerId, activityId, firstname, lastname, activityId FROM lecturer AS L JOIN LecturerParticipant AS LP ON LP.lecturertId = L.lecturerId";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTableSupervisors(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public List<Teacher> GetRemovedSupervisors()
+        {
+            string query = "SELECT L.lecturerId, L.firstname, L.lastname FROM lecturer AS L LEFT JOIN LecturerParticipant AS LP ON L.lecturerId = LP.lecturertId WHERE LP.lecturertId IS NULL;";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        private List<Supervisor> ReadTables(DataTable dataTable)
+        private List<Teacher> ReadTableSupervisors(DataTable dataTable)
         {
-            List<Supervisor> supervisors = new List<Supervisor>();
+            List<Teacher> teachers = new List<Teacher>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                Supervisor supervisor = new Supervisor()
+                Teacher teacher = new Teacher()
                 {
-                    SupervisorId = (int)dr["lecturertId"],
+                    FirstName = (string)dr["firstName"],
+                    LastName = (string)dr["lastName"],
                     ActivityId = (int)dr["activityId"],
+                    TeacherId = (int)dr["lecturerId"]
+                };
+                teachers.Add(teacher);
+            }
+            return teachers;
+        }
+
+
+        private List<Teacher> ReadTables(DataTable dataTable)
+        {
+            List<Teacher> supervisors = new List<Teacher>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Teacher supervisor = new Teacher()
+                {
+                    FirstName = (string)dr["firstname"],
+                    LastName = (string)dr["lastname"],
+                    TeacherId = (int)dr["lecturerId"]
                 };
                 supervisors.Add(supervisor);
             }

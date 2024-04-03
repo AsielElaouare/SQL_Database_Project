@@ -33,19 +33,16 @@ namespace SomerenUI
         {
             lvNotParticipatingSupervisors.Items.Clear();
 
-            List<Teacher> teachers = new List<Teacher>();
-            TeacherService teacherService = new TeacherService();
-            teachers = teacherService.GetTeachers();
+            List<Teacher> supervisors = new List<Teacher>();
+            SupervisorService supervisorService = new SupervisorService();
+            supervisors = supervisorService.GetRmvSupervisors();
 
-            foreach (Teacher teacher in teachers)
+            foreach (Teacher supervisor in supervisors)
             {
-                if (teacher.IsDeleted == 1)
-                {
-                    ListViewItem li = new ListViewItem(teacher.FirstName);
-                    li.SubItems.Add(teacher.LastName);
-                    li.Tag = teacher;
-                    lvNotParticipatingSupervisors.Items.Add(li);
-                }
+                ListViewItem li = new ListViewItem(supervisor.FirstName);
+                li.SubItems.Add(supervisor.LastName);
+                li.Tag = supervisor;
+                lvNotParticipatingSupervisors.Items.Add(li);
             }
         }
 
@@ -53,7 +50,7 @@ namespace SomerenUI
         {
             lvParticipatingSupervisors.Items.Clear();
 
-            List<Supervisor> supervisors = new List<Supervisor>();
+            List<Teacher> supervisors = new List<Teacher>();
             List<Teacher> teachers = new List<Teacher>();
             TeacherService teacherService = new TeacherService();
             teachers = teacherService.GetTeachers();
@@ -61,20 +58,15 @@ namespace SomerenUI
             SupervisorService SupervisorService = new SupervisorService();
             supervisors = SupervisorService.GetSupervisors();
 
-            foreach (Supervisor supervisor in supervisors)
+            foreach (Teacher supervisor in supervisors)
             {
                 if (supervisor.ActivityId == Activity.Id)
                 {
-                    foreach (Teacher teacher in teachers)
-                    {
-                        if (teacher.IsDeleted == 0 && teacher.TeacherId == supervisor.SupervisorId)
-                        {
-                            ListViewItem li = new ListViewItem(teacher.FirstName);
-                            li.SubItems.Add(teacher.LastName);
-                            li.Tag = teacher;
-                            lvParticipatingSupervisors.Items.Add(li);
-                        }
-                    }
+                    if (supervisor.FirstName != null) { }
+                    ListViewItem li = new ListViewItem(supervisor.FirstName);
+                    li.SubItems.Add(supervisor.LastName);
+                    li.Tag = supervisor;
+                    lvParticipatingSupervisors.Items.Add(li);
                 }
             }
         }
@@ -91,14 +83,10 @@ namespace SomerenUI
         }
 
         private void btnAddSupervisor_Click(object sender, EventArgs e)
-        {
-            Teacher teacher  = new Teacher();
-            TeacherService teacherService = new TeacherService();
-
+        {            
             ListViewItem selectedTeacherItem = lvNotParticipatingSupervisors.SelectedItems[0];
-            teacher = (Teacher)selectedTeacherItem.Tag;
+            Teacher teacher = (Teacher)selectedTeacherItem.Tag;
 
-            teacherService.UpdateTeacher(0, teacher.TeacherId);
             AddSupervisorToActivity(Activity.Id, teacher.TeacherId);
             PopulatingLvs();
         }
@@ -113,7 +101,6 @@ namespace SomerenUI
             if (result == DialogResult.OK)
             {
                 TeacherService teacherService = new TeacherService();
-                teacherService.UpdateTeacher(1, teacher.TeacherId);
                 RemoveSupervisorToActivity(teacher.TeacherId);
                 PopulatingLvs();
             }

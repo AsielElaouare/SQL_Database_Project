@@ -16,9 +16,15 @@ namespace SomerenService
         {
             supervisorDb = new SupervisorDao();
         }
-        public List<Supervisor> GetSupervisors()
+        public List<Teacher> GetSupervisors()
         {
-            List<Supervisor> supervisors = supervisorDb.GetAllSupervisors();
+            List<Teacher> supervisors = supervisorDb.GetAllSupervisors();
+            return supervisors;
+        }
+
+        public List<Teacher> GetRmvSupervisors()
+        {
+            List<Teacher> supervisors = supervisorDb.GetRemovedSupervisors();
             return supervisors;
         }
 

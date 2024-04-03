@@ -34,22 +34,10 @@ namespace SomerenDAL
                     PhoneNumber = (string)dr["phoneNumber"],
                     RoomId = (int)dr["roomId"],
                     BirthDate = (DateTime)dr["dateOfBirth"],
-                    IsDeleted = (byte)dr["is_deleted"]
                 };
                 teachers.Add(teacher);
             }
             return teachers;
-        }
-
-        public void UpdateTeacherDao(byte intByte, int id)
-        {
-            string query = "UPDATE Lecturer set [is_deleted] = @int where lecturerId = @id";
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@int", intByte ),
-                new SqlParameter("@id", id)
-            };
-            ExecuteEditQuery(query, sqlParameters);
         }
     }
 }
