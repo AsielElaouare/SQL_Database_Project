@@ -13,14 +13,17 @@ namespace SomerenDAL
     {
         public List<Teacher> GetAllSupervisors()
         {
-            string query = "SELECT  lecturerId, activityId, firstname, lastname, activityId FROM lecturer AS L JOIN LecturerParticipant AS LP ON LP.lecturertId = L.lecturerId";
+            string query = "SELECT  lecturerId, activityId, firstname, lastname, activityId FROM lecturer AS L JOIN LecturerParticipant AS LP ON LP.lecturertId = L.lecturerID";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTableSupervisors(ExecuteSelectQuery(query, sqlParameters));
         }
-        public List<Teacher> GetRemovedSupervisors()
+        public List<Teacher> GetRemovedSupervisors(int activityId)
         {
-            string query = "SELECT L.lecturerId, L.firstname, L.lastname FROM lecturer AS L LEFT JOIN LecturerParticipant AS LP ON L.lecturerId = LP.lecturertId WHERE LP.lecturertId IS NULL;";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = "SELECT L.lecturerId, L.firstname, L.lastname, LP.activityId FROM lecturer AS L LEFT JOIN LecturerParticipant AS LP ON L.lecturerId = LP.lecturertId WHERE activityId is null OR activityId != @ActivityId;";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@ActivityId", activityId)
+            };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 

@@ -35,7 +35,7 @@ namespace SomerenUI
 
             List<Teacher> supervisors = new List<Teacher>();
             SupervisorService supervisorService = new SupervisorService();
-            supervisors = supervisorService.GetRmvSupervisors();
+            supervisors = supervisorService.GetRmvSupervisors(Activity.Id);
 
             foreach (Teacher supervisor in supervisors)
             {
@@ -51,10 +51,6 @@ namespace SomerenUI
             lvParticipatingSupervisors.Items.Clear();
 
             List<Teacher> supervisors = new List<Teacher>();
-            List<Teacher> teachers = new List<Teacher>();
-            TeacherService teacherService = new TeacherService();
-            teachers = teacherService.GetTeachers();
-            
             SupervisorService SupervisorService = new SupervisorService();
             supervisors = SupervisorService.GetSupervisors();
 
@@ -83,26 +79,39 @@ namespace SomerenUI
         }
 
         private void btnAddSupervisor_Click(object sender, EventArgs e)
-        {            
-            ListViewItem selectedTeacherItem = lvNotParticipatingSupervisors.SelectedItems[0];
-            Teacher teacher = (Teacher)selectedTeacherItem.Tag;
+        {
+            if (lvNotParticipatingSupervisors.SelectedItems.Count != 0)
+            {
+                ListViewItem selectedTeacherItem = lvNotParticipatingSupervisors.SelectedItems[0];
+                Teacher teacher = (Teacher)selectedTeacherItem.Tag;
 
-            AddSupervisorToActivity(Activity.Id, teacher.TeacherId);
-            PopulatingLvs();
+                AddSupervisorToActivity(Activity.Id, teacher.TeacherId);
+                PopulatingLvs();
+            }
+            else
+            {
+               MessageBox.Show($"Please select a supervisor before continuing", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnRmvSupervisor_Click(object sender, EventArgs e)
         {
-            ListViewItem selectedTeacherItem = lvParticipatingSupervisors.SelectedItems[0];
-            Teacher teacher = (Teacher)selectedTeacherItem.Tag;
-
-            DialogResult result = MessageBox.Show($"Are you sure you want to remove '{teacher.FirstName} {teacher.LastName}' from this Activity?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            
-            if (result == DialogResult.OK)
+            if (lvParticipatingSupervisors.SelectedItems.Count != 0)
             {
-                TeacherService teacherService = new TeacherService();
-                RemoveSupervisorToActivity(teacher.TeacherId);
-                PopulatingLvs();
+                ListViewItem selectedTeacherItem = lvParticipatingSupervisors.SelectedItems[0];
+                Teacher teacher = (Teacher)selectedTeacherItem.Tag;
+
+                DialogResult result = MessageBox.Show($"Are you sure you want to remove '{teacher.FirstName} {teacher.LastName}' from this Activity?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                if (result == DialogResult.OK)
+                {
+                    RemoveSupervisorToActivity(teacher.TeacherId);
+                    PopulatingLvs();
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Please select a supervisor before continuing", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

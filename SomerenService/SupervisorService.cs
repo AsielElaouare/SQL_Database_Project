@@ -22,9 +22,9 @@ namespace SomerenService
             return supervisors;
         }
 
-        public List<Teacher> GetRmvSupervisors()
+        public List<Teacher> GetRmvSupervisors(int activityId)
         {
-            List<Teacher> supervisors = supervisorDb.GetRemovedSupervisors();
+            List<Teacher> supervisors = supervisorDb.GetRemovedSupervisors(activityId);
             return supervisors;
         }
 
