@@ -13,8 +13,6 @@ namespace SomerenModel
 
         public DateTime BirthDate { get; set; }
 
-        public int ActivityId { get; set; }
-
         public int Age
         {
             get

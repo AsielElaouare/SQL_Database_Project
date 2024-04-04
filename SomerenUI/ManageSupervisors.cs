@@ -29,13 +29,14 @@ namespace SomerenUI
             PopulateRemovedSupervisorLv();
             PopulateAddSupervisorLv();
         }
+
         private void PopulateRemovedSupervisorLv()
         {
             lvNotParticipatingSupervisors.Items.Clear();
 
             List<Teacher> supervisors = new List<Teacher>();
             SupervisorService supervisorService = new SupervisorService();
-            supervisors = supervisorService.GetRmvSupervisors(Activity.Id);
+            supervisors = supervisorService.GetNotParticipatingSupervisor(Activity.Id);
 
             foreach (Teacher supervisor in supervisors)
             {
@@ -52,20 +53,17 @@ namespace SomerenUI
 
             List<Teacher> supervisors = new List<Teacher>();
             SupervisorService SupervisorService = new SupervisorService();
-            supervisors = SupervisorService.GetSupervisors();
+            supervisors = SupervisorService.GetSupervisors(Activity.Id);
 
             foreach (Teacher supervisor in supervisors)
             {
-                if (supervisor.ActivityId == Activity.Id)
-                {
-                    if (supervisor.FirstName != null) { }
-                    ListViewItem li = new ListViewItem(supervisor.FirstName);
-                    li.SubItems.Add(supervisor.LastName);
-                    li.Tag = supervisor;
-                    lvParticipatingSupervisors.Items.Add(li);
-                }
+                ListViewItem li = new ListViewItem(supervisor.FirstName);
+                li.SubItems.Add(supervisor.LastName);
+                li.Tag = supervisor;
+                lvParticipatingSupervisors.Items.Add(li);
             }
         }
+
         public void AddSupervisorToActivity(int activityId, int supervisorId)
         {
             SupervisorService supervisorService = new SupervisorService();

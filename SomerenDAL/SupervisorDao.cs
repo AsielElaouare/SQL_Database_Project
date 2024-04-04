@@ -11,15 +11,19 @@ namespace SomerenDAL
 {
     public  class SupervisorDao : BaseDao
     {
-        public List<Teacher> GetAllSupervisors()
+        public List<Teacher> GetAllSupervisors(int activityId)
         {
-            string query = "SELECT  lecturerId, activityId, firstname, lastname, activityId FROM lecturer AS L JOIN LecturerParticipant AS LP ON LP.lecturertId = L.lecturerID";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = "SELECT lecturerId, activityId, firstname, lastname FROM lecturer AS L JOIN LecturerParticipant AS LP ON LP.lecturertId = L.lecturerID WHERE activityId = @ActivityId";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@ActivityId", activityId)
+            };
             return ReadTableSupervisors(ExecuteSelectQuery(query, sqlParameters));
         }
-        public List<Teacher> GetRemovedSupervisors(int activityId)
+        
+        public List<Teacher> GetNotParticipatingSupervisors(int activityId)
         {
-            string query = "SELECT L.lecturerId, L.firstname, L.lastname, LP.activityId FROM lecturer AS L LEFT JOIN LecturerParticipant AS LP ON L.lecturerId = LP.lecturertId WHERE activityId is null OR activityId != @ActivityId;";
+            string query = "SELECT * FROM [Lecturer] s WHERE s.lecturerId NOT IN (SELECT p.lecturertId FROM [LecturerParticipant] p WHERE p.activityId = @ActivityId);";
             SqlParameter[] sqlParameters =
             {
                 new SqlParameter("@ActivityId", activityId)
@@ -44,7 +48,6 @@ namespace SomerenDAL
             }
             return teachers;
         }
-
 
         private List<Teacher> ReadTables(DataTable dataTable)
         {
@@ -73,7 +76,8 @@ namespace SomerenDAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        public void RemoveSupervisorToTable(int supervisorId, int activityId)
+        
+        public void RemoveSupervisoFromTable(int supervisorId, int activityId)
         {
             string query = "DELETE FROM LecturerParticipant WHERE LecturertId = @Id AND activityId = @ActivityId";
             SqlParameter[] sqlParameters =
