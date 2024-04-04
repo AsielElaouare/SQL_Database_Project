@@ -73,12 +73,13 @@ namespace SomerenDAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        public void RemoveSupervisorToTable(int supervisorId)
+        public void RemoveSupervisorToTable(int supervisorId, int activityId)
         {
-            string query = "DELETE FROM LecturerParticipant WHERE LecturertId = @Id";
+            string query = "DELETE FROM LecturerParticipant WHERE LecturertId = @Id AND activityId = @ActivityId";
             SqlParameter[] sqlParameters =
             {
                 new SqlParameter("@Id", supervisorId),
+                new SqlParameter("@ActivityId", activityId)
             };
             ExecuteEditQuery(query, sqlParameters);
         }

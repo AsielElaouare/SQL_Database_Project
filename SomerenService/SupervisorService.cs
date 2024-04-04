@@ -32,9 +32,9 @@ namespace SomerenService
         {
             supervisorDb.AddSupervisorToTable(activityId, supervisorId);
         }
-        public void RemoveSupervisor(int supervisorId)
+        public void RemoveSupervisor(int supervisorId, int activityId)
         {
-            supervisorDb.RemoveSupervisorToTable(supervisorId);
+            supervisorDb.RemoveSupervisorToTable(supervisorId, activityId);
         }
     }
 }

@@ -72,10 +72,10 @@ namespace SomerenUI
             supervisorService.AddSupervisor(activityId, supervisorId);
         }
 
-        public void RemoveSupervisorToActivity(int supervisorId)
+        public void RemoveSupervisorToActivity(int supervisorId, int activityId)
         {
             SupervisorService supervisorService = new SupervisorService();
-            supervisorService.RemoveSupervisor(supervisorId);
+            supervisorService.RemoveSupervisor(supervisorId, activityId);
         }
 
         private void btnAddSupervisor_Click(object sender, EventArgs e)
@@ -105,7 +105,7 @@ namespace SomerenUI
 
                 if (result == DialogResult.OK)
                 {
-                    RemoveSupervisorToActivity(teacher.TeacherId);
+                    RemoveSupervisorToActivity(teacher.TeacherId, Activity.Id);
                     PopulatingLvs();
                 }
             }
