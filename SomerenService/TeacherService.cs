@@ -23,11 +23,5 @@ namespace SomerenService
             List<Teacher> teachers = teacherdb.GetAllTeachers();
             return teachers;
         }
-
-        public void UpdateTeacher(byte intByte, int id)
-        {
-
-            teacherdb.UpdateTeacherDao(intByte, id);
-        }
     }
 }

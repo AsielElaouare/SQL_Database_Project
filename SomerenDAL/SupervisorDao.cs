@@ -11,23 +11,55 @@ namespace SomerenDAL
 {
     public  class SupervisorDao : BaseDao
     {
-        public List<Supervisor> GetAllSupervisors()
+        public List<Teacher> GetAllSupervisors(int activityId)
         {
-            string query = "SELECT lecturertId, activityId FROM [lecturerparticipant]";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = "SELECT lecturerId, activityId, firstname, lastname FROM lecturer AS L JOIN LecturerParticipant AS LP ON LP.lecturertId = L.lecturerID WHERE activityId = @ActivityId";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@ActivityId", activityId)
+            };
+            return ReadTableSupervisors(ExecuteSelectQuery(query, sqlParameters));
+        }
+        
+        public List<Teacher> GetNotParticipatingSupervisors(int activityId)
+        {
+            string query = "SELECT * FROM [Lecturer] s WHERE s.lecturerId NOT IN (SELECT p.lecturertId FROM [LecturerParticipant] p WHERE p.activityId = @ActivityId);";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@ActivityId", activityId)
+            };
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        private List<Supervisor> ReadTables(DataTable dataTable)
+        private List<Teacher> ReadTableSupervisors(DataTable dataTable)
         {
-            List<Supervisor> supervisors = new List<Supervisor>();
+            List<Teacher> teachers = new List<Teacher>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                Supervisor supervisor = new Supervisor()
+                Teacher teacher = new Teacher()
                 {
-                    SupervisorId = (int)dr["lecturertId"],
+                    FirstName = (string)dr["firstName"],
+                    LastName = (string)dr["lastName"],
                     ActivityId = (int)dr["activityId"],
+                    TeacherId = (int)dr["lecturerId"]
+                };
+                teachers.Add(teacher);
+            }
+            return teachers;
+        }
+
+        private List<Teacher> ReadTables(DataTable dataTable)
+        {
+            List<Teacher> supervisors = new List<Teacher>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Teacher supervisor = new Teacher()
+                {
+                    FirstName = (string)dr["firstname"],
+                    LastName = (string)dr["lastname"],
+                    TeacherId = (int)dr["lecturerId"]
                 };
                 supervisors.Add(supervisor);
             }
@@ -44,12 +76,14 @@ namespace SomerenDAL
             };
             ExecuteEditQuery(query, sqlParameters);
         }
-        public void RemoveSupervisorToTable(int supervisorId)
+        
+        public void RemoveSupervisoFromTable(int supervisorId, int activityId)
         {
-            string query = "DELETE FROM LecturerParticipant WHERE LecturertId = @Id";
+            string query = "DELETE FROM LecturerParticipant WHERE LecturertId = @Id AND activityId = @ActivityId";
             SqlParameter[] sqlParameters =
             {
                 new SqlParameter("@Id", supervisorId),
+                new SqlParameter("@ActivityId", activityId)
             };
             ExecuteEditQuery(query, sqlParameters);
         }

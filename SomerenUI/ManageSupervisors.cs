@@ -29,23 +29,21 @@ namespace SomerenUI
             PopulateRemovedSupervisorLv();
             PopulateAddSupervisorLv();
         }
+
         private void PopulateRemovedSupervisorLv()
         {
             lvNotParticipatingSupervisors.Items.Clear();
 
-            List<Teacher> teachers = new List<Teacher>();
-            TeacherService teacherService = new TeacherService();
-            teachers = teacherService.GetTeachers();
+            List<Teacher> supervisors = new List<Teacher>();
+            SupervisorService supervisorService = new SupervisorService();
+            supervisors = supervisorService.GetNotParticipatingSupervisor(Activity.Id);
 
-            foreach (Teacher teacher in teachers)
+            foreach (Teacher supervisor in supervisors)
             {
-                if (teacher.IsDeleted == 1)
-                {
-                    ListViewItem li = new ListViewItem(teacher.FirstName);
-                    li.SubItems.Add(teacher.LastName);
-                    li.Tag = teacher;
-                    lvNotParticipatingSupervisors.Items.Add(li);
-                }
+                ListViewItem li = new ListViewItem(supervisor.FirstName);
+                li.SubItems.Add(supervisor.LastName);
+                li.Tag = supervisor;
+                lvNotParticipatingSupervisors.Items.Add(li);
             }
         }
 
@@ -53,69 +51,65 @@ namespace SomerenUI
         {
             lvParticipatingSupervisors.Items.Clear();
 
-            List<Supervisor> supervisors = new List<Supervisor>();
-            List<Teacher> teachers = new List<Teacher>();
-            TeacherService teacherService = new TeacherService();
-            teachers = teacherService.GetTeachers();
-            
+            List<Teacher> supervisors = new List<Teacher>();
             SupervisorService SupervisorService = new SupervisorService();
-            supervisors = SupervisorService.GetSupervisors();
+            supervisors = SupervisorService.GetSupervisors(Activity.Id);
 
-            foreach (Supervisor supervisor in supervisors)
+            foreach (Teacher supervisor in supervisors)
             {
-                if (supervisor.ActivityId == Activity.Id)
-                {
-                    foreach (Teacher teacher in teachers)
-                    {
-                        if (teacher.IsDeleted == 0 && teacher.TeacherId == supervisor.SupervisorId)
-                        {
-                            ListViewItem li = new ListViewItem(teacher.FirstName);
-                            li.SubItems.Add(teacher.LastName);
-                            li.Tag = teacher;
-                            lvParticipatingSupervisors.Items.Add(li);
-                        }
-                    }
-                }
+                ListViewItem li = new ListViewItem(supervisor.FirstName);
+                li.SubItems.Add(supervisor.LastName);
+                li.Tag = supervisor;
+                lvParticipatingSupervisors.Items.Add(li);
             }
         }
+
         public void AddSupervisorToActivity(int activityId, int supervisorId)
         {
             SupervisorService supervisorService = new SupervisorService();
             supervisorService.AddSupervisor(activityId, supervisorId);
         }
 
-        public void RemoveSupervisorToActivity(int supervisorId)
+        public void RemoveSupervisorToActivity(int supervisorId, int activityId)
         {
             SupervisorService supervisorService = new SupervisorService();
-            supervisorService.RemoveSupervisor(supervisorId);
+            supervisorService.RemoveSupervisor(supervisorId, activityId);
         }
 
         private void btnAddSupervisor_Click(object sender, EventArgs e)
         {
-            Teacher teacher  = new Teacher();
-            TeacherService teacherService = new TeacherService();
+            if (lvNotParticipatingSupervisors.SelectedItems.Count != 0)
+            {
+                ListViewItem selectedTeacherItem = lvNotParticipatingSupervisors.SelectedItems[0];
+                Teacher teacher = (Teacher)selectedTeacherItem.Tag;
 
-            ListViewItem selectedTeacherItem = lvNotParticipatingSupervisors.SelectedItems[0];
-            teacher = (Teacher)selectedTeacherItem.Tag;
-
-            teacherService.UpdateTeacher(0, teacher.TeacherId);
-            AddSupervisorToActivity(Activity.Id, teacher.TeacherId);
-            PopulatingLvs();
+                AddSupervisorToActivity(Activity.Id, teacher.TeacherId);
+                PopulatingLvs();
+            }
+            else
+            {
+               MessageBox.Show($"Please select a supervisor before continuing", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnRmvSupervisor_Click(object sender, EventArgs e)
         {
-            ListViewItem selectedTeacherItem = lvParticipatingSupervisors.SelectedItems[0];
-            Teacher teacher = (Teacher)selectedTeacherItem.Tag;
-
-            DialogResult result = MessageBox.Show($"Are you sure you want to remove '{teacher.FirstName} {teacher.LastName}' from this Activity?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            
-            if (result == DialogResult.OK)
+            if (lvParticipatingSupervisors.SelectedItems.Count != 0)
             {
-                TeacherService teacherService = new TeacherService();
-                teacherService.UpdateTeacher(1, teacher.TeacherId);
-                RemoveSupervisorToActivity(teacher.TeacherId);
-                PopulatingLvs();
+                ListViewItem selectedTeacherItem = lvParticipatingSupervisors.SelectedItems[0];
+                Teacher teacher = (Teacher)selectedTeacherItem.Tag;
+
+                DialogResult result = MessageBox.Show($"Are you sure you want to remove '{teacher.FirstName} {teacher.LastName}' from this Activity?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                if (result == DialogResult.OK)
+                {
+                    RemoveSupervisorToActivity(teacher.TeacherId, Activity.Id);
+                    PopulatingLvs();
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Please select a supervisor before continuing", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
