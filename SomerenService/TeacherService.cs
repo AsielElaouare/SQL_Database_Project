@@ -23,5 +23,9 @@ namespace SomerenService
             List<Teacher> teachers = teacherdb.GetAllTeachers();
             return teachers;
         }
+        public Teacher AddTeacher(Teacher teacher)
+        {
+            return teacherdb.AddTeacher(teacher);
+        }
     }
 }

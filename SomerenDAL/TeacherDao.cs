@@ -38,5 +38,20 @@ namespace SomerenDAL
             }
             return teachers;
         }
+        public Teacher AddTeacher(Teacher teacher)
+        {
+            string query = "INSERT INTO Lecturer (firstName, lastName, phoneNumber, dateOfBirth, roomId) VALUES (@firstName, @lastName, @phoneNumber, @dateOfBirth, @roomId)";
+            SqlParameter[] sqlParameters =
+            {
+                    new SqlParameter("@firstName", teacher.FirstName),
+                    new SqlParameter("@lastName", teacher.LastName),
+                    new SqlParameter("@phoneNumber", teacher.PhoneNumber),
+                    new SqlParameter("@dateOfBirth", teacher.BirthDate),
+                    new SqlParameter("@roomId", teacher.RoomId)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+            return teacher;
+        }
     }
 }
