@@ -41,7 +41,6 @@ namespace SomerenDAL
                 {
                     FirstName = (string)dr["firstName"],
                     LastName = (string)dr["lastName"],
-                    ActivityId = (int)dr["activityId"],
                     TeacherId = (int)dr["lecturerId"]
                 };
                 teachers.Add(teacher);
