@@ -720,5 +720,11 @@ namespace SomerenUI
             Form formSupervisors = new ManageSupervisors((Activity)listViewActivities.SelectedItems[0].Tag);
             formSupervisors.Show();
         }
+
+        private void AddTeacherButton_Click(object sender, EventArgs e)
+        {
+            CreateTeacherForm createTeacherForm = new CreateTeacherForm();
+            createTeacherForm.Show();
+        }
     }
 }
