@@ -84,5 +84,44 @@ namespace SomerenDAL
 			sqlParameters[1] = new SqlParameter("@studentId", studentId);
 			ExecuteEditQuery(query, sqlParameters);
 		}
-	}
+
+        public void UpdateStudent(Student student)
+        {
+            string command = "UPDATE Student SET firstname=@firstname, lastname=@lastname, studentNumber=@studentNumber, phoneNumber=@phoneNumber," +
+                "studentClass=@studentClass, roomId=@roomId Where studentId=@studentId";
+            SqlParameter[] sqlParameters = new SqlParameter[7];
+            sqlParameters[0] = new SqlParameter("@studentId", student.studentId);
+            sqlParameters[1] = new SqlParameter("@firstName", student.firstName);
+            sqlParameters[2] = new SqlParameter("@lastName", student.lastName);
+            sqlParameters[3] = new SqlParameter("@studentNumber", student.studentNumber);
+            sqlParameters[4] = new SqlParameter("@phoneNumber", student.phoneNumber);
+            sqlParameters[5] = new SqlParameter("@studentClass", student.studentClass);
+            sqlParameters[6] = new SqlParameter("@roomId", student.roomId);
+            ExecuteEditQuery(command, sqlParameters);
+        }
+
+        public void AddStudent(Student student)
+        {
+            string command = "INSERT INTO Student (firstName, lastName, studentNumber, phoneNumber, studentClass, roomId) " +
+                    "VALUES (@firstName, @Lastname, @studentNumber, @phoneNumber, @studentClass, @roomId);";
+            SqlParameter[] sqlParameters = new SqlParameter[7];
+            sqlParameters[0] = new SqlParameter("@studentId", student.studentId);
+            sqlParameters[1] = new SqlParameter("@firstName", student.firstName);
+            sqlParameters[2] = new SqlParameter("@lastName", student.lastName);
+            sqlParameters[3] = new SqlParameter("@studentNumber", student.studentNumber);
+            sqlParameters[4] = new SqlParameter("@phoneNumber", student.phoneNumber);
+            sqlParameters[5] = new SqlParameter("@studentClass", student.studentClass);
+            sqlParameters[6] = new SqlParameter("@roomId", student.roomId);
+            ExecuteEditQuery(command, sqlParameters);
+        }
+
+        public void DeleteStudent(Student student)
+        {
+            string command = "DELETE From Student WHERE studentId = @studentId";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@studentId", student.studentId);
+            ExecuteEditQuery(command, sqlParameters);
+
+        }
+    }
 }
