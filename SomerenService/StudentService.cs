@@ -40,5 +40,20 @@ namespace SomerenService
 		{
 			studentdb.RemoveParticipant(activityId, studentId);
 		}
-	}
+
+        public void UpdateStudent(Student student)
+        {
+            studentdb.UpdateStudent(student);
+        }
+
+        public void DeleteStudent(Student student)
+        {
+            studentdb.DeleteStudent(student);
+        }
+
+        public void AddStudent(Student student)
+        {
+            studentdb.AddStudent(student);
+        }
+    }
 }
