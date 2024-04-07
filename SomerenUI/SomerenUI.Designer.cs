@@ -61,8 +61,8 @@
             RoomSize = new System.Windows.Forms.ColumnHeader();
             label4 = new System.Windows.Forms.Label();
             pnlLecturers = new System.Windows.Forms.Panel();
-            AddTeacherButton = new System.Windows.Forms.Button();
-            pictureBox2 = new System.Windows.Forms.PictureBox();
+/*            AddTeacherButton = new System.Windows.Forms.Button();
+*/            pictureBox2 = new System.Windows.Forms.PictureBox();
             listViewLecturers = new System.Windows.Forms.ListView();
             lecturerId = new System.Windows.Forms.ColumnHeader();
             lecturerFirstName = new System.Windows.Forms.ColumnHeader();
@@ -435,8 +435,8 @@
             // 
             // pnlLecturers
             // 
-            pnlLecturers.Controls.Add(AddTeacherButton);
-            pnlLecturers.Controls.Add(pictureBox2);
+/*            pnlLecturers.Controls.Add(AddTeacherButton);
+*/            pnlLecturers.Controls.Add(pictureBox2);
             pnlLecturers.Controls.Add(listViewLecturers);
             pnlLecturers.Controls.Add(label2);
             pnlLecturers.Location = new System.Drawing.Point(14, 36);
@@ -450,13 +450,13 @@
             // 
             // AddTeacherButton
             // 
-            AddTeacherButton.Location = new System.Drawing.Point(1150, 257);
+          /*  AddTeacherButton.Location = new System.Drawing.Point(1150, 257);
             AddTeacherButton.Name = "AddTeacherButton";
             AddTeacherButton.Size = new System.Drawing.Size(186, 48);
             AddTeacherButton.TabIndex = 3;
             AddTeacherButton.Text = "Add Teacher";
             AddTeacherButton.UseVisualStyleBackColor = true;
-            AddTeacherButton.Click += AddTeacherButton_Click;
+            AddTeacherButton.Click += AddTeacherButton_Click;*/
             // 
             // pictureBox2
             // 
