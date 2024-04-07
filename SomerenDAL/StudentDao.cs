@@ -43,7 +43,8 @@ namespace SomerenDAL
 					lastName = dr["lastName"].ToString(),
 					phoneNumber = dr["phoneNumber"].ToString(),
 					studentClass = dr["studentClass"].ToString(),
-				};
+					studentId = (int)dr["studentId"]
+                };
 				students.Add(student);
 			}
 			return students;
