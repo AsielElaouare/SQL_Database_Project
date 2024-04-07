@@ -726,5 +726,11 @@ namespace SomerenUI
             CreateTeacherForm createTeacherForm = new CreateTeacherForm();
             createTeacherForm.Show();
         }
+
+        private void UpdateTeacherButton_Click(object sender, EventArgs e)
+        {
+            UpdateTeacherForm updateTeacherForm = new UpdateTeacherForm();
+            updateTeacherForm.Show();
+        }
     }
 }
