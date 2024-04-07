@@ -39,8 +39,6 @@
             label3 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
-            label6 = new System.Windows.Forms.Label();
-            IdComboBox = new System.Windows.Forms.ComboBox();
             SuspendLayout();
             // 
             // Roomtxt
@@ -133,31 +131,11 @@
             label1.TabIndex = 14;
             label1.Text = "First name";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(148, 45);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(30, 25);
-            label6.TabIndex = 25;
-            label6.Text = "ID";
-            // 
-            // IdComboBox
-            // 
-            IdComboBox.FormattingEnabled = true;
-            IdComboBox.Location = new System.Drawing.Point(353, 37);
-            IdComboBox.Name = "IdComboBox";
-            IdComboBox.Size = new System.Drawing.Size(150, 33);
-            IdComboBox.TabIndex = 26;
-            IdComboBox.SelectedIndexChanged += IdComboBox_SelectedIndexChanged;
-            // 
             // UpdateTeacherForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
-            Controls.Add(IdComboBox);
-            Controls.Add(label6);
             Controls.Add(Roomtxt);
             Controls.Add(label5);
             Controls.Add(BirthDatePicker);
@@ -188,7 +166,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox IdComboBox;
     }
 }

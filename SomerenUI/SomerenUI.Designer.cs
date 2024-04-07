@@ -61,6 +61,8 @@
             RoomSize = new System.Windows.Forms.ColumnHeader();
             label4 = new System.Windows.Forms.Label();
             pnlLecturers = new System.Windows.Forms.Panel();
+            DeleteTeacherButton = new System.Windows.Forms.Button();
+            UpdateTeacherButton = new System.Windows.Forms.Button();
             AddTeacherButton = new System.Windows.Forms.Button();
             pictureBox2 = new System.Windows.Forms.PictureBox();
             listViewLecturers = new System.Windows.Forms.ListView();
@@ -157,7 +159,6 @@
             drinksPrice = new System.Windows.Forms.ColumnHeader();
             drinkStock = new System.Windows.Forms.ColumnHeader();
             stockstatus = new System.Windows.Forms.ColumnHeader();
-            UpdateTeacherButton = new System.Windows.Forms.Button();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             pnlStudents.SuspendLayout();
@@ -417,6 +418,7 @@
             // 
             // pnlLecturers
             // 
+            pnlLecturers.Controls.Add(DeleteTeacherButton);
             pnlLecturers.Controls.Add(UpdateTeacherButton);
             pnlLecturers.Controls.Add(AddTeacherButton);
             pnlLecturers.Controls.Add(pictureBox2);
@@ -427,6 +429,26 @@
             pnlLecturers.Name = "pnlLecturers";
             pnlLecturers.Size = new System.Drawing.Size(1675, 971);
             pnlLecturers.TabIndex = 3;
+            // 
+            // DeleteTeacherButton
+            // 
+            DeleteTeacherButton.Location = new System.Drawing.Point(1438, 476);
+            DeleteTeacherButton.Name = "DeleteTeacherButton";
+            DeleteTeacherButton.Size = new System.Drawing.Size(232, 54);
+            DeleteTeacherButton.TabIndex = 5;
+            DeleteTeacherButton.Text = "Delete Teacher";
+            DeleteTeacherButton.UseVisualStyleBackColor = true;
+            DeleteTeacherButton.Click += DeleteTeacherButton_Click;
+            // 
+            // UpdateTeacherButton
+            // 
+            UpdateTeacherButton.Location = new System.Drawing.Point(1438, 403);
+            UpdateTeacherButton.Name = "UpdateTeacherButton";
+            UpdateTeacherButton.Size = new System.Drawing.Size(232, 55);
+            UpdateTeacherButton.TabIndex = 4;
+            UpdateTeacherButton.Text = "Update Teacher";
+            UpdateTeacherButton.UseVisualStyleBackColor = true;
+            UpdateTeacherButton.Click += UpdateTeacherButton_Click;
             // 
             // AddTeacherButton
             // 
@@ -452,6 +474,7 @@
             // listViewLecturers
             // 
             listViewLecturers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lecturerId, lecturerFirstName, lecturerLastName, lecturerAge, lecturerPhoneNumber });
+            listViewLecturers.FullRowSelect = true;
             listViewLecturers.Location = new System.Drawing.Point(29, 88);
             listViewLecturers.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             listViewLecturers.Name = "listViewLecturers";
@@ -1323,16 +1346,6 @@
             stockstatus.Text = "Stock Status";
             stockstatus.Width = 160;
             // 
-            // UpdateTeacherButton
-            // 
-            UpdateTeacherButton.Location = new System.Drawing.Point(1438, 403);
-            UpdateTeacherButton.Name = "UpdateTeacherButton";
-            UpdateTeacherButton.Size = new System.Drawing.Size(232, 45);
-            UpdateTeacherButton.TabIndex = 4;
-            UpdateTeacherButton.Text = "Update Teacher";
-            UpdateTeacherButton.UseVisualStyleBackColor = true;
-            UpdateTeacherButton.Click += UpdateTeacherButton_Click;
-            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -1518,5 +1531,6 @@
 		private System.Windows.Forms.RadioButton AlcoholischNoButton;
         private System.Windows.Forms.RadioButton AlcoholischYesButton;
         private System.Windows.Forms.Button UpdateTeacherButton;
+        private System.Windows.Forms.Button DeleteTeacherButton;
     }
 }

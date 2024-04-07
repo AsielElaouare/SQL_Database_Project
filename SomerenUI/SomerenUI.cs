@@ -729,8 +729,26 @@ namespace SomerenUI
 
         private void UpdateTeacherButton_Click(object sender, EventArgs e)
         {
-            UpdateTeacherForm updateTeacherForm = new UpdateTeacherForm();
+            UpdateTeacherForm updateTeacherForm = new UpdateTeacherForm(listViewLecturers.SelectedItems[0].Tag as Teacher);
             updateTeacherForm.Show();
+        }
+
+        private void DeleteTeacherButton_Click(object sender, EventArgs e)
+        {
+            Teacher teacher = listViewLecturers.SelectedItems[0].Tag as Teacher;
+            DeleteTeacher(teacher.TeacherId);
+        }
+        private void DeleteTeacher(int teacherId)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you wish to remove this lecturer?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                TeacherService teacherService = new TeacherService();
+                teacherService.DeleteTeacher(teacherId);
+                ShowLecturersPanel();
+                MessageBox.Show("Teacher deleted!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
         }
     }
 }

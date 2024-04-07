@@ -15,24 +15,13 @@ namespace SomerenUI
     public partial class UpdateTeacherForm : Form
     {
         TeacherService TeacherService;
-        List<Teacher> Teachers;
-        public UpdateTeacherForm()
+        Teacher Teacher;
+        public UpdateTeacherForm(Teacher teacher)
         {
             InitializeComponent();
             TeacherService = new TeacherService();
 
-            Teachers = TeacherService.GetTeachers();
-            foreach(Teacher teacher in Teachers)
-            {
-                IdComboBox.Items.Add(teacher.TeacherId);
-            }
-        }
-
-        private void IdComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int teacherId = (int)IdComboBox.SelectedItem;
-
-            Teacher teacher = TeacherService.GetTeacherById(teacherId);
+            Teacher = teacher;
 
             FirstNameTxt.Text = teacher.FirstName;
             LastNameTxt.Text = teacher.LastName;
@@ -43,22 +32,14 @@ namespace SomerenUI
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            int teacherId = (int)IdComboBox.SelectedItem;
-            string firstName = FirstNameTxt.Text;
-            string lastName = LastNameTxt.Text;
-            string phoneNumber = PhonenumberTxt.Text;
-            DateTime birthDate = BirthDatePicker.Value;
-            Room room = new Room();
-            room.roomId = int.Parse(Roomtxt.Text);
-
             Teacher UpdatedTeacher = new Teacher
             {
-                TeacherId = teacherId,
-                FirstName = firstName,
-                LastName = lastName,
-                PhoneNumber = phoneNumber,
-                BirthDate = birthDate,
-                RoomId = room.roomId
+                TeacherId = Teacher.TeacherId,
+                FirstName = FirstNameTxt.Text,
+                LastName = LastNameTxt.Text,
+                PhoneNumber = PhonenumberTxt.Text,
+                BirthDate = BirthDatePicker.Value,
+                RoomId = int.Parse(Roomtxt.Text)
             };
                 
             
