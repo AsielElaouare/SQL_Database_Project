@@ -88,7 +88,7 @@ namespace SomerenDAL
 
         public void UpdateStudent(Student student)
         {
-            string command = "UPDATE Student SET firstname=@firstname, lastname=@lastname, studentNumber=@studentNumber, phoneNumber=@phoneNumber," +
+            string command = "UPDATE Student SET firstname=@firstName, lastname=@lastName, studentNumber=@studentNumber, phoneNumber=@phoneNumber," +
                 "studentClass=@studentClass, roomId=@roomId Where studentId=@studentId";
             SqlParameter[] sqlParameters = new SqlParameter[7];
             sqlParameters[0] = new SqlParameter("@studentId", student.studentId);
@@ -104,7 +104,7 @@ namespace SomerenDAL
         public void AddStudent(Student student)
         {
             string command = "INSERT INTO Student (firstName, lastName, studentNumber, phoneNumber, studentClass, roomId) " +
-                    "VALUES (@firstName, @Lastname, @studentNumber, @phoneNumber, @studentClass, @roomId);";
+                    "VALUES (@firstName, @lastName, @studentNumber, @phoneNumber, @studentClass, @roomId);";
             SqlParameter[] sqlParameters = new SqlParameter[7];
             sqlParameters[0] = new SqlParameter("@studentId", student.studentId);
             sqlParameters[1] = new SqlParameter("@firstName", student.firstName);

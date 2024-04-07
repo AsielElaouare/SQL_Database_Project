@@ -10,6 +10,6 @@ namespace SomerenModel
         public string phoneNumber {  get; set; }
         public int studentNumber { get; set; }
         public string studentClass { get; set; }
-        public Room roomId {  get; set; }
+        public int roomId {  get; set; }
     }
 }

@@ -750,5 +750,47 @@ namespace SomerenUI
 
             }
         }
-    }
+
+		private void AddStudentBtn_Click(object sender, EventArgs e)
+		{
+			CreateStudents createStudentsForm = new CreateStudents();
+			createStudentsForm.Show();
+		}
+
+		private void UpdateStudentsBtn_Click(object sender, EventArgs e)
+		{
+			if (listViewStudents.SelectedItems.Count != 0)
+			{
+				CreateStudents createStudentsForm = new CreateStudents(listViewStudents.SelectedItems[0].Tag as Student);
+				createStudentsForm.Show();
+			}
+			else
+			{
+				MessageBox.Show("Please select a student to modify.");
+			}
+		}
+
+		private void DeleteStudentBtn_Click(object sender, EventArgs e)
+		{
+			if (listViewStudents.SelectedItems.Count != 0)
+			{
+				ListViewItem selectedItem = listViewStudents.SelectedItems[0];
+				Student selectedStudent = (Student)selectedItem.Tag;
+
+				try
+				{
+					StudentService studentservice = new StudentService();
+					studentservice.DeleteStudent(selectedStudent);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show($"Error deleting student: {ex.Message}");
+				}
+			}
+			else
+			{
+				MessageBox.Show("Please select a student to delete.");
+			}
+		}
+	}
 }
