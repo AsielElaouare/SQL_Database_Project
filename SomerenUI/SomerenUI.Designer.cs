@@ -1485,7 +1485,8 @@
         private System.Windows.Forms.Button btnManageParticipants;
         private System.Windows.Forms.ColumnHeader studentLastNameOrder;
         private System.Windows.Forms.Button manageSupervisorsButton;
-        private System.Windows.Forms.RadioButton AlcoholischNoButton;
+		private System.Windows.Forms.Button AddTeacherButton;
+		private System.Windows.Forms.RadioButton AlcoholischNoButton;
         private System.Windows.Forms.RadioButton AlcoholischYesButton;
     }
 }
