@@ -326,12 +326,12 @@
             // 
             // studentFirstName
             // 
-            studentFirstName.Text = "Firstname";
+            studentFirstName.Text = "First Name";
             studentFirstName.Width = 150;
             // 
             // studentLastName
             // 
-            studentLastName.Text = "Lastname";
+            studentLastName.Text = "Last Name";
             studentLastName.Width = 150;
             // 
             // studentPhoneNumber
@@ -1352,10 +1352,10 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1819, 829);
             Controls.Add(menuStrip1);
+            Controls.Add(pnlStudents);
             Controls.Add(pnlLecturers);
             Controls.Add(pnlDrinks);
             Controls.Add(pnlActivities);
-            Controls.Add(pnlStudents);
             Controls.Add(pnlOrderADrink);
             Controls.Add(pnlVatReport);
             Controls.Add(pnlRevenue);
