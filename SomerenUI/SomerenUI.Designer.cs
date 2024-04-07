@@ -1073,6 +1073,7 @@
 			DeleteStudentBtn.TabIndex = 5;
 			DeleteStudentBtn.Text = "Delete Students";
 			DeleteStudentBtn.UseVisualStyleBackColor = true;
+			DeleteStudentBtn.Click += DeleteStudentBtn_Click;
 			// 
 			// UpdateStudentsBtn
 			// 
@@ -1082,6 +1083,7 @@
 			UpdateStudentsBtn.TabIndex = 4;
 			UpdateStudentsBtn.Text = "Update Students";
 			UpdateStudentsBtn.UseVisualStyleBackColor = true;
+			UpdateStudentsBtn.Click += UpdateStudentsBtn_Click;
 			// 
 			// AddStudentBtn
 			// 
@@ -1091,6 +1093,7 @@
 			AddStudentBtn.TabIndex = 3;
 			AddStudentBtn.Text = "Add Students";
 			AddStudentBtn.UseVisualStyleBackColor = true;
+			AddStudentBtn.Click += AddStudentBtn_Click;
 			// 
 			// pictureBox1
 			// 
@@ -1190,6 +1193,7 @@
 			AlcoholischYesButton.TabStop = true;
 			AlcoholischYesButton.Text = "Alcoholic";
 			AlcoholischYesButton.UseVisualStyleBackColor = true;
+			AlcoholischYesButton.Click += AddStudentBtn_Click;
 			// 
 			// PriceOfDrink
 			// 
@@ -1236,6 +1240,7 @@
 			deletebtn.TabIndex = 13;
 			deletebtn.Text = "DELETE!";
 			deletebtn.UseVisualStyleBackColor = true;
+			deletebtn.Click += deletebtn_Click;
 			// 
 			// updatebtn
 			// 
@@ -1245,6 +1250,7 @@
 			updatebtn.TabIndex = 12;
 			updatebtn.Text = "Update!";
 			updatebtn.UseVisualStyleBackColor = true;
+			updatebtn.Click += updatebtn_Click;
 			// 
 			// AddDrinkButton
 			// 
@@ -1254,6 +1260,7 @@
 			AddDrinkButton.TabIndex = 9;
 			AddDrinkButton.Text = "Add Drink";
 			AddDrinkButton.UseVisualStyleBackColor = true;
+			AddDrinkButton.Click += AddDrinkButton_Click;
 			// 
 			// drinkPriceTextBox
 			// 
@@ -1286,6 +1293,7 @@
 			listViewDrinks.TabIndex = 4;
 			listViewDrinks.UseCompatibleStateImageBehavior = false;
 			listViewDrinks.View = System.Windows.Forms.View.Details;
+			listViewDrinks.SelectedIndexChanged += listViewDrinks_SelectedIndexChanged;
 			// 
 			// drink
 			// 
@@ -1319,8 +1327,8 @@
 			AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
 			AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			ClientSize = new System.Drawing.Size(1455, 663);
-			Controls.Add(pnlStudents);
 			Controls.Add(pnlDrinks);
+			Controls.Add(pnlStudents);
 			Controls.Add(menuStrip1);
 			Controls.Add(pnlLecturers);
 			Controls.Add(pnlActivities);
