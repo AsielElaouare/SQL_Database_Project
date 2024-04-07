@@ -23,7 +23,7 @@ namespace SomerenDAL
         
         public List<Teacher> GetNotParticipatingSupervisors(int activityId)
         {
-            string query = "SELECT * FROM [Lecturer] s WHERE s.lecturerId NOT IN (SELECT p.lecturertId FROM [LecturerParticipant] p WHERE p.activityId = @ActivityId);";
+            string query = "SELECT lecturerId, firstName, lastName, phoneNumber, dateOfBirth, roomId FROM [Lecturer] s WHERE s.lecturerId NOT IN (SELECT p.lecturertId FROM [LecturerParticipant] p WHERE p.activityId = @ActivityId);";
             SqlParameter[] sqlParameters =
             {
                 new SqlParameter("@ActivityId", activityId)
