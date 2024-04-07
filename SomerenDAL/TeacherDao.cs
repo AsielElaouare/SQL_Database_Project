@@ -97,5 +97,15 @@ namespace SomerenDAL
             ExecuteEditQuery(query, sqlParameters);
             return teacher;
         }
+        public void DeleteTeacher(int teacher)
+        {
+            string query = "DELETE FROM Lecturer WHERE lecturerId = @lecturerId";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@lecturerId", teacher) 
+            };
+            
+            ExecuteEditQuery(query, sqlParameters);
+        }
     }
 }

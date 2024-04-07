@@ -36,5 +36,9 @@ namespace SomerenService
         {
             return teacherdb.UpdateTeacher(teacher);
         }
+        public void DeleteTeacher(int teacher)
+        {
+            teacherdb.DeleteTeacher(teacher);
+        }
     }
 }
