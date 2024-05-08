@@ -46,9 +46,9 @@ namespace SomerenService
             studentdb.UpdateStudent(student);
         }
 
-        public void DeleteStudent(Student student)
+        public void DeleteStudent(int studentId)
         {
-            studentdb.DeleteStudent(student);
+            studentdb.DeleteStudent(studentId);
         }
 
         public void AddStudent(Student student)
