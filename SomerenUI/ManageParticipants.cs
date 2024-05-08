@@ -18,6 +18,9 @@ namespace SomerenUI
 
 		private void ManageParticipants_Load(object sender, EventArgs e)
 		{
+			lvParticipating.Items.Clear();
+			lvNotParticipating.Items.Clear();
+
 			StudentService studentService = new StudentService();
 			List<Student> participatingStudents = studentService.GetParticipatingStudents(Activity.Id);
 			List<Student> notParticipatingStudents = studentService.GetNotParticipatingStudents(Activity.Id);

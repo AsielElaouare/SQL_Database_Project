@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SomerenModel
 {
-    public class Supervisor
-    {
-        public int SupervisorId { get; set; }
-        public int ActivityId { get; set; }
-    }
+	public class Supervisor
+	{
+		public int SupervisorId { get; set; }
+		public string FirstName { get; set; }
+		public string LastName { get; set; }
+	}
 }
