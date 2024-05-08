@@ -17,16 +17,16 @@ namespace SomerenService
 			supervisordb = new SupervisorDao();
 		}
 
-		public List<Supervisor> GetParticipatingSupervisors(int activityId)
+		public List<Teacher> GetParticipatingSupervisors(int activityId)
 		{
-			List<Supervisor> supervisor = supervisordb.GetParticipatingSupervisors(activityId);
-			return supervisor;
+			List<Teacher> teachers = supervisordb.GetParticipatingSupervisors(activityId);
+			return teachers;
 		}
 
-		public List<Supervisor> GetNotParticipatingSupervisors(int activityId)
+		public List<Teacher> GetNotParticipatingSupervisors(int activityId)
 		{
-			List<Supervisor> supervisor = supervisordb.GetNotParticipatingSupervisors(activityId);
-			return supervisor;
+			List<Teacher> teachers = supervisordb.GetNotParticipatingSupervisors(activityId);
+			return teachers;
 		}
 
 		public void AddSupervisor(int supervisorId, int activityId)

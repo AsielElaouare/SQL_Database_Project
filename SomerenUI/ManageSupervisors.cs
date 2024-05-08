@@ -22,23 +22,23 @@ namespace SomerenUI
 			lvNotParticipatingSupervisors.Items.Clear();
 
 			SupervisorService supervisorService = new SupervisorService();
-			List<Supervisor> participatingSupervisors = supervisorService.GetParticipatingSupervisors(Activity.Id);
-			List<Supervisor> notParticipatingSupervisors = supervisorService.GetNotParticipatingSupervisors(Activity.Id);
+			List<Teacher> participatingSupervisors = supervisorService.GetParticipatingSupervisors(Activity.Id);
+			List<Teacher> notParticipatingSupervisors = supervisorService.GetNotParticipatingSupervisors(Activity.Id);
 
-			foreach (Supervisor supervisor in participatingSupervisors)
+			foreach (Teacher teacher in participatingSupervisors)
 			{
-				ListViewItem item = new ListViewItem(supervisor.FirstName);
-				item.SubItems.Add(supervisor.LastName);
-				item.Tag = supervisor;
+				ListViewItem item = new ListViewItem(teacher.FirstName);
+				item.SubItems.Add(teacher.LastName);
+				item.Tag = teacher;
 
 				lvParticipatingSupervisors.Items.Add(item);
 			}
 
-			foreach (Supervisor supervisor in notParticipatingSupervisors)
+			foreach (Teacher teacher in notParticipatingSupervisors)
 			{
-				ListViewItem item = new ListViewItem(supervisor.FirstName);
-				item.SubItems.Add(supervisor.LastName);
-				item.Tag = supervisor;
+				ListViewItem item = new ListViewItem(teacher.FirstName);
+				item.SubItems.Add(teacher.LastName);
+				item.Tag = teacher;
 
 				lvNotParticipatingSupervisors.Items.Add(item);
 			}
@@ -52,14 +52,14 @@ namespace SomerenUI
 				return;
 			}
 
-			Supervisor supervisor = (Supervisor)lvNotParticipatingSupervisors.SelectedItems[0].Tag;
+			Teacher teacher = (Teacher)lvNotParticipatingSupervisors.SelectedItems[0].Tag;
 
 			SupervisorService supervisorService = new SupervisorService();
-			supervisorService.AddSupervisor(supervisor.SupervisorId, Activity.Id);
+			supervisorService.AddSupervisor(teacher.TeacherId, Activity.Id);
 
-			ListViewItem item = new ListViewItem(supervisor.FirstName);
-			item.SubItems.Add(supervisor.LastName);
-			item.Tag = supervisor;
+			ListViewItem item = new ListViewItem(teacher.FirstName);
+			item.SubItems.Add(teacher.LastName);
+			item.Tag = teacher;
 
 			lvParticipatingSupervisors.Items.Add(item);
 			lvNotParticipatingSupervisors.Items.Remove(lvNotParticipatingSupervisors.SelectedItems[0]);
@@ -78,14 +78,14 @@ namespace SomerenUI
 				return;
 			}
 
-			Supervisor supervisor = (Supervisor)lvParticipatingSupervisors.SelectedItems[0].Tag;
+			Teacher teacher = (Teacher)lvParticipatingSupervisors.SelectedItems[0].Tag;
 
 			SupervisorService supervisorService = new SupervisorService();
-			supervisorService.RemoveSupervisor(supervisor.SupervisorId, Activity.Id);
+			supervisorService.RemoveSupervisor(teacher.TeacherId, Activity.Id);
 
-			ListViewItem item = new ListViewItem(supervisor.FirstName);
-			item.SubItems.Add(supervisor.LastName);
-			item.Tag = supervisor;
+			ListViewItem item = new ListViewItem(teacher.FirstName);
+			item.SubItems.Add(teacher.LastName);
+			item.Tag = teacher;
 
 			lvNotParticipatingSupervisors.Items.Add(item);
 			lvParticipatingSupervisors.Items.Remove(lvParticipatingSupervisors.SelectedItems[0]);

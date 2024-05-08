@@ -51,19 +51,19 @@ namespace SomerenDAL
 
 		private List<Teacher> ReadTables(DataTable dataTable)
 		{
-			List<Teacher> supervisors = new List<Teacher>();
+			List<Teacher> teachers = new List<Teacher>();
 
 			foreach (DataRow dr in dataTable.Rows)
 			{
-				Teacher supervisor = new Teacher()
+				Teacher teacher = new Teacher()
 				{
 					TeacherId = (int)dr["lecturerId"],
 					FirstName = dr["firstName"].ToString(),
 					LastName = dr["lastName"].ToString(),
 				};
-				supervisors.Add(supervisor);
+				teachers.Add(teacher);
 			}
-			return supervisors;
+			return teachers;
 		}
 	}
 }
