@@ -12,8 +12,6 @@ namespace SomerenModel
         public int RoomId { get; set; }
 
         public DateTime BirthDate { get; set; }
-        public byte IsDeleted { get; set; }
-
 
         public int Age
         {

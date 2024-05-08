@@ -45,83 +45,34 @@ namespace SomerenDAL
 			return drinks;
 		}
 
-		private SqlConnection dbConnection;
+	
+		public void UpdateDrink(Drink drink) { 
+	     	string command = "UPDATE Drink SET Name=@name, Stock=@stock, Price=@price, Alcoholic=@alcoholic Where drinkId=@drinkId";
+		    SqlParameter[] SqlParameters = new SqlParameter[5];
+		    SqlParameters[0] = new SqlParameter("@drinkId", drink.Id);
+		    SqlParameters[1] = new SqlParameter("@name", drink.Name);
+		    SqlParameters[2] = new SqlParameter("@stock", drink.Stock);
+		    SqlParameters[3] = new SqlParameter("@price", drink.Price);
+		    SqlParameters[4] = new SqlParameter("@alcoholic", drink.isAlcoholic);
+		    ExecuteEditQuery(command, SqlParameters);
+	    }
 
-		public DrinkDao()
-		{
-			string connString = ConfigurationManager.
-				ConnectionStrings["SomerenDatabase"].ConnectionString;
-			dbConnection = new SqlConnection(connString);
+        public void AddDrink(Drink drink) { 
+            string command = "INSERT INTO Drink (name, alcoholic, price, stock) VALUES (@name, @alcoholic, @price, @stock);";
+            SqlParameter[] sqlParameters = new SqlParameter[5];
+            sqlParameters[0] = new SqlParameter("@drinkId", drink.Id);
+            sqlParameters[1] = new SqlParameter("@name", drink.Name);
+            sqlParameters[2] = new SqlParameter("@alcoholic", drink.isAlcoholic);
+            sqlParameters[3] = new SqlParameter("@price", drink.Price);
+            sqlParameters[4] = new SqlParameter("@stock", drink.Stock);
+            ExecuteEditQuery(command, sqlParameters);
+    } 
+
+		public void DeleteDrink(Drink drink) { 
+			string command = "DELETE From Drink WHERE drinkId = @drinkId";
+			SqlParameter[] sqlParameters = new SqlParameter[1];
+			sqlParameters[0] = new SqlParameter("@drinkId", drink.Id);
+			ExecuteEditQuery(command, sqlParameters);
 		}
-
-
-		public void UpdateDrink(Drink drink)
-		{
-			try
-			{
-				dbConnection.Open();
-				SqlCommand command = new SqlCommand("UPDATE Drink SET Name=@name, Stock=@stock, Price=@price, Alcoholic=@alcoholic Where drinkId=@drinkId", dbConnection);
-				command.Parameters.AddWithValue("@drinkId", drink.Id);
-				command.Parameters.AddWithValue("@name", drink.Name);
-				command.Parameters.AddWithValue("@stock", drink.Stock);
-				command.Parameters.AddWithValue("@price", drink.Price);
-				command.Parameters.AddWithValue("@alcoholic", drink.isAlcoholic);
-
-				command.ExecuteNonQuery();
-			}
-			catch
-			{
-				throw new Exception("Can not connect to the database");
-			}
-			finally
-			{
-				dbConnection.Close();
-			}
-		}
-
-
-		public void AddDrink(Drink drink)
-		{
-			try
-			{
-				dbConnection.Open();
-				SqlCommand command = new SqlCommand(
-					"INSERT INTO Drink (name, alcoholic, price, stock) " +
-					"VALUES (@name, @alcoholic, @price, @stock);", dbConnection);
-				command.Parameters.AddWithValue("@drinkId", drink.Id);
-				command.Parameters.AddWithValue("@name", drink.Name);
-				command.Parameters.AddWithValue("@alcoholic", drink.isAlcoholic);
-				command.Parameters.AddWithValue("@price", drink.Price);
-				command.Parameters.AddWithValue("@stock", drink.Stock);
-				command.ExecuteNonQuery();
-			}
-			catch (Exception ex)
-			{
-				throw new Exception("Can not connect to the database: " + ex.Message);
-			}
-			finally
-			{
-				dbConnection.Close();
-			}
-		}
-
-		public void DeleteDrink(Drink drink)
-		{
-			try
-			{
-				dbConnection.Open();
-				SqlCommand command = new SqlCommand("DELETE From Drink WHERE drinkId = @drinkId", dbConnection);
-				command.Parameters.AddWithValue("@drinkId", drink.Id);
-				command.ExecuteNonQuery();
-			}
-			catch
-			{
-				throw new Exception("Can not connect to the database");
-			}
-			finally
-			{
-				dbConnection.Close();
-			}
-		}
-	}
+    }
 }

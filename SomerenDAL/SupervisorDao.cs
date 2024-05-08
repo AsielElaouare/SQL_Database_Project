@@ -11,7 +11,7 @@ namespace SomerenDAL
 {
 	public class SupervisorDao : BaseDao
 	{
-		public List<Supervisor> GetParticipatingSupervisors(int activityId)
+		public List<Teacher> GetParticipatingSupervisors(int activityId)
 		{
 			string query = "SELECT l.lecturerId, l.firstName, l.lastName, lp.activityId FROM [lecturer] AS l JOIN [lecturerparticipant] AS lp ON l.lecturerId = lp.lecturerId WHERE activityId = @activityId";
 			SqlParameter[] sqlParameters = new SqlParameter[1];
@@ -19,7 +19,7 @@ namespace SomerenDAL
 			return ReadTables(ExecuteSelectQuery(query, sqlParameters));
 		}
 
-		public List<Supervisor> GetNotParticipatingSupervisors(int activityId)
+		public List<Teacher> GetNotParticipatingSupervisors(int activityId)
 		{
 			string query = "SELECT l.lecturerId, l.firstName, l.lastName FROM [lecturer] AS l WHERE l.lecturerId NOT IN (SELECT lp.lecturerId FROM LecturerParticipant AS lp WHERE lp.activityId = @activityId)";
 			SqlParameter[] sqlParameters = new SqlParameter[1];
@@ -49,15 +49,15 @@ namespace SomerenDAL
 			ExecuteEditQuery(query, sqlParameters);
 		}
 
-		private List<Supervisor> ReadTables(DataTable dataTable)
+		private List<Teacher> ReadTables(DataTable dataTable)
 		{
-			List<Supervisor> supervisors = new List<Supervisor>();
+			List<Teacher> supervisors = new List<Teacher>();
 
 			foreach (DataRow dr in dataTable.Rows)
 			{
-				Supervisor supervisor = new Supervisor()
+				Teacher supervisor = new Teacher()
 				{
-					SupervisorId = (int)dr["lecturerId"],
+					TeacherId = (int)dr["lecturerId"],
 					FirstName = dr["firstName"].ToString(),
 					LastName = dr["lastName"].ToString(),
 				};

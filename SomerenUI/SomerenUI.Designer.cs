@@ -43,15 +43,6 @@
             vatReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             pnlDashboard = new System.Windows.Forms.Panel();
             lblDashboard = new System.Windows.Forms.Label();
-            pnlStudents = new System.Windows.Forms.Panel();
-            pictureBox1 = new System.Windows.Forms.PictureBox();
-            listViewStudents = new System.Windows.Forms.ListView();
-            studentStudentNumber = new System.Windows.Forms.ColumnHeader();
-            studentFirstName = new System.Windows.Forms.ColumnHeader();
-            studentLastName = new System.Windows.Forms.ColumnHeader();
-            studentPhoneNumber = new System.Windows.Forms.ColumnHeader();
-            studentStudenClass = new System.Windows.Forms.ColumnHeader();
-            label1 = new System.Windows.Forms.Label();
             pnlRooms = new System.Windows.Forms.Panel();
             pictureBox4 = new System.Windows.Forms.PictureBox();
             listViewRooms = new System.Windows.Forms.ListView();
@@ -61,6 +52,9 @@
             RoomSize = new System.Windows.Forms.ColumnHeader();
             label4 = new System.Windows.Forms.Label();
             pnlLecturers = new System.Windows.Forms.Panel();
+            DeleteTeacherButton = new System.Windows.Forms.Button();
+            UpdateTeacherButton = new System.Windows.Forms.Button();
+            AddTeacherButton = new System.Windows.Forms.Button();
             pictureBox2 = new System.Windows.Forms.PictureBox();
             listViewLecturers = new System.Windows.Forms.ListView();
             lecturerId = new System.Windows.Forms.ColumnHeader();
@@ -70,6 +64,7 @@
             lecturerPhoneNumber = new System.Windows.Forms.ColumnHeader();
             label2 = new System.Windows.Forms.Label();
             pnlActivities = new System.Windows.Forms.Panel();
+            manageSupervisorsButton = new System.Windows.Forms.Button();
             btnManageParticipants = new System.Windows.Forms.Button();
             pictureBox3 = new System.Windows.Forms.PictureBox();
             listViewActivities = new System.Windows.Forms.ListView();
@@ -134,31 +129,39 @@
             studentLastNameOrder = new System.Windows.Forms.ColumnHeader();
             pictureBox5 = new System.Windows.Forms.PictureBox();
             label5 = new System.Windows.Forms.Label();
+            pnlStudents = new System.Windows.Forms.Panel();
+            DeleteStudentBtn = new System.Windows.Forms.Button();
+            UpdateStudentsBtn = new System.Windows.Forms.Button();
+            AddStudentBtn = new System.Windows.Forms.Button();
+            pictureBox1 = new System.Windows.Forms.PictureBox();
+            listViewStudents = new System.Windows.Forms.ListView();
+            studentStudentNumber = new System.Windows.Forms.ColumnHeader();
+            studentFirstName = new System.Windows.Forms.ColumnHeader();
+            studentLastName = new System.Windows.Forms.ColumnHeader();
+            studentPhoneNumber = new System.Windows.Forms.ColumnHeader();
+            studentStudenClass = new System.Windows.Forms.ColumnHeader();
+            label1 = new System.Windows.Forms.Label();
             pnlDrinks = new System.Windows.Forms.Panel();
+            AlcoholischNoButton = new System.Windows.Forms.RadioButton();
+            AlcoholischYesButton = new System.Windows.Forms.RadioButton();
             PriceOfDrink = new System.Windows.Forms.Label();
             StockOfDrink = new System.Windows.Forms.Label();
-            BoolOfDrink = new System.Windows.Forms.Label();
             NameOfDrink = new System.Windows.Forms.Label();
             TitleOfDrink = new System.Windows.Forms.Label();
             deletebtn = new System.Windows.Forms.Button();
             updatebtn = new System.Windows.Forms.Button();
-            drinkAlcoholischTextBox = new System.Windows.Forms.TextBox();
             AddDrinkButton = new System.Windows.Forms.Button();
             drinkPriceTextBox = new System.Windows.Forms.TextBox();
             drinkStockTextBox = new System.Windows.Forms.TextBox();
             drinkNameTextBox = new System.Windows.Forms.TextBox();
             listViewDrinks = new System.Windows.Forms.ListView();
-            Drink_ID = new System.Windows.Forms.ColumnHeader();
             drink = new System.Windows.Forms.ColumnHeader();
             drinkAlcohol = new System.Windows.Forms.ColumnHeader();
             drinksPrice = new System.Windows.Forms.ColumnHeader();
             drinkStock = new System.Windows.Forms.ColumnHeader();
             stockstatus = new System.Windows.Forms.ColumnHeader();
-            manageSupervisorsButton = new System.Windows.Forms.Button();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
-            pnlStudents.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlRooms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             pnlLecturers.SuspendLayout();
@@ -173,6 +176,8 @@
             pnlOrderADrink.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)textBoxQuantityDrinks).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            pnlStudents.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pnlDrinks.SuspendLayout();
             SuspendLayout();
             // 
@@ -182,7 +187,7 @@
             menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dashboardToolStripMenuItem, studentsToolStripMenuItem, lecturersToolStripMenuItem, activitiesToolStripMenuItem, roomsToolStripMenuItem, drinksToolStripMenuItem, orderADrinkToolStripMenuItem, revenueToolStripMenuItem, vatReportToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new System.Drawing.Size(962, 24);
+            menuStrip1.Size = new System.Drawing.Size(1273, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -266,108 +271,50 @@
             // pnlDashboard
             // 
             pnlDashboard.Controls.Add(lblDashboard);
-            pnlDashboard.Location = new System.Drawing.Point(12, 27);
+            pnlDashboard.Location = new System.Drawing.Point(15, 34);
+            pnlDashboard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             pnlDashboard.Name = "pnlDashboard";
-            pnlDashboard.Size = new System.Drawing.Size(938, 466);
+            pnlDashboard.Size = new System.Drawing.Size(1172, 583);
             pnlDashboard.TabIndex = 1;
             // 
             // lblDashboard
             // 
             lblDashboard.AutoSize = true;
-            lblDashboard.Location = new System.Drawing.Point(13, 13);
+            lblDashboard.Location = new System.Drawing.Point(17, 16);
+            lblDashboard.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lblDashboard.Name = "lblDashboard";
             lblDashboard.Size = new System.Drawing.Size(208, 15);
             lblDashboard.TabIndex = 0;
             lblDashboard.Text = "Welcome to the Someren Application!";
-            // 
-            // pnlStudents
-            // 
-            pnlStudents.Controls.Add(pictureBox1);
-            pnlStudents.Controls.Add(listViewStudents);
-            pnlStudents.Controls.Add(label1);
-            pnlStudents.Location = new System.Drawing.Point(12, 27);
-            pnlStudents.Name = "pnlStudents";
-            pnlStudents.Size = new System.Drawing.Size(938, 466);
-            pnlStudents.TabIndex = 2;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (System.Drawing.Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new System.Drawing.Point(805, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new System.Drawing.Size(130, 123);
-            pictureBox1.TabIndex = 2;
-            pictureBox1.TabStop = false;
-            // 
-            // listViewStudents
-            // 
-            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { studentStudentNumber, studentFirstName, studentLastName, studentPhoneNumber, studentStudenClass });
-            listViewStudents.Location = new System.Drawing.Point(16, 42);
-            listViewStudents.Name = "listViewStudents";
-            listViewStudents.Size = new System.Drawing.Size(766, 307);
-            listViewStudents.TabIndex = 1;
-            listViewStudents.UseCompatibleStateImageBehavior = false;
-            listViewStudents.View = System.Windows.Forms.View.Details;
-            // 
-            // studentStudentNumber
-            // 
-            studentStudentNumber.Text = "Studentnumber";
-            studentStudentNumber.Width = 150;
-            // 
-            // studentFirstName
-            // 
-            studentFirstName.Text = "Firstname";
-            studentFirstName.Width = 150;
-            // 
-            // studentLastName
-            // 
-            studentLastName.Text = "Lastname";
-            studentLastName.Width = 150;
-            // 
-            // studentPhoneNumber
-            // 
-            studentPhoneNumber.Text = "Phonenumber";
-            studentPhoneNumber.Width = 150;
-            // 
-            // studentStudenClass
-            // 
-            studentStudenClass.Text = "Class";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label1.Location = new System.Drawing.Point(13, 7);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(107, 32);
-            label1.TabIndex = 0;
-            label1.Text = "Students";
             // 
             // pnlRooms
             // 
             pnlRooms.Controls.Add(pictureBox4);
             pnlRooms.Controls.Add(listViewRooms);
             pnlRooms.Controls.Add(label4);
-            pnlRooms.Location = new System.Drawing.Point(12, 27);
+            pnlRooms.Location = new System.Drawing.Point(15, 34);
+            pnlRooms.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             pnlRooms.Name = "pnlRooms";
-            pnlRooms.Size = new System.Drawing.Size(938, 466);
+            pnlRooms.Size = new System.Drawing.Size(1172, 583);
             pnlRooms.TabIndex = 5;
             // 
             // pictureBox4
             // 
             pictureBox4.Image = (System.Drawing.Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new System.Drawing.Point(805, 0);
+            pictureBox4.Location = new System.Drawing.Point(1006, 0);
+            pictureBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new System.Drawing.Size(130, 123);
+            pictureBox4.Size = new System.Drawing.Size(163, 154);
             pictureBox4.TabIndex = 2;
             pictureBox4.TabStop = false;
             // 
             // listViewRooms
             // 
             listViewRooms.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { RoomId, RoomName, Roomtype, RoomSize });
-            listViewRooms.Location = new System.Drawing.Point(16, 42);
+            listViewRooms.Location = new System.Drawing.Point(20, 52);
+            listViewRooms.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             listViewRooms.Name = "listViewRooms";
-            listViewRooms.Size = new System.Drawing.Size(766, 307);
+            listViewRooms.Size = new System.Drawing.Size(957, 383);
             listViewRooms.TabIndex = 1;
             listViewRooms.UseCompatibleStateImageBehavior = false;
             listViewRooms.View = System.Windows.Forms.View.Details;
@@ -395,7 +342,8 @@
             // 
             label4.AutoSize = true;
             label4.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label4.Location = new System.Drawing.Point(13, 7);
+            label4.Location = new System.Drawing.Point(17, 9);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(86, 32);
             label4.TabIndex = 0;
@@ -403,29 +351,69 @@
             // 
             // pnlLecturers
             // 
+            pnlLecturers.Controls.Add(DeleteTeacherButton);
+            pnlLecturers.Controls.Add(UpdateTeacherButton);
+            pnlLecturers.Controls.Add(AddTeacherButton);
             pnlLecturers.Controls.Add(pictureBox2);
             pnlLecturers.Controls.Add(listViewLecturers);
             pnlLecturers.Controls.Add(label2);
-            pnlLecturers.Location = new System.Drawing.Point(12, 27);
+            pnlLecturers.Location = new System.Drawing.Point(15, 34);
+            pnlLecturers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             pnlLecturers.Name = "pnlLecturers";
-            pnlLecturers.Size = new System.Drawing.Size(938, 466);
+            pnlLecturers.Size = new System.Drawing.Size(1172, 583);
             pnlLecturers.TabIndex = 3;
+            // 
+            // DeleteTeacherButton
+            // 
+            DeleteTeacherButton.Location = new System.Drawing.Point(1006, 286);
+            DeleteTeacherButton.Margin = new System.Windows.Forms.Padding(2);
+            DeleteTeacherButton.Name = "DeleteTeacherButton";
+            DeleteTeacherButton.Size = new System.Drawing.Size(163, 32);
+            DeleteTeacherButton.TabIndex = 5;
+            DeleteTeacherButton.Text = "Delete Teacher";
+            DeleteTeacherButton.UseVisualStyleBackColor = true;
+            DeleteTeacherButton.Click += DeleteTeacherButton_Click;
+            // 
+            // UpdateTeacherButton
+            // 
+            UpdateTeacherButton.Location = new System.Drawing.Point(1006, 242);
+            UpdateTeacherButton.Margin = new System.Windows.Forms.Padding(2);
+            UpdateTeacherButton.Name = "UpdateTeacherButton";
+            UpdateTeacherButton.Size = new System.Drawing.Size(163, 33);
+            UpdateTeacherButton.TabIndex = 4;
+            UpdateTeacherButton.Text = "Update Teacher";
+            UpdateTeacherButton.UseVisualStyleBackColor = true;
+            UpdateTeacherButton.Click += UpdateTeacherButton_Click;
+            // 
+            // AddTeacherButton
+            // 
+            AddTeacherButton.Location = new System.Drawing.Point(1006, 193);
+            AddTeacherButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            AddTeacherButton.Name = "AddTeacherButton";
+            AddTeacherButton.Size = new System.Drawing.Size(163, 36);
+            AddTeacherButton.TabIndex = 3;
+            AddTeacherButton.Text = "Add Teacher";
+            AddTeacherButton.UseVisualStyleBackColor = true;
+            AddTeacherButton.Click += AddTeacherButton_Click;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (System.Drawing.Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new System.Drawing.Point(805, 0);
+            pictureBox2.Location = new System.Drawing.Point(1006, 0);
+            pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new System.Drawing.Size(130, 123);
+            pictureBox2.Size = new System.Drawing.Size(163, 154);
             pictureBox2.TabIndex = 2;
             pictureBox2.TabStop = false;
             // 
             // listViewLecturers
             // 
             listViewLecturers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { lecturerId, lecturerFirstName, lecturerLastName, lecturerAge, lecturerPhoneNumber });
-            listViewLecturers.Location = new System.Drawing.Point(16, 42);
+            listViewLecturers.FullRowSelect = true;
+            listViewLecturers.Location = new System.Drawing.Point(20, 52);
+            listViewLecturers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             listViewLecturers.Name = "listViewLecturers";
-            listViewLecturers.Size = new System.Drawing.Size(766, 307);
+            listViewLecturers.Size = new System.Drawing.Size(957, 383);
             listViewLecturers.TabIndex = 1;
             listViewLecturers.UseCompatibleStateImageBehavior = false;
             listViewLecturers.View = System.Windows.Forms.View.Details;
@@ -461,7 +449,8 @@
             // 
             label2.AutoSize = true;
             label2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label2.Location = new System.Drawing.Point(13, 7);
+            label2.Location = new System.Drawing.Point(17, 9);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(110, 32);
             label2.TabIndex = 0;
@@ -474,18 +463,31 @@
             pnlActivities.Controls.Add(pictureBox3);
             pnlActivities.Controls.Add(listViewActivities);
             pnlActivities.Controls.Add(label3);
-            pnlActivities.Location = new System.Drawing.Point(12, 27);
+            pnlActivities.Location = new System.Drawing.Point(15, 34);
+            pnlActivities.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             pnlActivities.Name = "pnlActivities";
-            pnlActivities.Size = new System.Drawing.Size(938, 466);
+            pnlActivities.Size = new System.Drawing.Size(1172, 583);
             pnlActivities.TabIndex = 4;
+            // 
+            // manageSupervisorsButton
+            // 
+            manageSupervisorsButton.Enabled = false;
+            manageSupervisorsButton.Location = new System.Drawing.Point(18, 442);
+            manageSupervisorsButton.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            manageSupervisorsButton.Name = "manageSupervisorsButton";
+            manageSupervisorsButton.Size = new System.Drawing.Size(220, 38);
+            manageSupervisorsButton.TabIndex = 4;
+            manageSupervisorsButton.Text = "Manage supervisors";
+            manageSupervisorsButton.UseVisualStyleBackColor = true;
+            manageSupervisorsButton.Click += manageSupervisorsButton_Click;
             // 
             // btnManageParticipants
             // 
             btnManageParticipants.Enabled = false;
-            btnManageParticipants.Location = new System.Drawing.Point(606, 353);
-            btnManageParticipants.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            btnManageParticipants.Location = new System.Drawing.Point(758, 441);
+            btnManageParticipants.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             btnManageParticipants.Name = "btnManageParticipants";
-            btnManageParticipants.Size = new System.Drawing.Size(176, 30);
+            btnManageParticipants.Size = new System.Drawing.Size(220, 38);
             btnManageParticipants.TabIndex = 3;
             btnManageParticipants.Text = "Manage participants";
             btnManageParticipants.UseVisualStyleBackColor = true;
@@ -494,9 +496,10 @@
             // pictureBox3
             // 
             pictureBox3.Image = (System.Drawing.Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new System.Drawing.Point(805, 0);
+            pictureBox3.Location = new System.Drawing.Point(1006, 0);
+            pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new System.Drawing.Size(130, 123);
+            pictureBox3.Size = new System.Drawing.Size(163, 154);
             pictureBox3.TabIndex = 2;
             pictureBox3.TabStop = false;
             // 
@@ -504,9 +507,10 @@
             // 
             listViewActivities.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { ActivityId, ActivityName, ActivityDay, ActivityBeginTime, ActivityEndTime });
             listViewActivities.FullRowSelect = true;
-            listViewActivities.Location = new System.Drawing.Point(16, 42);
+            listViewActivities.Location = new System.Drawing.Point(20, 52);
+            listViewActivities.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             listViewActivities.Name = "listViewActivities";
-            listViewActivities.Size = new System.Drawing.Size(766, 307);
+            listViewActivities.Size = new System.Drawing.Size(957, 383);
             listViewActivities.TabIndex = 1;
             listViewActivities.UseCompatibleStateImageBehavior = false;
             listViewActivities.View = System.Windows.Forms.View.Details;
@@ -540,7 +544,8 @@
             // 
             label3.AutoSize = true;
             label3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label3.Location = new System.Drawing.Point(13, 7);
+            label3.Location = new System.Drawing.Point(17, 9);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(109, 32);
             label3.TabIndex = 0;
@@ -564,15 +569,15 @@
             pnlRevenue.Controls.Add(pictureBox6);
             pnlRevenue.Controls.Add(label10);
             pnlRevenue.Location = new System.Drawing.Point(12, 27);
+            pnlRevenue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             pnlRevenue.Name = "pnlRevenue";
-            pnlRevenue.Size = new System.Drawing.Size(938, 466);
+            pnlRevenue.Size = new System.Drawing.Size(1175, 590);
             pnlRevenue.TabIndex = 7;
             // 
             // endDateMessage
             // 
             endDateMessage.AutoSize = true;
-            endDateMessage.Location = new System.Drawing.Point(504, 102);
-            endDateMessage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            endDateMessage.Location = new System.Drawing.Point(630, 128);
             endDateMessage.Name = "endDateMessage";
             endDateMessage.Size = new System.Drawing.Size(0, 15);
             endDateMessage.TabIndex = 15;
@@ -580,18 +585,17 @@
             // startDateMessage
             // 
             startDateMessage.AutoSize = true;
-            startDateMessage.Location = new System.Drawing.Point(104, 102);
-            startDateMessage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            startDateMessage.Location = new System.Drawing.Point(130, 128);
             startDateMessage.Name = "startDateMessage";
             startDateMessage.Size = new System.Drawing.Size(0, 15);
             startDateMessage.TabIndex = 14;
             // 
             // reportGeneratorBtn
             // 
-            reportGeneratorBtn.Location = new System.Drawing.Point(504, 138);
-            reportGeneratorBtn.Margin = new System.Windows.Forms.Padding(2);
+            reportGeneratorBtn.Location = new System.Drawing.Point(630, 172);
+            reportGeneratorBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             reportGeneratorBtn.Name = "reportGeneratorBtn";
-            reportGeneratorBtn.Size = new System.Drawing.Size(210, 36);
+            reportGeneratorBtn.Size = new System.Drawing.Size(262, 45);
             reportGeneratorBtn.TabIndex = 13;
             reportGeneratorBtn.Text = "Generate Report";
             reportGeneratorBtn.UseVisualStyleBackColor = true;
@@ -600,8 +604,7 @@
             // outputNoC
             // 
             outputNoC.AutoSize = true;
-            outputNoC.Location = new System.Drawing.Point(293, 162);
-            outputNoC.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            outputNoC.Location = new System.Drawing.Point(367, 202);
             outputNoC.Name = "outputNoC";
             outputNoC.Size = new System.Drawing.Size(0, 15);
             outputNoC.TabIndex = 12;
@@ -609,8 +612,7 @@
             // outputTurnover
             // 
             outputTurnover.AutoSize = true;
-            outputTurnover.Location = new System.Drawing.Point(132, 162);
-            outputTurnover.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            outputTurnover.Location = new System.Drawing.Point(165, 202);
             outputTurnover.Name = "outputTurnover";
             outputTurnover.Size = new System.Drawing.Size(0, 15);
             outputTurnover.TabIndex = 11;
@@ -618,8 +620,7 @@
             // outputSales
             // 
             outputSales.AutoSize = true;
-            outputSales.Location = new System.Drawing.Point(15, 162);
-            outputSales.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            outputSales.Location = new System.Drawing.Point(18, 202);
             outputSales.Name = "outputSales";
             outputSales.Size = new System.Drawing.Size(0, 15);
             outputSales.TabIndex = 10;
@@ -627,8 +628,7 @@
             // NoCLabel
             // 
             NoCLabel.AutoSize = true;
-            NoCLabel.Location = new System.Drawing.Point(293, 138);
-            NoCLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            NoCLabel.Location = new System.Drawing.Point(367, 172);
             NoCLabel.Name = "NoCLabel";
             NoCLabel.Size = new System.Drawing.Size(125, 15);
             NoCLabel.TabIndex = 9;
@@ -637,8 +637,7 @@
             // TurnoverLabel
             // 
             TurnoverLabel.AutoSize = true;
-            TurnoverLabel.Location = new System.Drawing.Point(132, 138);
-            TurnoverLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            TurnoverLabel.Location = new System.Drawing.Point(165, 172);
             TurnoverLabel.Name = "TurnoverLabel";
             TurnoverLabel.Size = new System.Drawing.Size(54, 15);
             TurnoverLabel.TabIndex = 8;
@@ -647,8 +646,7 @@
             // SalesLabel
             // 
             SalesLabel.AutoSize = true;
-            SalesLabel.Location = new System.Drawing.Point(15, 138);
-            SalesLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            SalesLabel.Location = new System.Drawing.Point(18, 172);
             SalesLabel.Name = "SalesLabel";
             SalesLabel.Size = new System.Drawing.Size(33, 15);
             SalesLabel.TabIndex = 7;
@@ -658,8 +656,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label8.Location = new System.Drawing.Point(412, 74);
-            label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label8.Location = new System.Drawing.Point(515, 92);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(70, 20);
             label8.TabIndex = 6;
@@ -669,8 +666,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label9.Location = new System.Drawing.Point(13, 74);
-            label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label9.Location = new System.Drawing.Point(17, 92);
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(76, 20);
             label9.TabIndex = 5;
@@ -678,8 +674,8 @@
             // 
             // enddatePicker
             // 
-            enddatePicker.Location = new System.Drawing.Point(504, 74);
-            enddatePicker.Margin = new System.Windows.Forms.Padding(2);
+            enddatePicker.Location = new System.Drawing.Point(515, 122);
+            enddatePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             enddatePicker.Name = "enddatePicker";
             enddatePicker.Size = new System.Drawing.Size(211, 23);
             enddatePicker.TabIndex = 4;
@@ -687,8 +683,8 @@
             // 
             // startdatePicker
             // 
-            startdatePicker.Location = new System.Drawing.Point(104, 73);
-            startdatePicker.Margin = new System.Windows.Forms.Padding(2);
+            startdatePicker.Location = new System.Drawing.Point(20, 120);
+            startdatePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             startdatePicker.Name = "startdatePicker";
             startdatePicker.Size = new System.Drawing.Size(211, 23);
             startdatePicker.TabIndex = 3;
@@ -748,7 +744,8 @@
             // lblDateFrom
             // 
             lblDateFrom.AutoSize = true;
-            lblDateFrom.Location = new System.Drawing.Point(3, 0);
+            lblDateFrom.Location = new System.Drawing.Point(4, 0);
+            lblDateFrom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             lblDateFrom.Name = "lblDateFrom";
             lblDateFrom.Size = new System.Drawing.Size(41, 15);
             lblDateFrom.TabIndex = 7;
@@ -757,7 +754,7 @@
             // reportLabel10
             // 
             reportLabel10.AutoSize = true;
-            reportLabel10.Location = new System.Drawing.Point(50, 0);
+            reportLabel10.Location = new System.Drawing.Point(52, 0);
             reportLabel10.Name = "reportLabel10";
             reportLabel10.Size = new System.Drawing.Size(22, 15);
             reportLabel10.TabIndex = 8;
@@ -766,7 +763,7 @@
             // lblDateTo
             // 
             lblDateTo.AutoSize = true;
-            lblDateTo.Location = new System.Drawing.Point(78, 0);
+            lblDateTo.Location = new System.Drawing.Point(80, 0);
             lblDateTo.Name = "lblDateTo";
             lblDateTo.Size = new System.Drawing.Size(41, 15);
             lblDateTo.TabIndex = 9;
@@ -1043,21 +1040,123 @@
             label5.AutoSize = true;
             label5.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             label5.Location = new System.Drawing.Point(0, 0);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(82, 32);
             label5.TabIndex = 0;
             label5.Text = "Order ";
             // 
+            // pnlStudents
+            // 
+            pnlStudents.Controls.Add(DeleteStudentBtn);
+            pnlStudents.Controls.Add(UpdateStudentsBtn);
+            pnlStudents.Controls.Add(AddStudentBtn);
+            pnlStudents.Controls.Add(pictureBox1);
+            pnlStudents.Controls.Add(listViewStudents);
+            pnlStudents.Controls.Add(label1);
+            pnlStudents.Location = new System.Drawing.Point(12, 27);
+            pnlStudents.Name = "pnlStudents";
+            pnlStudents.Size = new System.Drawing.Size(938, 466);
+            pnlStudents.TabIndex = 18;
+            // 
+            // DeleteStudentBtn
+            // 
+            DeleteStudentBtn.Location = new System.Drawing.Point(302, 353);
+            DeleteStudentBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            DeleteStudentBtn.Name = "DeleteStudentBtn";
+            DeleteStudentBtn.Size = new System.Drawing.Size(149, 29);
+            DeleteStudentBtn.TabIndex = 5;
+            DeleteStudentBtn.Text = "Delete Students";
+            DeleteStudentBtn.UseVisualStyleBackColor = true;
+            DeleteStudentBtn.Click += DeleteStudentBtn_Click;
+            // 
+            // UpdateStudentsBtn
+            // 
+            UpdateStudentsBtn.Location = new System.Drawing.Point(467, 353);
+            UpdateStudentsBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            UpdateStudentsBtn.Name = "UpdateStudentsBtn";
+            UpdateStudentsBtn.Size = new System.Drawing.Size(149, 29);
+            UpdateStudentsBtn.TabIndex = 4;
+            UpdateStudentsBtn.Text = "Update Students";
+            UpdateStudentsBtn.UseVisualStyleBackColor = true;
+            UpdateStudentsBtn.Click += UpdateStudentsBtn_Click;
+            // 
+            // AddStudentBtn
+            // 
+            AddStudentBtn.Location = new System.Drawing.Point(633, 353);
+            AddStudentBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            AddStudentBtn.Name = "AddStudentBtn";
+            AddStudentBtn.Size = new System.Drawing.Size(149, 29);
+            AddStudentBtn.TabIndex = 3;
+            AddStudentBtn.Text = "Add Students";
+            AddStudentBtn.UseVisualStyleBackColor = true;
+            AddStudentBtn.Click += AddStudentBtn_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (System.Drawing.Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new System.Drawing.Point(805, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new System.Drawing.Size(130, 123);
+            pictureBox1.TabIndex = 2;
+            pictureBox1.TabStop = false;
+            // 
+            // listViewStudents
+            // 
+            listViewStudents.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { studentStudentNumber, studentFirstName, studentLastName, studentPhoneNumber, studentStudenClass });
+            listViewStudents.FullRowSelect = true;
+            listViewStudents.Location = new System.Drawing.Point(16, 42);
+            listViewStudents.Name = "listViewStudents";
+            listViewStudents.Size = new System.Drawing.Size(766, 307);
+            listViewStudents.TabIndex = 1;
+            listViewStudents.UseCompatibleStateImageBehavior = false;
+            listViewStudents.View = System.Windows.Forms.View.Details;
+            // 
+            // studentStudentNumber
+            // 
+            studentStudentNumber.Text = "Studentnumber";
+            studentStudentNumber.Width = 150;
+            // 
+            // studentFirstName
+            // 
+            studentFirstName.Text = "Firstname";
+            studentFirstName.Width = 150;
+            // 
+            // studentLastName
+            // 
+            studentLastName.Text = "Lastname";
+            studentLastName.Width = 150;
+            // 
+            // studentPhoneNumber
+            // 
+            studentPhoneNumber.Text = "Phonenumber";
+            studentPhoneNumber.Width = 150;
+            // 
+            // studentStudenClass
+            // 
+            studentStudenClass.Text = "Class";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            label1.Location = new System.Drawing.Point(17, 9);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(107, 32);
+            label1.TabIndex = 0;
+            label1.Text = "Students";
+            // 
             // pnlDrinks
             // 
+            pnlDrinks.Controls.Add(AlcoholischNoButton);
+            pnlDrinks.Controls.Add(AlcoholischYesButton);
             pnlDrinks.Controls.Add(PriceOfDrink);
             pnlDrinks.Controls.Add(StockOfDrink);
-            pnlDrinks.Controls.Add(BoolOfDrink);
             pnlDrinks.Controls.Add(NameOfDrink);
             pnlDrinks.Controls.Add(TitleOfDrink);
             pnlDrinks.Controls.Add(deletebtn);
             pnlDrinks.Controls.Add(updatebtn);
-            pnlDrinks.Controls.Add(drinkAlcoholischTextBox);
             pnlDrinks.Controls.Add(AddDrinkButton);
             pnlDrinks.Controls.Add(drinkPriceTextBox);
             pnlDrinks.Controls.Add(drinkStockTextBox);
@@ -1067,7 +1166,32 @@
             pnlDrinks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             pnlDrinks.Name = "pnlDrinks";
             pnlDrinks.Size = new System.Drawing.Size(938, 466);
-            pnlDrinks.TabIndex = 17;
+            pnlDrinks.TabIndex = 19;
+            // 
+            // AlcoholischNoButton
+            // 
+            AlcoholischNoButton.AutoSize = true;
+            AlcoholischNoButton.Location = new System.Drawing.Point(647, 131);
+            AlcoholischNoButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            AlcoholischNoButton.Name = "AlcoholischNoButton";
+            AlcoholischNoButton.Size = new System.Drawing.Size(101, 19);
+            AlcoholischNoButton.TabIndex = 20;
+            AlcoholischNoButton.TabStop = true;
+            AlcoholischNoButton.Text = "Non Alcoholic";
+            AlcoholischNoButton.UseVisualStyleBackColor = true;
+            // 
+            // AlcoholischYesButton
+            // 
+            AlcoholischYesButton.AutoSize = true;
+            AlcoholischYesButton.Location = new System.Drawing.Point(561, 131);
+            AlcoholischYesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            AlcoholischYesButton.Name = "AlcoholischYesButton";
+            AlcoholischYesButton.Size = new System.Drawing.Size(75, 19);
+            AlcoholischYesButton.TabIndex = 19;
+            AlcoholischYesButton.TabStop = true;
+            AlcoholischYesButton.Text = "Alcoholic";
+            AlcoholischYesButton.UseVisualStyleBackColor = true;
+            AlcoholischYesButton.Click += AddStudentBtn_Click;
             // 
             // PriceOfDrink
             // 
@@ -1086,15 +1210,6 @@
             StockOfDrink.Size = new System.Drawing.Size(36, 15);
             StockOfDrink.TabIndex = 17;
             StockOfDrink.Text = "Stock";
-            // 
-            // BoolOfDrink
-            // 
-            BoolOfDrink.AutoSize = true;
-            BoolOfDrink.Location = new System.Drawing.Point(526, 124);
-            BoolOfDrink.Name = "BoolOfDrink";
-            BoolOfDrink.Size = new System.Drawing.Size(69, 15);
-            BoolOfDrink.TabIndex = 16;
-            BoolOfDrink.Text = "Alcoholisch";
             // 
             // NameOfDrink
             // 
@@ -1137,14 +1252,6 @@
             updatebtn.UseVisualStyleBackColor = true;
             updatebtn.Click += updatebtn_Click;
             // 
-            // drinkAlcoholischTextBox
-            // 
-            drinkAlcoholischTextBox.Location = new System.Drawing.Point(606, 122);
-            drinkAlcoholischTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            drinkAlcoholischTextBox.Name = "drinkAlcoholischTextBox";
-            drinkAlcoholischTextBox.Size = new System.Drawing.Size(110, 23);
-            drinkAlcoholischTextBox.TabIndex = 10;
-            // 
             // AddDrinkButton
             // 
             AddDrinkButton.Location = new System.Drawing.Point(738, 50);
@@ -1182,7 +1289,7 @@
             // 
             // listViewDrinks
             // 
-            listViewDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { Drink_ID, drink, drinkAlcohol, drinksPrice, drinkStock, stockstatus });
+            listViewDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { drink, drinkAlcohol, drinksPrice, drinkStock, stockstatus });
             listViewDrinks.FullRowSelect = true;
             listViewDrinks.Location = new System.Drawing.Point(20, 46);
             listViewDrinks.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1192,11 +1299,6 @@
             listViewDrinks.UseCompatibleStateImageBehavior = false;
             listViewDrinks.View = System.Windows.Forms.View.Details;
             listViewDrinks.SelectedIndexChanged += listViewDrinks_SelectedIndexChanged;
-            // 
-            // Drink_ID
-            // 
-            Drink_ID.Text = "id";
-            Drink_ID.Width = 30;
             // 
             // drink
             // 
@@ -1210,13 +1312,13 @@
             // 
             // drinksPrice
             // 
-            drinksPrice.DisplayIndex = 4;
+            drinksPrice.DisplayIndex = 3;
             drinksPrice.Text = "Price";
             drinksPrice.Width = 45;
             // 
             // drinkStock
             // 
-            drinkStock.DisplayIndex = 3;
+            drinkStock.DisplayIndex = 2;
             drinkStock.Text = "Stock";
             drinkStock.Width = 50;
             // 
@@ -1225,32 +1327,20 @@
             stockstatus.Text = "Stock Status";
             stockstatus.Width = 160;
             // 
-            // manageSupervisorsButton
-            // 
-            manageSupervisorsButton.Enabled = false;
-            manageSupervisorsButton.Location = new System.Drawing.Point(15, 354);
-            manageSupervisorsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            manageSupervisorsButton.Name = "manageSupervisorsButton";
-            manageSupervisorsButton.Size = new System.Drawing.Size(176, 30);
-            manageSupervisorsButton.TabIndex = 4;
-            manageSupervisorsButton.Text = "Manage supervisors";
-            manageSupervisorsButton.UseVisualStyleBackColor = true;
-            manageSupervisorsButton.Click += manageSupervisorsButton_Click;
-            // 
             // SomerenUI
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(962, 497);
-            Controls.Add(menuStrip1);
-            Controls.Add(pnlActivities);
-            Controls.Add(pnlStudents);
-            Controls.Add(pnlOrderADrink);
-            Controls.Add(pnlDrinks);
-            Controls.Add(pnlVatReport);
+            ClientSize = new System.Drawing.Size(1273, 497);
             Controls.Add(pnlRevenue);
-            Controls.Add(pnlDashboard);
+            Controls.Add(pnlDrinks);
+            Controls.Add(pnlStudents);
+            Controls.Add(menuStrip1);
             Controls.Add(pnlLecturers);
+            Controls.Add(pnlActivities);
+            Controls.Add(pnlOrderADrink);
+            Controls.Add(pnlVatReport);
+            Controls.Add(pnlDashboard);
             Controls.Add(pnlRooms);
             MainMenuStrip = menuStrip1;
             Name = "SomerenUI";
@@ -1260,9 +1350,6 @@
             menuStrip1.PerformLayout();
             pnlDashboard.ResumeLayout(false);
             pnlDashboard.PerformLayout();
-            pnlStudents.ResumeLayout(false);
-            pnlStudents.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlRooms.ResumeLayout(false);
             pnlRooms.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
@@ -1284,6 +1371,9 @@
             pnlOrderADrink.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)textBoxQuantityDrinks).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            pnlStudents.ResumeLayout(false);
+            pnlStudents.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pnlDrinks.ResumeLayout(false);
             pnlDrinks.PerformLayout();
             ResumeLayout(false);
@@ -1302,46 +1392,37 @@
         private System.Windows.Forms.ToolStripMenuItem roomsToolStripMenuItem;
         private System.Windows.Forms.Panel pnlDashboard;
         private System.Windows.Forms.Label lblDashboard;
-        private System.Windows.Forms.Panel pnlStudents;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ListView listViewStudents;
-        private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Panel pnlRooms;
-		private System.Windows.Forms.PictureBox pictureBox4;
-		private System.Windows.Forms.ListView listViewRooms;
-		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Panel pnlLecturers;
-		private System.Windows.Forms.PictureBox pictureBox2;
-		private System.Windows.Forms.ListView listViewLecturers;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Panel pnlActivities;
-		private System.Windows.Forms.PictureBox pictureBox3;
-		private System.Windows.Forms.ListView listViewActivities;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.ColumnHeader studentLastName;
-		private System.Windows.Forms.ColumnHeader studentPhoneNumber;
-		private System.Windows.Forms.ColumnHeader studentFirstName;
-		private System.Windows.Forms.ColumnHeader studentStudentNumber;
-		private System.Windows.Forms.ColumnHeader studentStudenClass;
-		private System.Windows.Forms.ColumnHeader lecturerId;
-		private System.Windows.Forms.ColumnHeader lecturerFirstName;
-		private System.Windows.Forms.ColumnHeader lecturerLastName;
-		private System.Windows.Forms.ColumnHeader lecturerPhoneNumber;
-		private System.Windows.Forms.ColumnHeader lecturerAge;
-		private System.Windows.Forms.ColumnHeader RoomId;
-		private System.Windows.Forms.ColumnHeader RoomName;
-		private System.Windows.Forms.ColumnHeader Roomtype;
-		private System.Windows.Forms.ColumnHeader RoomSize;
-		private System.Windows.Forms.ColumnHeader ActivityId;
-		private System.Windows.Forms.ColumnHeader ActivityName;
-		private System.Windows.Forms.ColumnHeader ActivityDay;
-		private System.Windows.Forms.ColumnHeader ActivityBeginTime;
-		private System.Windows.Forms.ColumnHeader ActivityEndTime;
+        private System.Windows.Forms.Panel pnlRooms;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.ListView listViewRooms;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel pnlLecturers;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.ListView listViewLecturers;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel pnlActivities;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.ListView listViewActivities;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ColumnHeader lecturerId;
+        private System.Windows.Forms.ColumnHeader lecturerFirstName;
+        private System.Windows.Forms.ColumnHeader lecturerLastName;
+        private System.Windows.Forms.ColumnHeader lecturerPhoneNumber;
+        private System.Windows.Forms.ColumnHeader lecturerAge;
+        private System.Windows.Forms.ColumnHeader RoomId;
+        private System.Windows.Forms.ColumnHeader RoomName;
+        private System.Windows.Forms.ColumnHeader Roomtype;
+        private System.Windows.Forms.ColumnHeader RoomSize;
+        private System.Windows.Forms.ColumnHeader ActivityId;
+        private System.Windows.Forms.ColumnHeader ActivityName;
+        private System.Windows.Forms.ColumnHeader ActivityDay;
+        private System.Windows.Forms.ColumnHeader ActivityBeginTime;
+        private System.Windows.Forms.ColumnHeader ActivityEndTime;
         private System.Windows.Forms.ToolStripMenuItem orderADrinkToolStripMenuItem;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.FontDialog fontDialog2;
         private System.Windows.Forms.FontDialog fontDialog3;
-		private System.Windows.Forms.ToolStripMenuItem vatReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vatReportToolStripMenuItem;
         private System.Windows.Forms.Panel pnlRevenue;
         private System.Windows.Forms.Label endDateMessage;
         private System.Windows.Forms.Label startDateMessage;
@@ -1359,64 +1440,78 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolStripMenuItem revenueToolStripMenuItem;
-		private System.Windows.Forms.Panel pnlVatReport;
-		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-		private System.Windows.Forms.Label lblDateFrom;
-		private System.Windows.Forms.Label reportLabel10;
-		private System.Windows.Forms.Label lblDateTo;
-		private System.Windows.Forms.ComboBox cbSelectYear;
-		private System.Windows.Forms.Label lblVatTotal;
-		private System.Windows.Forms.Label lblVatHigh;
-		private System.Windows.Forms.Label lblVatLow;
-		private System.Windows.Forms.Label reportLabel14;
-		private System.Windows.Forms.Label reportLabel13;
-		private System.Windows.Forms.Label reportLabel12;
-		private System.Windows.Forms.Label reportLabel8;
-		private System.Windows.Forms.ComboBox cbSelectQuarter;
-		private System.Windows.Forms.Label reportLabel7;
-		private System.Windows.Forms.Label reportLabel6;
-		private System.Windows.Forms.PictureBox reportPictureBox;
-		private System.Windows.Forms.Label reportLabel5;
-		private System.Windows.Forms.Panel pnlOrderADrink;
-		private System.Windows.Forms.NumericUpDown textBoxQuantityDrinks;
-		private System.Windows.Forms.Label label12;
-		private System.Windows.Forms.Label label11;
-		private System.Windows.Forms.Label totalPriceLabel;
-		private System.Windows.Forms.Button submitOrderButtton;
-		private System.Windows.Forms.Label orderViewItems;
-		private System.Windows.Forms.Label orderViewLabel;
-		private System.Windows.Forms.ListView listViewDrinkOrder;
-		private System.Windows.Forms.ColumnHeader drinkName;
-		private System.Windows.Forms.ColumnHeader drinkPrice;
-		private System.Windows.Forms.ColumnHeader alcoholDrink;
-		private System.Windows.Forms.ColumnHeader stockDrink;
-		private System.Windows.Forms.ListView listViewStudentOrder;
-		private System.Windows.Forms.ColumnHeader studentName;
-		private System.Windows.Forms.PictureBox pictureBox5;
-		private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel pnlVatReport;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label lblDateFrom;
+        private System.Windows.Forms.Label reportLabel10;
+        private System.Windows.Forms.Label lblDateTo;
+        private System.Windows.Forms.ComboBox cbSelectYear;
+        private System.Windows.Forms.Label lblVatTotal;
+        private System.Windows.Forms.Label lblVatHigh;
+        private System.Windows.Forms.Label lblVatLow;
+        private System.Windows.Forms.Label reportLabel14;
+        private System.Windows.Forms.Label reportLabel13;
+        private System.Windows.Forms.Label reportLabel12;
+        private System.Windows.Forms.Label reportLabel8;
+        private System.Windows.Forms.ComboBox cbSelectQuarter;
+        private System.Windows.Forms.Label reportLabel7;
+        private System.Windows.Forms.Label reportLabel6;
+        private System.Windows.Forms.PictureBox reportPictureBox;
+        private System.Windows.Forms.Label reportLabel5;
+        private System.Windows.Forms.Panel pnlOrderADrink;
+        private System.Windows.Forms.NumericUpDown textBoxQuantityDrinks;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label totalPriceLabel;
+        private System.Windows.Forms.Button submitOrderButtton;
+        private System.Windows.Forms.Label orderViewItems;
+        private System.Windows.Forms.Label orderViewLabel;
+        private System.Windows.Forms.ListView listViewDrinkOrder;
+        private System.Windows.Forms.ColumnHeader drinkName;
+        private System.Windows.Forms.ColumnHeader drinkPrice;
+        private System.Windows.Forms.ColumnHeader alcoholDrink;
+        private System.Windows.Forms.ColumnHeader stockDrink;
+        private System.Windows.Forms.ListView listViewStudentOrder;
+        private System.Windows.Forms.ColumnHeader studentName;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem drinksToolStripMenuItem;
+        private System.Windows.Forms.Button btnManageParticipants;
+        private System.Windows.Forms.ColumnHeader studentLastNameOrder;
+        private System.Windows.Forms.Button manageSupervisorsButton;
+		private System.Windows.Forms.Button AddTeacherButton;
+        private System.Windows.Forms.Button UpdateTeacherButton;
+        private System.Windows.Forms.Button DeleteTeacherButton;
+		private System.Windows.Forms.Panel pnlStudents;
+		private System.Windows.Forms.Button DeleteStudentBtn;
+		private System.Windows.Forms.Button UpdateStudentsBtn;
+		private System.Windows.Forms.Button AddStudentBtn;
+		private System.Windows.Forms.PictureBox pictureBox1;
+		private System.Windows.Forms.ListView listViewStudents;
+		private System.Windows.Forms.ColumnHeader studentStudentNumber;
+		private System.Windows.Forms.ColumnHeader studentFirstName;
+		private System.Windows.Forms.ColumnHeader studentLastName;
+		private System.Windows.Forms.ColumnHeader studentPhoneNumber;
+		private System.Windows.Forms.ColumnHeader studentStudenClass;
+		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Panel pnlDrinks;
+		private System.Windows.Forms.RadioButton AlcoholischNoButton;
+		private System.Windows.Forms.RadioButton AlcoholischYesButton;
 		private System.Windows.Forms.Label PriceOfDrink;
 		private System.Windows.Forms.Label StockOfDrink;
-		private System.Windows.Forms.Label BoolOfDrink;
 		private System.Windows.Forms.Label NameOfDrink;
 		private System.Windows.Forms.Label TitleOfDrink;
 		private System.Windows.Forms.Button deletebtn;
 		private System.Windows.Forms.Button updatebtn;
-		private System.Windows.Forms.TextBox drinkAlcoholischTextBox;
 		private System.Windows.Forms.Button AddDrinkButton;
 		private System.Windows.Forms.TextBox drinkPriceTextBox;
 		private System.Windows.Forms.TextBox drinkStockTextBox;
 		private System.Windows.Forms.TextBox drinkNameTextBox;
 		private System.Windows.Forms.ListView listViewDrinks;
-		private System.Windows.Forms.ColumnHeader Drink_ID;
 		private System.Windows.Forms.ColumnHeader drink;
 		private System.Windows.Forms.ColumnHeader drinkAlcohol;
 		private System.Windows.Forms.ColumnHeader drinksPrice;
 		private System.Windows.Forms.ColumnHeader drinkStock;
 		private System.Windows.Forms.ColumnHeader stockstatus;
-		private System.Windows.Forms.ToolStripMenuItem drinksToolStripMenuItem;
-		private System.Windows.Forms.Button btnManageParticipants;
-        private System.Windows.Forms.ColumnHeader studentLastNameOrder;
-        private System.Windows.Forms.Button manageSupervisorsButton;
-    }
+	}
 }
