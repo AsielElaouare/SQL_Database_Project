@@ -9,82 +9,61 @@ using System.Threading.Tasks;
 
 namespace SomerenDAL
 {
-    public  class SupervisorDao : BaseDao
-    {
-        public List<Teacher> GetAllSupervisors(int activityId)
-        {
-            string query = "SELECT lecturerId, activityId, firstname, lastname FROM lecturer AS L JOIN LecturerParticipant AS LP ON LP.lecturertId = L.lecturerID WHERE activityId = @ActivityId";
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@ActivityId", activityId)
-            };
-            return ReadTableSupervisors(ExecuteSelectQuery(query, sqlParameters));
-        }
-        
-        public List<Teacher> GetNotParticipatingSupervisors(int activityId)
-        {
-            string query = "SELECT lecturerId, firstName, lastName, phoneNumber, dateOfBirth, roomId FROM [Lecturer] s WHERE s.lecturerId NOT IN (SELECT p.lecturertId FROM [LecturerParticipant] p WHERE p.activityId = @ActivityId);";
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@ActivityId", activityId)
-            };
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        }
+	public class SupervisorDao : BaseDao
+	{
+		public List<Teacher> GetParticipatingSupervisors(int activityId)
+		{
+			string query = "SELECT l.lecturerId, l.firstName, l.lastName, lp.activityId FROM [lecturer] AS l JOIN [lecturerparticipant] AS lp ON l.lecturerId = lp.lecturerId WHERE activityId = @activityId";
+			SqlParameter[] sqlParameters = new SqlParameter[1];
+			sqlParameters[0] = new SqlParameter("@activityId", activityId);
+			return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+		}
 
-        private List<Teacher> ReadTableSupervisors(DataTable dataTable)
-        {
-            List<Teacher> teachers = new List<Teacher>();
+		public List<Teacher> GetNotParticipatingSupervisors(int activityId)
+		{
+			string query = "SELECT l.lecturerId, l.firstName, l.lastName FROM [lecturer] AS l WHERE l.lecturerId NOT IN (SELECT lp.lecturerId FROM LecturerParticipant AS lp WHERE lp.activityId = @activityId)";
+			SqlParameter[] sqlParameters = new SqlParameter[1];
+			sqlParameters[0] = new SqlParameter("@activityId", activityId);
+			return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+		}
 
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                Teacher teacher = new Teacher()
-                {
-                    FirstName = (string)dr["firstName"],
-                    LastName = (string)dr["lastName"],
-                    TeacherId = (int)dr["lecturerId"]
-                };
-                teachers.Add(teacher);
-            }
-            return teachers;
-        }
+		public void AddSupervisorToTable(int LecturerId, int activityId)
+		{
+			string query = "INSERT INTO LecturerParticipant(LecturerId, ActivityId) VALUES (@LecturerId, @ActivityId)";
+			SqlParameter[] sqlParameters =
+			{
+				new SqlParameter("@LecturerId", LecturerId),
+				new SqlParameter("@ActivityId", activityId),
+			};
+			ExecuteEditQuery(query, sqlParameters);
+		}
 
-        private List<Teacher> ReadTables(DataTable dataTable)
-        {
-            List<Teacher> supervisors = new List<Teacher>();
+		public void RemoveSupervisorToTable(int LecturerId, int ActivityId)
+		{
+			string query = "DELETE FROM LecturerParticipant WHERE LecturerId = @LecturerId AND ActivityId = @ActivityId";
+			SqlParameter[] sqlParameters =
+			{
+				new SqlParameter("@LecturerId", LecturerId),
+				new SqlParameter("@ActivityId", ActivityId)
+			};
+			ExecuteEditQuery(query, sqlParameters);
+		}
 
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                Teacher supervisor = new Teacher()
-                {
-                    FirstName = (string)dr["firstname"],
-                    LastName = (string)dr["lastname"],
-                    TeacherId = (int)dr["lecturerId"]
-                };
-                supervisors.Add(supervisor);
-            }
-            return supervisors;
-        }
+		private List<Teacher> ReadTables(DataTable dataTable)
+		{
+			List<Teacher> teachers = new List<Teacher>();
 
-        public void AddSupervisorToTable(int activityId, int supervisorId)
-        {
-            string query = "INSERT INTO LecturerParticipant(LecturertId, ActivityId) VALUES (@LecturerId, @ActivityId)";
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@ActivityId", activityId),
-                new SqlParameter("@LecturerId", supervisorId),
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
-        
-        public void RemoveSupervisoFromTable(int supervisorId, int activityId)
-        {
-            string query = "DELETE FROM LecturerParticipant WHERE LecturertId = @Id AND activityId = @ActivityId";
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@Id", supervisorId),
-                new SqlParameter("@ActivityId", activityId)
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
-    }
+			foreach (DataRow dr in dataTable.Rows)
+			{
+				Teacher teacher = new Teacher()
+				{
+					TeacherId = (int)dr["lecturerId"],
+					FirstName = dr["firstName"].ToString(),
+					LastName = dr["lastName"].ToString(),
+				};
+				teachers.Add(teacher);
+			}
+			return teachers;
+		}
+	}
 }

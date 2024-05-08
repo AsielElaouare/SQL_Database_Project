@@ -9,32 +9,33 @@ using System.Threading.Tasks;
 
 namespace SomerenService
 {
-    public class SupervisorService
-    {
-        private SupervisorDao supervisorDb;
-        public SupervisorService()
-        {
-            supervisorDb = new SupervisorDao();
-        }
-        public List<Teacher> GetSupervisors(int activityId)
-        {
-            List<Teacher> supervisors = supervisorDb.GetAllSupervisors(activityId);
-            return supervisors;
-        }
+	public class SupervisorService
+	{
+		private SupervisorDao supervisordb;
+		public SupervisorService()
+		{
+			supervisordb = new SupervisorDao();
+		}
 
-        public List<Teacher> GetNotParticipatingSupervisor(int activityId)
-        {
-            List<Teacher> supervisors = supervisorDb.GetNotParticipatingSupervisors(activityId);
-            return supervisors;
-        }
+		public List<Teacher> GetParticipatingSupervisors(int activityId)
+		{
+			List<Teacher> teachers = supervisordb.GetParticipatingSupervisors(activityId);
+			return teachers;
+		}
 
-        public void AddSupervisor(int activityId, int supervisorId)
-        {
-            supervisorDb.AddSupervisorToTable(activityId, supervisorId);
-        }
-        public void RemoveSupervisor(int supervisorId, int activityId)
-        {
-            supervisorDb.RemoveSupervisoFromTable(supervisorId, activityId);
-        }
-    }
+		public List<Teacher> GetNotParticipatingSupervisors(int activityId)
+		{
+			List<Teacher> teachers = supervisordb.GetNotParticipatingSupervisors(activityId);
+			return teachers;
+		}
+
+		public void AddSupervisor(int supervisorId, int activityId)
+		{
+			supervisordb.AddSupervisorToTable(supervisorId, activityId);
+		}
+		public void RemoveSupervisor(int supervisorId, int ActivityId)
+		{
+			supervisordb.RemoveSupervisorToTable(supervisorId, ActivityId);
+		}
+	}
 }
