@@ -780,7 +780,7 @@ namespace SomerenUI
 				try
 				{
 					StudentService studentservice = new StudentService();
-					studentservice.DeleteStudent(selectedStudent);
+					studentservice.DeleteStudent(selectedStudent.studentId);
 				}
 				catch (Exception ex)
 				{

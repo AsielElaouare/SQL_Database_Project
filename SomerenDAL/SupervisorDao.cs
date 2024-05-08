@@ -13,7 +13,7 @@ namespace SomerenDAL
 	{
 		public List<Teacher> GetParticipatingSupervisors(int activityId)
 		{
-			string query = "SELECT l.lecturerId, l.firstName, l.lastName, lp.activityId FROM [lecturer] AS l JOIN [lecturerparticipant] AS lp ON l.lecturerId = lp.lecturerId WHERE activityId = @activityId";
+			string query = "SELECT l.lecturerId, l.firstName, l.lastName, lp.activityId FROM [lecturer] AS l JOIN [lecturerparticipant] AS lp ON l.lecturerId = lp.lecturerId WHERE activityId = @activityId AND l.IsDeleted = 0";
 			SqlParameter[] sqlParameters = new SqlParameter[1];
 			sqlParameters[0] = new SqlParameter("@activityId", activityId);
 			return ReadTables(ExecuteSelectQuery(query, sqlParameters));
@@ -21,7 +21,7 @@ namespace SomerenDAL
 
 		public List<Teacher> GetNotParticipatingSupervisors(int activityId)
 		{
-			string query = "SELECT l.lecturerId, l.firstName, l.lastName FROM [lecturer] AS l WHERE l.lecturerId NOT IN (SELECT lp.lecturerId FROM LecturerParticipant AS lp WHERE lp.activityId = @activityId)";
+			string query = "SELECT l.lecturerId, l.firstName, l.lastName FROM [lecturer] AS l WHERE l.lecturerId NOT IN (SELECT lp.lecturerId FROM LecturerParticipant AS lp WHERE lp.activityId = @activityId) AND l.IsDeleted = 0";
 			SqlParameter[] sqlParameters = new SqlParameter[1];
 			sqlParameters[0] = new SqlParameter("@activityId", activityId);
 			return ReadTables(ExecuteSelectQuery(query, sqlParameters));
